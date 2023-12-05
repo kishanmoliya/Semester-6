@@ -1,3 +1,4 @@
+//W.A.P.	to	check	given	number	is	palindrome	or	not.
 import java.util.Scanner;
 
 public class palindrom {

@@ -1,3 +1,4 @@
+//W.A.P.	to	check	given	number	is	prime	or	not.
 import java.util.Scanner;
 
 public class prime{

@@ -1,3 +1,5 @@
+// Arrange	the	array	of	10	elements	in	a	given	order.	Minimum	should	be	at	center.	Second	minimum	
+// to	its	right,	third	minimum	to	its	left,	fourth	minimum	to	its	right	and	so	on.
 import java.lang.reflect.Array;
 import java.util.Arrays;
 

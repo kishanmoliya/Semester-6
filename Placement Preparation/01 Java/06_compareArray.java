@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-
+//Given	two	arrays,	1,	2,3,4,5	and	2,	3,1,0,5	find	which	number	is	not	present	in	the	second	array.
 public class compareArray {
     public static void main(String[] args) {
         int[] arr1 = {1,2,3,4,5};
         int[] arr2 = {2,6,1,0,5};
-        ArrayList arr = new ArrayList<>();
-        int[] arr3 = new int[5];
-
+    
         for(int i=0; i<arr1.length; i++){
            int count = 0;
           for(int j=0; j<arr2.length; j++){
@@ -15,10 +12,8 @@ public class compareArray {
             }
           }
           if(count == 0){
-            arr.add(arr1[i]);
+            System.out.println(arr1[i]);
           }
         }
-        
-        System.out.println(arr);
     } 
 }
