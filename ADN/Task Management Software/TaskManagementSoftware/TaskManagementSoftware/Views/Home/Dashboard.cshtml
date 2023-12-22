@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TaskManagementSoftware.Models.ProjectList>
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+<h2>@ViewBag.MySession</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectOwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeadLine)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.UserId == @ViewBag.UserID)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectOwnerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeadLine)
+                    </td>                 
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Home" asp-action="Logout">Logout</a>
