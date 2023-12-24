@@ -1,7 +1,7 @@
 Create Database Task_Management_Software
 
 
--- User Register
+-- User Register Insert
 select * From MST_User
 Exec [dbo].[PR_User_Insert] 'Narendra Modi','modi232@gmail.com','modi',0,1
 Create or Alter Procedure [dbo].[PR_User_Insert]
@@ -34,11 +34,11 @@ Values
 
 
 -- Get UserData
-Insert into MST_User values('Karan Khunt','karankhunt232@gmail.com','karan',0,1,12-21-2023,12-21-2023)
-Exec PR_GetUser_Log 'kishanmoliya232@gmail.com', 'kishan'
+Insert into MST_User values('K','k','k',0,1,12-21-2023,12-21-2023)
+Exec PR_GetUser_Log 'k', 'k'
 Create or Alter Procedure PR_GetUser_Log
-	@UserEmail		nvarchar(MAX),
-	@UserPassword	nvarchar(MAX)
+	@Email		nvarchar(MAX),
+	@Password	nvarchar(MAX)
 As
 Select
 	UserID,
@@ -49,7 +49,7 @@ Select
 	CreatedDate,
 	ModifiedDate
 From MST_User
-	Where Email = @UserEmail and Password = @UserPassword
+	Where Email = @Email and Password = @Password
 
 Delete From PRJ_Project
 
@@ -74,3 +74,19 @@ Select
 From PRJ_Project
 Inner Join MST_User on PRJ_Project.UserID = MST_User.UserID
 Where PRJ_Project.UserID = @UserID
+
+
+
+--Get ALL Data
+Create or ALter Procedure GetData
+As
+Select
+	UserID,
+	UserName,
+	Email,
+	IsAdmin,
+	IsActive,
+	CreatedDate,
+	ModifiedDate
+From MST_User
+ 

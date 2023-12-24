@@ -16,8 +16,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System
 build_property._RazorSourceGeneratorDebug = 
 
-[E:/Semester-6/ADN/Task Management Software/Task_Management_System/Task_Management_System/Areas/MST_User_Registration/Views/MST_User_Registration/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJfUmVnaXN0cmF0aW9uXFZpZXdzXE1TVF9Vc2VyX1JlZ2lzdHJhdGlvblxJbmRleC5jc2h0bWw=
+[E:/Semester-6/ADN/Task Management Software/Task_Management_System/Task_Management_System/Areas/MST_User_Registration/Views/MST_User_Registration/Dashbord.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJfUmVnaXN0cmF0aW9uXFZpZXdzXE1TVF9Vc2VyX1JlZ2lzdHJhdGlvblxEYXNoYm9yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Semester-6/ADN/Task Management Software/Task_Management_System/Task_Management_System/Areas/MST_User_Registration/Views/MST_User_Registration/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJfUmVnaXN0cmF0aW9uXFZpZXdzXE1TVF9Vc2VyX1JlZ2lzdHJhdGlvblxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Semester-6/ADN/Task Management Software/Task_Management_System/Task_Management_System/Areas/MST_User_Registration/Views/MST_User_Registration/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTVNUX1VzZXJfUmVnaXN0cmF0aW9uXFZpZXdzXE1TVF9Vc2VyX1JlZ2lzdHJhdGlvblxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Semester-6/ADN/Task Management Software/Task_Management_System/Task_Management_System/Areas/MST_User_Registration/Views/_ViewImports.cshtml]

@@ -8,11 +8,32 @@
     ".NETCoreApp,Version=v6.0": {
       "Task_Management_System/1.0.0": {
         "dependencies": {
+          "EnterpriseLibrary.Data": "6.0.1304",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
+          "Quintsys.Practices.EnterpriseLibrary.Data": "1.0.5",
           "System.Data.SqlClient": "4.8.5"
         },
         "runtime": {
           "Task_Management_System.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Common/6.0.1304": {
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.1304.0"
+          }
+        }
+      },
+      "EnterpriseLibrary.Data/6.0.1304": {
+        "dependencies": {
+          "EnterpriseLibrary.Common": "6.0.1304"
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.1304.0"
+          }
         }
       },
       "Humanizer/2.14.1": {
@@ -1373,6 +1394,26 @@
           }
         }
       },
+      "Quintsys.Practices.EnterpriseLibrary.Data/1.0.5": {
+        "dependencies": {
+          "EnterpriseLibrary.Data": "6.0.1304",
+          "Quintsys.System": "1.0.5"
+        },
+        "runtime": {
+          "lib/net452/Quintsys.Practices.EnterpriseLibrary.Data.dll": {
+            "assemblyVersion": "1.0.5.0",
+            "fileVersion": "1.0.5.0"
+          }
+        }
+      },
+      "Quintsys.System/1.0.5": {
+        "runtime": {
+          "lib/net452/Quintsys.System.dll": {
+            "assemblyVersion": "1.0.5.0",
+            "fileVersion": "1.0.5.0"
+          }
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -2263,6 +2304,20 @@
       "serviceable": false,
       "sha512": ""
     },
+    "EnterpriseLibrary.Common/6.0.1304": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w/ua1PWAQD1/CnJ+qz/5APgmqI/1YnbamnwFGSotm7b66sFIkrnfLC+9+WzcSZWnePwwUw3Pl2QsLVDyX7NwaQ==",
+      "path": "enterpriselibrary.common/6.0.1304",
+      "hashPath": "enterpriselibrary.common.6.0.1304.nupkg.sha512"
+    },
+    "EnterpriseLibrary.Data/6.0.1304": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FmaIrwbO7qOg0hd6rESeltyxcOccBa9V5QXPQ/4vMzpqZXh457uiJcwV4Xtx8q1zFhiGq1AszYjWP1p69Qps+w==",
+      "path": "enterpriselibrary.data/6.0.1304",
+      "hashPath": "enterpriselibrary.data.6.0.1304.nupkg.sha512"
+    },
     "Humanizer/2.14.1": {
       "type": "package",
       "serviceable": true,
@@ -2934,6 +2989,20 @@
       "sha512": "sha512-Wm/AOFICTIrCgbVxv9dNWusraTzcggbo5W4ao7hD8NNVq911an9TGwW+uNuYc8I5PkpTeMuSXneV2u6hbi1P4w==",
       "path": "nuget.versioning/6.6.1",
       "hashPath": "nuget.versioning.6.6.1.nupkg.sha512"
+    },
+    "Quintsys.Practices.EnterpriseLibrary.Data/1.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KrSK/EPaw6r6llNkMskN5HQgilIsdFK+ajB3DcBfS5cHXTITJRLabn0muWiaZrDw1Hqqh+KfqTkbAHIyJckFUQ==",
+      "path": "quintsys.practices.enterpriselibrary.data/1.0.5",
+      "hashPath": "quintsys.practices.enterpriselibrary.data.1.0.5.nupkg.sha512"
+    },
+    "Quintsys.System/1.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Q65LUu4VnilzGShQuzGgHa3f530gn0O3KMX3YHL0usja2HrcU2Vx+Us9kJMbC5m5XfpiisCJ5o6NoZ9+aI/qow==",
+      "path": "quintsys.system/1.0.5",
+      "hashPath": "quintsys.system.1.0.5.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

@@ -229,3 +229,7 @@ E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Managemen
 E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\obj\Debug\net6.0\Task_Management_System.pdb
 E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\obj\Debug\net6.0\Task_Management_System.genruntimeconfig.cache
 E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\obj\Debug\net6.0\ref\Task_Management_System.dll
+E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\Quintsys.Practices.EnterpriseLibrary.Data.dll
+E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\Quintsys.System.dll
