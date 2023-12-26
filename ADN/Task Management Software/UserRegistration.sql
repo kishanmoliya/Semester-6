@@ -35,7 +35,7 @@ Values
 
 -- Get UserData
 Insert into MST_User values('K','k','k',0,1,12-21-2023,12-21-2023)
-Exec PR_GetUser_Log 'k', 'k'
+Exec PR_GetUser_Log 'k', 'j'
 Create or Alter Procedure PR_GetUser_Log
 	@Email		nvarchar(MAX),
 	@Password	nvarchar(MAX)
@@ -60,11 +60,12 @@ Insert Into PRJ_Project Values('Task_Management_Software','You can Manage youre 
 Insert Into PRJ_Project Values('RTO_Driving_Test','Hear you can show the various MCQs','Karan Khunt',18-12-2023,20-12-2023,20,1000000,2)
 Insert Into PRJ_Project Values('Architecture_Admission','Find the collage','Uttam Nagvadiya',18-12-2023,20-12-2023,56,6565600,3)
 	
-Exec PR_UserWise_Project 1
+Exec PR_UserWise_Project 5
 Create or Alter Procedure PR_UserWise_Project
 	@UserID int
 As
-Select  
+Select 
+	PRJ_Project.UserID,
 	PRJ_Project.ProjectID,
 	PRJ_Project.ProjectTitle,
 	PRJ_Project.ProjectDescription,
