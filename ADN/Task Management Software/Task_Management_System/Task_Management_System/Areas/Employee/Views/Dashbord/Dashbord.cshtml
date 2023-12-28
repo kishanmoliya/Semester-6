@@ -1,0 +1,44 @@
+﻿﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+@model System.Data.DataTable;
+<style>
+    .table-data {
+        overflow-y: auto;
+        height: 71vh;
+    }
+
+        .table-data thead tr {
+            position: sticky;
+            top: 0;
+        }
+</style>
+
+<div class="Container">
+    <div class="table-data">
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-primary fixed">
+                    <th scope="col">Project Tile</th>
+                    <th scope="col">Project Description</th>
+                    <th scope="col" colspan="2" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (System.Data.DataRow data in Model.Rows)
+                {
+                    <tr>
+                        <td>@data["ProjectTitle"]</td>
+                        <td>@data["ProjectDescription"]</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <a asp-area="Employee" asp-controller="Dashbord" asp-action="Logout">Logout</a>
+</div>

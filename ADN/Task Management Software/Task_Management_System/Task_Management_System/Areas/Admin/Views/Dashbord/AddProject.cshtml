@@ -1,0 +1,144 @@
+﻿@model Task_Management_System.Areas.Admin.Models.NewProjectModel
+
+@{
+    Layout = "_Layout";
+}
+@*<section class="vh-100 bg-image"
+         style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+                            <form asp-action="Register">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="form-outline mb-4">
+                                    <input asp-for="ProjectTitle" type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <label asp-for="ProjectTitle" class="form-label" for="form3Example1cg">Project Title</label>
+                                    <div><span asp-validation-for="ProjectTitle" class="text-danger"></span></div>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input asp-for="ProjectDescription" type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <label asp-for="ProjectDescription" class="form-label" for="form3Example1cg">Project Title</label>
+                                    <div><span asp-validation-for="ProjectDescription" class="text-danger"></span></div>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input asp-for="ProjectOwnerName" type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <label asp-for="ProjectOwnerName" class="form-label" for="form3Example1cg">Project Title</label>
+                                    <div><span asp-validation-for="ProjectOwnerName" class="text-danger"></span></div>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input asp-for="TotalMembers" type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <label asp-for="TotalMembers" class="form-label" for="form3Example1cg">Project Title</label>
+                                    <div><span asp-validation-for="TotalMembers" class="text-danger"></span></div>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input asp-for="ProjectCost" type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <label asp-for="ProjectCost" class="form-label" for="form3Example1cg">Project Title</label>
+                                    <div><span asp-validation-for="ProjectCost" class="text-danger"></span></div>
+                                </div>
+
+                                 <div class="form-outline mb-4">
+                                    <input asp-for="DeadLine" type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <label asp-for="DeadLine" class="form-label" for="form3Example1cg">Project Title</label>
+                                    <div><span asp-validation-for="DeadLine" class="text-danger"></span></div>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input asp-for="UserID" type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <label asp-for="UserID" class="form-label" for="form3Example1cg">Project Title</label>
+                                    <div><span asp-validation-for="UserID" class="text-danger"></span></div>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit"
+                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                                        Register
+                                    </button>
+                                </div>
+
+                                <p class="text-center text-muted mt-5 mb-0">
+                                    Have already an account? <a asp-area="MST_User_Registration" asp-controller="MST_User_Registration" asp-action="Index"
+                                                                class="fw-bold text-body"><u>Login here</u></a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+
+<div class="wrapper">
+    <div class="registration_form">
+        <div class="title">
+            Add Your Project
+        </div>
+
+        <form asp-action="AddProject">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form_wrap">
+
+                <div class="input_wrap">
+                    <label asp-for="ProjectTitle" for="fname">Project Title</label>
+                    <input asp-for="ProjectTitle" type="text" id="fname">
+                    <div><span asp-validation-for="ProjectTitle" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="ProjectDescription" for="fname">Project Dedcription</label>
+                    <input asp-for="ProjectDescription" type="text" cols="40"
+                           rows="5" id="fname">
+                    <div><span asp-validation-for="ProjectDescription" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="ProjectOwnerName" for="fname">Project Owner Name</label>
+                    <input asp-for="ProjectOwnerName" type="text" id="fname">
+                    <div><span asp-validation-for="ProjectOwnerName" class="text-danger"></span></div>
+                </div>
+
+                <div class="input_grp">
+                    <div class="input_wrap">
+                        <label asp-for="TotalMembers" for="fname">Project Total Members</label>
+                        <input asp-for="TotalMembers" type="number" min="1" max="500" id="fname">
+                        <div><span asp-validation-for="TotalMembers" class="text-danger"></span></div>
+                    </div>
+                    <div class="input_wrap">
+                        <label asp-for="ProjectCost" for="fname">Project Cost</label>
+                        <input asp-for="ProjectCost" type="number" min="1000" max="50000000" id="fname">
+                        <div><span asp-validation-for="ProjectCost" class="text-danger"></span></div>
+                    </div>
+                </div>
+
+                <div class="input_wrap">
+                    <label asp-for="DeadLine" for="fname">Project DeadLine  </label>
+                    <input asp-for="DeadLine" type="date" id="fname">
+                    <div><span asp-validation-for="DeadLine" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="UserID" for="fname">User ID</label>
+                    <input asp-for="UserID" type="text" id="fname">
+                    <div><span asp-validation-for="UserID" class="text-danger"></span></div>
+                </div>
+
+                <div class="input_wrap">
+                    <input type="submit" value="Add Project" class="submit_btn">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

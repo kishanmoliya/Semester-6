@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Data.SqlClient;
 using Task_Management_System.Areas.MST_User_Registration.Models;
 using Task_Management_System.BAL;
 
@@ -18,10 +20,6 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
 
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetInt32("UserSessionID") != null)
-            {
-                return RedirectToAction("Dashbord", "Dashbord", new { area = "Dashbord" });
-            }
             return View("Login");
         }
 
@@ -31,10 +29,16 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
 
             if (dt.Rows.Count > 0)
             {
-                TempData["ID"] = Convert.ToInt32(dt.Rows[0]["UserID"]);
-
-                /*ViewBag.UserID = Convert.ToInt32(dt.Rows[0]["UserID"]);*/
-                return RedirectToAction("Dashbord", "Dashbord", new { area = "Dashbord" });
+                if (Convert.ToBoolean(dt.Rows[0]["IsAdmin"]))
+                {
+                    HttpContext.Session.SetInt32("AdminSessionID", Convert.ToInt32(dt.Rows[0]["UserID"]));
+                    return RedirectToAction("Dashbord", "Dashbord", new { area = "Admin" });
+                }
+                else
+                {
+                    HttpContext.Session.SetInt32("EmployeeSessionID", Convert.ToInt32(dt.Rows[0]["UserID"]));
+                    return RedirectToAction("Dashbord", "Dashbord", new { area = "Employee" });
+                }
             }
             else
             {
@@ -44,21 +48,22 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
             return View();
         }
 
-        public IActionResult Dashbord(DataTable dt)
+        public IActionResult RegisterForm()
         {
-            if (HttpContext.Session.GetInt32("UserSessionID") != null)
+            return View("Register");
+        }
+
+        public IActionResult Register(UserModel userModel)
+        {
+            bool IsSuccess = bal.PR_User_Insert(userModel);
+            if (IsSuccess)
             {
-                return View(dt);
+                return RedirectToAction("Index");
             }
             else
             {
-                return RedirectToAction("Login");
+                return View();
             }
-        }
-
-        public IActionResult Register()
-        {
-            return View();
         }
 
         /* public IActionResult Index()
