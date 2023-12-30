@@ -79,58 +79,66 @@
 </section>*@
 
 <div class="wrapper">
+    @{
+        String buttonName = "";
+        if (ViewBag.Data != null)
+        {
+            ViewBag.Data = "Edit Project Details";
+            buttonName = "Save Changes";
+        }
+        else
+        {
+            ViewBag.Data = "Add Your Project";
+            buttonName = "Add Project";
+        }
+    }
     <div class="registration_form">
         <div class="title">
-            Add Your Project
+            @ViewBag.Data
         </div>
-
         <form asp-action="AddProject">
+            @Html.HiddenFor(x => x.ProjectID)
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form_wrap">
 
                 <div class="input_wrap">
                     <label asp-for="ProjectTitle" for="fname">Project Title</label>
-                    <input asp-for="ProjectTitle" type="text" id="fname">
+                    <input asp-for="ProjectTitle" name="ProjectTitle" type="text" id="fname">
                     <div><span asp-validation-for="ProjectTitle" class="text-danger"></span></div>
                 </div>
                 <div class="input_wrap">
                     <label asp-for="ProjectDescription" for="fname">Project Dedcription</label>
-                    <input asp-for="ProjectDescription" type="text" cols="40"
+                    <input asp-for="ProjectDescription" name="ProjectDescription" type="text" cols="40"
                            rows="5" id="fname">
                     <div><span asp-validation-for="ProjectDescription" class="text-danger"></span></div>
                 </div>
                 <div class="input_wrap">
                     <label asp-for="ProjectOwnerName" for="fname">Project Owner Name</label>
-                    <input asp-for="ProjectOwnerName" type="text" id="fname">
+                    <input asp-for="ProjectOwnerName" name="ProjectOwnerName" type="text" id="fname">
                     <div><span asp-validation-for="ProjectOwnerName" class="text-danger"></span></div>
                 </div>
 
                 <div class="input_grp">
                     <div class="input_wrap">
                         <label asp-for="TotalMembers" for="fname">Project Total Members</label>
-                        <input asp-for="TotalMembers" type="number" min="1" max="500" id="fname">
+                        <input asp-for="TotalMembers" name="TotalMembers" type="number" min="1" max="500" id="fname">
                         <div><span asp-validation-for="TotalMembers" class="text-danger"></span></div>
                     </div>
                     <div class="input_wrap">
                         <label asp-for="ProjectCost" for="fname">Project Cost</label>
-                        <input asp-for="ProjectCost" type="number" min="1000" max="50000000" id="fname">
+                        <input asp-for="ProjectCost" name="ProjectCost" type="number" min="1000" max="50000000" id="fname">
                         <div><span asp-validation-for="ProjectCost" class="text-danger"></span></div>
                     </div>
                 </div>
 
                 <div class="input_wrap">
                     <label asp-for="DeadLine" for="fname">Project DeadLine  </label>
-                    <input asp-for="DeadLine" type="date" id="fname">
+                    <input asp-for="DeadLine" name="DeadLine" type="date" id="fname">
                     <div><span asp-validation-for="DeadLine" class="text-danger"></span></div>
-                </div>
-                <div class="input_wrap">
-                    <label asp-for="UserID" for="fname">User ID</label>
-                    <input asp-for="UserID" type="text" id="fname">
-                    <div><span asp-validation-for="UserID" class="text-danger"></span></div>
                 </div>
 
                 <div class="input_wrap">
-                    <input type="submit" value="Add Project" class="submit_btn">
+                    <input type="submit" value="@buttonName" class="submit_btn">
                 </div>
             </div>
         </form>

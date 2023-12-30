@@ -10,6 +10,8 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
     public class DashbordController : Controller
     {
         Admin_BALBase bal = new Admin_BALBase();
+
+        #region Dashbord
         public IActionResult Dashbord()
         {
             if (HttpContext.Session.GetInt32("AdminSessionID") != null)
@@ -22,25 +24,18 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
                 return RedirectToAction("Index", "MST_User_Registration", new { area = "MST_User_Registration" });
             }
         }
+        #endregion
 
-        public IActionResult Logout()
-        {
-            if (HttpContext.Session.GetString("AdminSessionID") != null)
-            {
-                HttpContext.Session.Remove("AdminSessionID");
-                return RedirectToAction("Index", "MST_User_Registration", new { area = "MST_User_Registration" });
-            }
-            return View();
-        }
-
+        #region Add Project
         public IActionResult AddProjectForm()
         {
             return View("AddProject");
         }
 
-        public IActionResult AddProject(NewProjectModel prjModel)
+        public IActionResult AddProject(NewProjectModel prjModel, int? ProjectID)
         {
-            bool IsSuccess = bal.PR_Add_Project(prjModel);
+            int UserID = Convert.ToInt32(HttpContext.Session.GetInt32("AdminSessionID"));
+            bool IsSuccess = bal.PR_Add_Project(prjModel, UserID, ProjectID);
             if (IsSuccess)
             {
                 return RedirectToAction("Dashbord");
@@ -50,5 +45,78 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
                 return View();
             }
         }
+        #endregion
+
+        #region Delete 
+        public IActionResult DeleteProject(int ProjectID)
+        {
+            bal.PR_Delete_Project(ProjectID);
+            return RedirectToAction("Dashbord");
+        }
+        #endregion
+
+        #region Get Single Project
+        public IActionResult ProjectDetails(int ProjectID)
+        {
+            DataTable dt = bal.PR_Project_SelectByPK(ProjectID);
+            if(dt.Rows.Count > 0)
+            {
+                return View(dt);
+            }
+            else
+            {
+                return View("Dashbord");
+            }
+        }
+        #endregion
+
+        #region Update Project
+        public IActionResult UpdateProject(int ProjectID)
+        {
+            ViewBag.Data = ProjectID;
+            DataTable dt = bal.PR_Project_SelectByPK(ProjectID);
+            if(dt.Rows.Count > 0)
+            {
+                NewProjectModel prjModel = new NewProjectModel
+                {
+                    ProjectID = Convert.ToInt32(dt.Rows[0]["ProjectID"]),
+                    ProjectTitle = Convert.ToString(dt.Rows[0]["ProjectTitle"]),
+                    ProjectDescription = Convert.ToString(dt.Rows[0]["ProjectDescription"]),
+                    ProjectOwnerName = Convert.ToString(dt.Rows[0]["ProjectOwnerName"]),
+                    TotalMembers = Convert.ToInt32(dt.Rows[0]["TotalMembers"]),
+                    ProjectCost = Convert.ToDouble(dt.Rows[0]["ProjectCost"]),
+                    DeadLine = Convert.ToDateTime(dt.Rows[0]["DeadLine"]),
+                };
+                return View("AddProject", prjModel);
+            }
+            else
+            {
+                return View("Dashbord");
+            }
+       /*     bool IsSuccess = bal.PR_Update_Project(prjModel, ProjectID);
+
+            Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
+            if (IsSuccess)
+            {
+                return RedirectToAction("Dashbord");
+            }
+            else
+            {
+                return View();
+            }*/
+        }
+        #endregion
+
+        #region Logout
+        public IActionResult Logout()
+        {
+            if (HttpContext.Session.GetString("AdminSessionID") != null)
+            {
+                HttpContext.Session.Remove("AdminSessionID");
+                return RedirectToAction("Index", "MST_User_Registration", new { area = "MST_User_Registration" });
+            }
+            return View();
+        }
+        #endregion
     }
 }

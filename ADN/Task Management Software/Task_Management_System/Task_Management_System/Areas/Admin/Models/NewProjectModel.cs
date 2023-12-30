@@ -2,6 +2,7 @@
 {
     public class NewProjectModel
     {
+        public int ProjectID { get; set; }
         public string ProjectTitle { get; set; }
         public string ProjectDescription { get; set; }
         public string ProjectOwnerName { get; set; }

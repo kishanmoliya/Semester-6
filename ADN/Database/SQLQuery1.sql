@@ -1,3 +1,65 @@
+--Get All Student
+CREATE OR ALTER PROCEDURE GetStudentDetails
+AS
+BEGIN
+    SELECT *
+    FROM Student;
+END;
+
+--Insert Student
+CREATE OR ALTER PROCEDURE InsertStudent
+    @StudentName NVARCHAR(50),
+    @StudentAge INT,
+    @StudentStandred NVARCHAR(50),
+    @StudentFatherName NVARCHAR(50)
+AS
+BEGIN
+    INSERT INTO Student (StudentName, StudentAge, StudentStandred, StudentFatherName)
+    VALUES (@StudentName, @StudentAge, @StudentStandred, @StudentFatherName);
+END;
+
+--Update Student
+Exec UpdateStudent 5,'new',20,'7','raju'
+CREATE PROCEDURE UpdateStudent
+    @StudentID INT,
+    @NewStudentName NVARCHAR(50),
+    @NewStudentAge INT,
+    @NewStudentStandred NVARCHAR(50),
+    @NewStudentFatherName NVARCHAR(50)
+AS
+BEGIN
+    UPDATE Student
+    SET StudentName = @NewStudentName,
+        StudentAge = @NewStudentAge,
+        StudentStandred = @NewStudentStandred,
+        StudentFatherName = @NewStudentFatherName
+    WHERE StudentID = @StudentID;
+END;
+
+
+--Delete Student
+CREATE PROCEDURE DeleteStudent
+    @StudentID INT
+AS
+BEGIN
+    DELETE FROM Student
+    WHERE StudentID = @StudentID;
+END;
+
+
+--Select Student By PK
+CREATE or Alter PROCEDURE GetStudentByPK
+    @StudentID INT
+AS
+BEGIN
+    SELECT *
+    FROM Student
+    WHERE StudentID = @StudentID;
+END;
+
+-------------------------------------------------
+-------------------------------------------------
+
 -- Person Select ALL
 Insert into Person values('Uttam','7984186755','kishanmoliya232@gmail.com')
 exec API_Person_SelectAll
@@ -12,8 +74,6 @@ From Person
 Order by
 	Person.Name,
 	Person.Email
-
-
 
 --Person SelectBy ID
 Exec API_Person_SelectByID 3

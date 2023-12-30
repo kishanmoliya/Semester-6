@@ -1,10 +1,6 @@
 ﻿using APIDemo.BAL;
 using APIDemo.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
-using System.Data.Common;
-using System.Data;
-using System;
 
 namespace APIDemo.Controllers
 {
@@ -62,28 +58,6 @@ namespace APIDemo.Controllers
         }
         #endregion
 
-        #region Person Delete
-        [HttpDelete]
-        public IActionResult Delete(int PersonID)
-        {
-            bool IsSuccess = bal.API_Person_Delete(PersonID);
-
-            Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
-            if(IsSuccess)
-            {
-                data.Add("status", true);
-                data.Add("message", "Data Deleted Successfully");
-                return Ok(data);
-            }
-            else
-            {
-                data.Add("status", false);
-                data.Add("message", "Some Error has been Occured");
-                return Ok(data);
-            }
-        }
-        #endregion
-
         #region Person Insert
         [HttpPost]
         public IActionResult Insert([FromForm] UserModel userModel)
@@ -115,6 +89,28 @@ namespace APIDemo.Controllers
 
             Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
             if (IsSuccess)
+            {
+                data.Add("status", true);
+                data.Add("message", "Data Updated Successfully");
+                return Ok(data);
+            }
+            else
+            {
+                data.Add("status", false);
+                data.Add("message", "Some Error has been Occured");
+                return Ok(data);
+            }
+        }
+        #endregion
+
+        #region Person Delete
+        [HttpDelete]
+        public IActionResult Delete(int PersonID)
+        {
+            bool IsSuccess = bal.API_Person_Delete(PersonID);
+
+            Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
+            if(IsSuccess)
             {
                 data.Add("status", true);
                 data.Add("message", "Data Deleted Successfully");

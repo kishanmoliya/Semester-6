@@ -3,25 +3,58 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = "_Layout";
+    Layout = "_Layout_Login";
 }
-
-<div class="container right-panel-active">
+@*<div class="container login right-panel-active">
     <!-- Sign Up -->
     <div class="container__form container--signup">
-        <form asp-action="Register" class="form" id="form1">
+        <form action="#" class="form" id="form1">
+            <h2 class="form__title">Sign Up</h2>
+            <input type="text" placeholder="User" class="input" />
+            <input type="email" placeholder="Email" class="input" />
+            <input type="password" placeholder="Password" class="input" />
+            <button class="btn">Sign Up</button>
+        </form>
+    </div>
+
+    <!-- Sign In -->
+    <div class="container__form container--signin">
+        <form action="#" class="form" id="form2">
+            <h2 class="form__title">Sign In</h2>
+            <input type="email" placeholder="Email" class="input" />
+            <input type="password" placeholder="Password" class="input" />
+            <a href="#" class="link">Forgot your password?</a>
+            <button class="btn">Sign In</button>
+        </form>
+    </div>
+
+    <!-- Overlay -->
+    <div class="container__overlay">
+        <div class="overlay">
+            <div class="overlay__panel overlay--left">
+                <button class="btn" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay__panel overlay--right">
+                <button class="btn" id="signUp">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+<div class="container login right-panel-active">
+    <!-- Sign Up -->
+    <div class="container__form container--signup">
+        <form asp-area="MST_User_Registration" asp-controller="MST_User_Registration"  asp-action="Register" class="form" id="form1">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <h2 class="form__title">Sign Up</h2>
 
-            <label asp-for="UserName" class="form-label" for="form3Example1cg">Your Name</label>
             <input asp-for="UserName" type="text" placeholder="Your Name" class="input" />
             <div><span asp-validation-for="UserName" class="text-danger"></span></div>
 
-            <label asp-for="Email" class="form-label" for="form3Example3cg">Your Email</label>
             <input asp-for="Email" type="email" placeholder="Email" class="input" />
             <div><span asp-validation-for="Email" class="text-danger"></span></div>
 
-            <label asp-for="Password" class="form-label" for="form3Example4cg">Password</label>
             <input asp-for="Password" type="password" placeholder="Password" class="input" />
             <div> <span asp-validation-for="Password" class="text-danger"></span></div>
 
@@ -31,19 +64,22 @@
 
     <!-- Sign In -->
     <div class="container__form container--signin">
+
+        @{
+            if (ViewBag.Message != null)
+            {
+                <p style="color:red;">@ViewBag.Message</p>
+            }
+        }
         <form asp-area="MST_User_Registration" asp-controller="MST_User_Registration" asp-action="Login" class="form" id="form2">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <h2 class="form__title">Sign In</h2>
 
-            <label asp-for="Email" class="control-label"></label>
             <input asp-for="Email" type="email" placeholder="Email" class="input" />
             <span asp-validation-for="Email" class="text-danger"></span>
 
-
-            <label asp-for="Password" class="control-label"></label>
             <input asp-for="Password" type="password" placeholder="Password" class="input" />
             <span asp-validation-for="Password" class="text-danger"></span>
-
 
             <a href="#" class="link">Forgot your password?</a>
             <button type="submit" class="btn">Sign In</button>
@@ -65,8 +101,8 @@
 
 
 
----------------
-@*<div class="container">
+@*---------------
+<div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h2 class="text-center text-dark mt-2">Login Form</h2>

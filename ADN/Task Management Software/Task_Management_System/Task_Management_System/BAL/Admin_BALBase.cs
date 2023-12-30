@@ -32,12 +32,12 @@ namespace Task_Management_System.BAL
         #endregion
 
         #region Add Project
-        public bool PR_Add_Project(NewProjectModel prjModel)
+        public bool PR_Add_Project(NewProjectModel prjModel, int UserID, int? ProjectID)
         {
             try
             {
 
-                if (dal.PR_Add_Project(prjModel))
+                if (dal.PR_Add_Project(prjModel, UserID, ProjectID))
                 {
                     return true;
                 }
@@ -52,6 +52,73 @@ namespace Task_Management_System.BAL
             }
         }
         #endregion
+
+        #region Delete Projecet
+        public bool PR_Delete_Project(int ProjectID)
+        {
+            try
+            {
+
+                if (dal.PR_Delete_Project(ProjectID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region Project Details
+        public DataTable PR_Project_SelectByPK(int ProjectID)
+        {
+            try
+            {
+                DataTable dt = dal.PR_Project_SelectByPK(ProjectID);
+                if (dt != null)
+                {
+                    return dt;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+       
+        #region Updata Project
+        public bool PR_Update_Project(NewProjectModel prjModel, int ProjectID)
+        {
+            try
+            {
+
+                if (dal.PR_Update_Project(prjModel, ProjectID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
     }
 }
 
