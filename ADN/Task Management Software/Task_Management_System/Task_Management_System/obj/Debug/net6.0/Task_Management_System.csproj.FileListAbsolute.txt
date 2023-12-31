@@ -233,3 +233,5 @@ E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Managemen
 E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\Microsoft.Practices.EnterpriseLibrary.Data.dll
 E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\Quintsys.Practices.EnterpriseLibrary.Data.dll
 E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\Quintsys.System.dll
+E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\package-lock.json
+E:\Semester-6\ADN\Task Management Software\Task_Management_System\Task_Management_System\bin\Debug\net6.0\package.json

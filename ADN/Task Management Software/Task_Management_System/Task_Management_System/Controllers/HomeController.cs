@@ -15,14 +15,8 @@ namespace Task_Management_System.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "MST_User_Registration", new {area = "MST_User_Registration"});
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

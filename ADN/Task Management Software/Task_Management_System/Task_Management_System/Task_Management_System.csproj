@@ -1,23 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
-    <PackageReference Include="Quintsys.Practices.EnterpriseLibrary.Data" Version="1.0.5" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+		<PackageReference Include="Quintsys.Practices.EnterpriseLibrary.Data" Version="1.0.5" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Employee\Data\" />
-    <Folder Include="Areas\Employee\Models\" />
-    <Folder Include="Areas\MST_User_Registration\Data\" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<Folder Include="Areas\Admin\Data\" />
+		<Folder Include="Areas\Employee\Data\" />
+		<Folder Include="Areas\Employee\Models\" />
+		<Folder Include="Areas\MST_User_Registration\Data\" />
+	</ItemGroup>
 </Project>
