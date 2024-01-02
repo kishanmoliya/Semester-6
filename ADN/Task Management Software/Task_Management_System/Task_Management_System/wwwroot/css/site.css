@@ -18,7 +18,7 @@ body {
 
 /*
 ===========================
-Login Form
+        Login Form
 ===========================
 */
 body {
@@ -275,3 +275,53 @@ body {
         color: #9C27B0;
         border: 1px solid #9C27B0;
     }
+
+
+/* 
+    ===========================
+            Dashbord
+    ===========================
+*/
+
+.card-list {
+    width: 100%;
+}
+
+.title {
+    display: inline-block;
+    font-size: 8px;
+    padding: 10px 10px 0;
+    text-transform: uppercase;
+}
+
+.zmdi {
+    display: inline-block;
+    font-size: 1.35rem;
+    margin-right: 5px;
+    min-width: 25px;
+}
+
+.value {
+    font-size: 28px;
+    padding: 0 10px;
+}
+
+.blue {
+    background-color: #2298F1;
+}
+
+.green {
+    background-color: #66B92E;
+}
+
+.orange {
+    background-color: #DA932C;
+}
+
+.red {
+    background-color: #D65B4A;
+}
+
+.card-list {
+    width: 100%;
+}

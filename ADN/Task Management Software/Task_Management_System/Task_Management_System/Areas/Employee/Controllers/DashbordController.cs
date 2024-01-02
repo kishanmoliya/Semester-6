@@ -10,22 +10,15 @@ namespace Task_Management_System.Areas.Employee.Controllers
         Admin_BALBase bal = new Admin_BALBase();
         public IActionResult Dashbord()
         {
-            if (HttpContext.Session.GetInt32("EmployeeSessionID") != null)
-            {
-                DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("EmployeeSessionID")));
-                return View(dt);
-            }
-            else
-            {
-                return RedirectToAction("Index", "MST_User_Registration", new { area = "MST_User_Registration" });
-            }
+            DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("EmployeeSessionID")));
+            return View(dt);
         }
 
         public IActionResult Logout()
         {
             if (HttpContext.Session.GetString("EmployeeSessionID") != null)
             {
-                HttpContext.Session.Remove("EmployeeSessionID");
+                HttpContext.Session.Clear();
                 return RedirectToAction("Index", "MST_User_Registration", new { area = "MST_User_Registration" });
             }
             return View();

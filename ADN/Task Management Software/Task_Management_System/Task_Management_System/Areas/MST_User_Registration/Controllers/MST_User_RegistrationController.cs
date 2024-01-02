@@ -5,6 +5,7 @@ using Task_Management_System.BAL;
 
 namespace Task_Management_System.Areas.MST_User_Registration.Controllers
 {
+    
     [Area("MST_User_Registration")]
     public class MST_User_RegistrationController : Controller
     {
@@ -23,27 +24,43 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
 
         public IActionResult Login(UserModel userModel)
         {
-            DataTable dt = bal.PR_GetUser_Log(userModel.Email, userModel.Password);
-
-            if (dt.Rows.Count > 0)
-            {
-                if (Convert.ToBoolean(dt.Rows[0]["IsAdmin"]))
+            /*if (HttpContext.Session.GetInt32("AdminSessionID") == null)
+            {*/
+                DataTable dt = bal.PR_GetUser_Log(userModel.Email, userModel.Password);
+                if (dt.Rows.Count > 0)
                 {
-                    HttpContext.Session.SetInt32("AdminSessionID", Convert.ToInt32(dt.Rows[0]["UserID"]));
+                    if (Convert.ToBoolean(dt.Rows[0]["IsAdmin"]))
+                    {
+                        HttpContext.Session.SetInt32("AdminSessionID", Convert.ToInt32(dt.Rows[0]["UserID"]));
+                        HttpContext.Session.SetString("UserName", dt.Rows[0]["UserName"].ToString());
+                        HttpContext.Session.SetString("IsAdmin", dt.Rows[0]["IsAdmin"].ToString());
+                        return RedirectToAction("Dashbord", "Dashbord", new { area = "Admin" });
+                    }
+                    /*else
+                    {
+                        HttpContext.Session.SetInt32("EmployeeSessionID", Convert.ToInt32(dt.Rows[0]["UserID"]));
+                        HttpContext.Session.SetString("UserName", dt.Rows[0]["UserName"].ToString());
+                        HttpContext.Session.SetString("IsAdmin", dt.Rows[0]["IsAdmin"].ToString());
+                        return RedirectToAction("Dashbord", "Dashbord", new { area = "Employee" });
+                    }*/
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Crediantial";
+                }
+            /*}
+            else
+            {
+                if (Convert.ToBoolean(CommonVariables.IsAdmin()))
+                {
                     return RedirectToAction("Dashbord", "Dashbord", new { area = "Admin" });
                 }
                 else
                 {
-                    HttpContext.Session.SetInt32("EmployeeSessionID", Convert.ToInt32(dt.Rows[0]["UserID"]));
                     return RedirectToAction("Dashbord", "Dashbord", new { area = "Employee" });
                 }
-            }
-            else
-            {
-                ViewBag.Message = "Invalid Crediantial";
-            }
-
-            return View();
+            }*/
+            return View();  
         }
 
         public IActionResult RegisterForm()

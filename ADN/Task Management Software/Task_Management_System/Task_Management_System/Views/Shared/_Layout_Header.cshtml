@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Task_Management_System.BAL
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,8 +14,8 @@
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container">
                 <!-- Brand/logo -->
-                <a class="navbar-brand" href="#">
-                    Asad Rizvi
+                <a  class="navbar-brand" href="#">
+                    Project Management
                 </a>
 
                 <!-- Toggler/collapsible Button -->
@@ -44,7 +45,7 @@
                         <li class="nav-item dropdown pe-3">
                             <a class="nav-link nav-profile d-flex align-items-center pe-0 text-white" href="#" data-bs-toggle="dropdown">
                                 <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                                <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                                <span class="d-none d-md-block dropdown-toggle ps-2">@(CommonVariables.UserName() ?? "Null")</span>
                             </a><!-- End Profile Iamge Icon -->
 
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">

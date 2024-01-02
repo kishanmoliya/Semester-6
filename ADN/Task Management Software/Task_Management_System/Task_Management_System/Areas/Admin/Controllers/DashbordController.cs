@@ -6,6 +6,7 @@ using Task_Management_System.BAL;
 
 namespace Task_Management_System.Areas.Dashbord.Controllers
 {
+    [CheckAccess]
     [Area("Admin")]
     public class DashbordController : Controller
     {
@@ -14,15 +15,8 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         #region Dashbord
         public IActionResult Dashbord()
         {
-            if (HttpContext.Session.GetInt32("AdminSessionID") != null)
-            {
-                DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("AdminSessionID")));
-                return View(dt);
-            }
-            else
-            {
-                return RedirectToAction("Index", "MST_User_Registration", new { area = "MST_User_Registration" });
-            }
+            DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("AdminSessionID")));
+            return View(dt);
         }
         #endregion
 
@@ -59,7 +53,7 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         public IActionResult ProjectDetails(int ProjectID)
         {
             DataTable dt = bal.PR_Project_SelectByPK(ProjectID);
-            if(dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
                 return View(dt);
             }
@@ -75,7 +69,7 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         {
             ViewBag.Data = ProjectID;
             DataTable dt = bal.PR_Project_SelectByPK(ProjectID);
-            if(dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
                 NewProjectModel prjModel = new NewProjectModel
                 {
@@ -93,17 +87,17 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
             {
                 return View("Dashbord");
             }
-       /*     bool IsSuccess = bal.PR_Update_Project(prjModel, ProjectID);
+            /*     bool IsSuccess = bal.PR_Update_Project(prjModel, ProjectID);
 
-            Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
-            if (IsSuccess)
-            {
-                return RedirectToAction("Dashbord");
-            }
-            else
-            {
-                return View();
-            }*/
+                 Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
+                 if (IsSuccess)
+                 {
+                     return RedirectToAction("Dashbord");
+                 }
+                 else
+                 {
+                     return View();
+                 }*/
         }
         #endregion
 
@@ -112,7 +106,7 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         {
             if (HttpContext.Session.GetString("AdminSessionID") != null)
             {
-                HttpContext.Session.Remove("AdminSessionID");
+                HttpContext.Session.Clear();
                 return RedirectToAction("Index", "MST_User_Registration", new { area = "MST_User_Registration" });
             }
             return View();

@@ -1,0 +1,41 @@
+﻿namespace Task_Management_System.BAL
+{
+    public class CommonVariables
+    {
+        public static IHttpContextAccessor _httpContextAccessor;
+
+        static CommonVariables()
+        {
+            _httpContextAccessor = new HttpContextAccessor();
+        }
+
+        public static int? UserID()
+        {
+            if (_httpContextAccessor.HttpContext.Session.GetInt32("AdminSessionID") != null)
+            {
+                return _httpContextAccessor.HttpContext.Session.GetInt32("AdminSessionID");
+            }
+            else if(_httpContextAccessor.HttpContext.Session.GetInt32("EmployeeSessionID") != null)
+            {
+                return _httpContextAccessor.HttpContext.Session.GetInt32("EmployeeSessionID");
+            }
+            return null;
+        }
+        public static string? UserName()
+        {
+            if (_httpContextAccessor.HttpContext?.Session.GetString("UserName") != null)
+            {
+                return _httpContextAccessor.HttpContext.Session.GetString("UserName")?.ToString();
+            }
+            return null;
+        }
+        public static bool IsAdmin()
+        {
+            if (_httpContextAccessor.HttpContext.Session.GetString("IsAdmin") != null)
+            {
+                return Convert.ToBoolean(_httpContextAccessor.HttpContext.Session.GetString("IsAdmin").ToString());
+            }
+            return false;
+        }
+    }
+}
