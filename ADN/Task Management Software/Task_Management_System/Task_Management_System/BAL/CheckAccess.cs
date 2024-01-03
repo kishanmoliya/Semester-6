@@ -7,7 +7,7 @@ namespace Task_Management_System.BAL
     {
         public void OnAuthorization(AuthorizationFilterContext filterContext)
         {
-            if (filterContext.HttpContext.Session.GetInt32("AdminSessionID") == null && filterContext.HttpContext.Session.GetInt32("AdminSessionID") == null)
+            if (filterContext.HttpContext.Session.GetInt32("UserID") == null)
             {
                 filterContext.Result = new RedirectResult("~/MST_User_Registration/MST_User_Registration/Index");
             }

@@ -81,7 +81,9 @@ a {
 }
 
 body {
-    background: #84889c;
+    /* background: #84889c;*/
+    /*background: #dee2e6;*/
+    background: #f6f9ff ;
 }
 
 .wrapper {

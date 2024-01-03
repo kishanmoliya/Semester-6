@@ -1,6 +1,6 @@
 ﻿namespace Task_Management_System.BAL
 {
-    public class CommonVariables
+    public static class CommonVariables 
     {
         public static IHttpContextAccessor _httpContextAccessor;
 
@@ -11,13 +11,9 @@
 
         public static int? UserID()
         {
-            if (_httpContextAccessor.HttpContext.Session.GetInt32("AdminSessionID") != null)
+            if (_httpContextAccessor.HttpContext.Session.GetInt32("UserID") != null)
             {
-                return _httpContextAccessor.HttpContext.Session.GetInt32("AdminSessionID");
-            }
-            else if(_httpContextAccessor.HttpContext.Session.GetInt32("EmployeeSessionID") != null)
-            {
-                return _httpContextAccessor.HttpContext.Session.GetInt32("EmployeeSessionID");
+                return _httpContextAccessor.HttpContext.Session.GetInt32("UserID");
             }
             return null;
         }

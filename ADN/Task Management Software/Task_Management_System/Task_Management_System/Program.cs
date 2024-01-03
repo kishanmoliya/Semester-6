@@ -2,6 +2,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Common Variables File
+builder.Services.AddHttpContextAccessor();
+
+//For Use of Session
 builder.Services.AddSession();
 
 var app = builder.Build();
@@ -14,6 +19,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//Session
 app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();

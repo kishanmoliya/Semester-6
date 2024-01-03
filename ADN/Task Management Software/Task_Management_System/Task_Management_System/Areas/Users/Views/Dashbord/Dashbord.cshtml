@@ -1,0 +1,79 @@
+﻿﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout_Header";
+}
+
+@model System.Data.DataTable;
+<style>
+    .table-data {
+        overflow-y: auto;
+        height: 71vh;
+    }
+
+        .table-data thead tr {
+            position: sticky;
+            top: 0;
+        }
+</style>
+
+<div class="Container">
+    <h2 class="text-center">Manage your Projects</h2>
+    <form method="post" asp-area="Users" asp-controller="Dashbord" asp-action="AddProjectForm">
+
+        <div class="card-listab-content">
+            <div class="row">
+                <div class="card blue col-lg-2 col-md-4 m-2">
+                    <div class="title">all projects</div>
+                    <i class="zmdi zmdi-upload"></i>
+                    <div class="value">@Model.Rows.Count</div>
+                </div>
+                <div class="card green col-lg-2 col-md-4 m-2">
+                    <div class="title">team members</div>
+                    <i class="zmdi zmdi-upload"></i>
+                    <div class="value">5,990</div>
+                </div>
+                <div class="card orange col-lg-2 col-md-4 m-2">
+                    <div class="title">total budget</div>
+                    <i class="zmdi zmdi-download"></i>
+                    <div class="value">50,000</div>
+                </div>
+                <div class="card red col-lg-2 col-md-4 m-2">
+                    <div class="title">new customers</div>
+                    <i class="zmdi zmdi-download"></i>
+                    <div class="value">3</div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus"></i>Add Project</button>
+    </form>
+    <div class="table-data">
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-primary fixed">
+                    <th scope="col">Project Tile</th>
+                    <th scope="col">Project Description</th>
+                    <th scope="col" colspan="3" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (System.Data.DataRow data in Model.Rows)
+                {
+                    <tr>
+                        <td>@data["ProjectTitle"]</td>
+                        <td>@data["ProjectDescription"]</td>
+                        <td class="d-flex justify-content-center">
+                   
+                            <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data["ProjectID"]">Delete</a>
+                            <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-ProjectID="@data["ProjectID"]">Update</a>
+                            <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="ProjectDetails" asp-route-ProjectID="@data["ProjectID"]">Show Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <a asp-area="Users" asp-controller="Dashbord" asp-action="Logout">Logout</a>
+</div>

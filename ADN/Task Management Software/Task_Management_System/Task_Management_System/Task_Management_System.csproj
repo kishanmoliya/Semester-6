@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Areas\Admin\Data\" />
+		<Folder Include="Areas\Users\Data\" />
 		<Folder Include="Areas\Employee\Data\" />
 		<Folder Include="Areas\Employee\Models\" />
 		<Folder Include="Areas\MST_User_Registration\Data\" />
