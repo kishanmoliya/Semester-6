@@ -1,7 +1,6 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data.Common;
 using System.Data;
-using Task_Management_System.Areas.MST_User_Registration.Models;
 using Task_Management_System.Areas.Admin.Models;
 
 namespace Task_Management_System.DAL

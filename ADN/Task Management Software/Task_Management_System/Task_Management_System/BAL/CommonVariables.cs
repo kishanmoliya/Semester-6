@@ -25,6 +25,16 @@
             }
             return null;
         }
+
+        public static string? Email()
+        {
+            if (_httpContextAccessor.HttpContext?.Session.GetString("Email") != null)
+            {
+                return _httpContextAccessor.HttpContext.Session.GetString("Email")?.ToString();
+            }
+            return null;
+        }
+
         public static bool IsAdmin()
         {
             if (_httpContextAccessor.HttpContext.Session.GetString("IsAdmin") != null)

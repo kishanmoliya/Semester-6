@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Task_Management_System.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="data-bs-dark">  
     <header>
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container">
@@ -38,20 +38,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
-
-
-
                         <!-- Profile  -->
                         <li class="nav-item dropdown pe-3">
                             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                                <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                                <span class="d-none d-md-block dropdown-toggle ps-2">@(CommonVariables.UserName())</span>
+                                <div class="rounded-circle bg-warning"><span class="p-2">@CommonVariables.UserName()[0]</span></div>
+                                <span class="d-none d-md-block dropdown-toggle ps-2">@CommonVariables.UserName()</span>
                             </a><!-- End Profile Iamge Icon -->
 
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li class="dropdown-header">
-                                    <h6>Kevin Anderson</h6>
-                                    <span>Web Designer</span>
+                                    <h6>@CommonVariables.UserName()</h6>
+                                    <span>@CommonVariables.Email()</span>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -85,10 +82,10 @@
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
-                                </li>
+                                </li>       
 
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Users" asp-controller="Dashbord" asp-action="Logout">
                                         <i class="bi bi-box-arrow-right"></i>
                                         <span>Sign Out</span>
                                     </a>
@@ -121,5 +118,10 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    @*<script>
+    late UserName = @(CommonVariables.UserName);
+    var profileName = (UserName.split(" ")[0][0] + UserName.split(" ")[1][0]).toUpperCase();
+    </script>*@
 </body>
 </html>

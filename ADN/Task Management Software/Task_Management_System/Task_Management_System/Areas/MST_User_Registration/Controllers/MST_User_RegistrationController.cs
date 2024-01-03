@@ -33,6 +33,7 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
                     HttpContext.Session.SetInt32("UserID", Convert.ToInt32(dt.Rows[0]["UserID"]));
                     HttpContext.Session.SetString("UserName", Convert.ToString(dt.Rows[0]["UserName"]));
                     HttpContext.Session.SetString("IsAdmin", dt.Rows[0]["IsAdmin"].ToString());
+                    HttpContext.Session.SetString("Email", dt.Rows[0]["Email"].ToString());
                     return RedirectToAction("Dashbord", "Dashbord", new { area = "Users" });
                 }
             }
