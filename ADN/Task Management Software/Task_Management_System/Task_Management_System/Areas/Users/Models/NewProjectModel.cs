@@ -1,4 +1,4 @@
-﻿namespace Task_Management_System.Areas.Admin.Models
+﻿namespace Task_Management_System.Areas.Users.Models
 {
     public class NewProjectModel
     {
@@ -10,5 +10,6 @@
         public int TotalMembers { get; set;}
         public double ProjectCost { get; set;}
         public int UserID { get; set;}
+        public DateTime ModifiedDate { get; set; }
     }
 }

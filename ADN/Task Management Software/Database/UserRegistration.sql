@@ -71,7 +71,8 @@ Select
 	PRJ_Project.CreatedDate,
 	PRJ_Project.DeadLine,
 	PRJ_Project.TotalMembers,
-	PRJ_Project.ProjectCost
+	PRJ_Project.ProjectCost,
+	PRJ_Project.ModifiedDate
 From PRJ_Project
 Inner Join MST_User on PRJ_Project.UserID = MST_User.UserID
 Where PRJ_Project.UserID = @UserID
@@ -91,3 +92,22 @@ Select
 	ModifiedDate
 From MST_User
  
+
+-- Dashbord Data
+Exec DashbordCount 5
+Alter Procedure DashbordCount
+	@UserID	int
+AS
+Declare @Temp Table
+(
+	sumOfMember		int,
+	sumOfProject	int,
+	sumOfBudget		decimal(18,2),
+	sumOfCustomers	int	
+)
+Insert Into @Temp 
+Select sumOfMember = SUM(TotalMembers), sumOfProject = Count(ProjectID), sumOfBudget = SUM(ProjectCost), sumOfCustomers = Count(Distinct ProjectOwnerName)
+FROM PRJ_Project Where UserID = @UserID
+
+Select * From @Temp
+

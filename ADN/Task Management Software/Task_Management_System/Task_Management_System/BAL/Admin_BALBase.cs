@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using Task_Management_System.Areas.Admin.Models;
+using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.Areas.MST_User_Registration.Models;
 using Task_Management_System.DAL;
 
@@ -119,6 +119,28 @@ namespace Task_Management_System.BAL
         }
         #endregion
 
+        #region DashbordData
+        public DataTable DashbordCount(int id)
+        {
+            try
+            {
+                DataTable dt = dal.DashbordCount(id);
+                if (dt != null)
+                {
+                    return dt;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+        #endregion
     }
 }
 

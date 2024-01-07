@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
-using Task_Management_System.Areas.Admin.Models;
-using Task_Management_System.Areas.MST_User_Registration.Models;
+using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.BAL;
 
 namespace Task_Management_System.Areas.Dashbord.Controllers
@@ -11,12 +10,50 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
     public class DashbordController : Controller
     {
         Admin_BALBase bal = new Admin_BALBase();
-
+      
         #region Dashbord
         public IActionResult Dashbord()
         {
+            ViewModel model = new ViewModel();
+            model.DashboordData = getDashbordData();
+            model.ProjectDetails = getProjectDetails();
+            return View(model);
+        }
+
+        public DashbordCountModel getDashbordData()
+        {
+            DataTable dt = bal.DashbordCount(Convert.ToInt32(CommonVariables.UserID()));
+            DashbordCountModel dashbordData = new DashbordCountModel
+            {
+                sumOfMember = Convert.ToInt32(dt.Rows[0]["sumOfMember"]),
+                sumOfProject = Convert.ToInt32(dt.Rows[0]["sumOfProject"]),
+                sumOfBudget = Convert.ToDouble(dt.Rows[0]["sumOfBudget"]),
+                sumOfCustomers = Convert.ToInt32(dt.Rows[0]["sumOfCustomers"])
+            };
+            return dashbordData;
+        }
+
+        public List<NewProjectModel> getProjectDetails()
+        {
             DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("UserID")));
-            return View(dt);
+            List<NewProjectModel> newProject = new List<NewProjectModel>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                NewProjectModel model = new NewProjectModel
+                {
+                    ProjectID = Convert.ToInt32(dr["ProjectID"]),
+                    ProjectTitle = Convert.ToString(dr["ProjectTitle"]),
+                    ProjectDescription = Convert.ToString(dr["ProjectDescription"]),
+                    ProjectOwnerName = Convert.ToString(dr["ProjectOwnerName"]),
+                    DeadLine = Convert.ToDateTime(dr["DeadLine"]),
+                    TotalMembers = Convert.ToInt32(dr["TotalMembers"]),
+                    ProjectCost = Convert.ToDouble(dr["ProjectCost"]),
+                    UserID = Convert.ToInt32(dr["UserID"]),
+                    ModifiedDate = Convert.ToDateTime(dr["ModifiedDate"]),
+                };
+                newProject.Add(model);
+            }
+            return newProject;
         }
         #endregion
 

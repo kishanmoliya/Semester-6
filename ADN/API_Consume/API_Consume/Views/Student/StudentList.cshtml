@@ -1,0 +1,36 @@
+﻿@model List<API_Consume.Models.StudentModel>
+<h2>Student List</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <!-- Add other columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.StudentID</td>
+                    <td>@emp.StudentName</td>
+                    <td>@emp.StudentAge</td>
+                    <td>
+                        <form method="post" asp-controller="Student" asp-action="Delete" asp-route-StudentID="@emp.StudentID">
+                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
+                    <!-- Add other columns as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No Student found.</p>
+}

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data.Common;
 using System.Data;
-using Task_Management_System.Areas.Admin.Models;
+using Task_Management_System.Areas.Users.Models;
 
 namespace Task_Management_System.DAL
 {
@@ -160,6 +160,28 @@ namespace Task_Management_System.DAL
                 return false;
             }
         }
-            #endregion 
+        #endregion
+
+        #region Get Dashbord Data...
+        public DataTable DashbordCount(int id)
+        {
+            try
+            {
+                SqlDatabase db = new SqlDatabase(ConnString);
+                DbCommand cmd = db.GetStoredProcCommand("DashbordCount");
+                db.AddInParameter(cmd, "@UserID", SqlDbType.VarChar, id);
+                DataTable dt = new DataTable();
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    dt.Load(reader);
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

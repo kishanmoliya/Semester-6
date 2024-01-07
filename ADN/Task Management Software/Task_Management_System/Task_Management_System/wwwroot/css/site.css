@@ -285,13 +285,14 @@ body {
     ===========================
 */
 
-.card-list {
-    width: 100%;
+.ds {
+    padding: 5px 15px 15px;
+    width: 22%;
 }
 
 .title {
     display: inline-block;
-    font-size: 8px;
+    font-size: 15px;
     padding: 10px 10px 0;
     text-transform: uppercase;
 }
