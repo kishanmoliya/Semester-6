@@ -55,7 +55,7 @@
                             <div class="row align-items-start">
                                 <button class="col btn btn-outline-success m-1" type="submit">View</button>
                                 <button class="col btn btn-outline-success m-1" type="submit">Edit</button>
-                                <button class="col btn btn-outline-success m-1" type="submit">Complete<i class="bi bi-arrow-return-right ms-2"></i></button>
+                                <button asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-ProjectID="@data["TaskID"]" class="col btn btn-outline-success m-1" type="submit">Complete<i class="bi bi-arrow-return-right ms-2"></i></button>
                             </div>
                         </div>
                     </div>
