@@ -83,7 +83,7 @@ a {
 body {
     /* background: #84889c;*/
     /*background: #dee2e6;*/
-    background: #f6f9ff ;
+    background: #f6f9ff;
 }
 
 .wrapper {
@@ -199,6 +199,11 @@ body {
             background: #ffd5d2;
         }
 
+.form-control:focus, .form-control:active {
+    border: none;
+    border-color: none;
+    box-shadow: none;
+}
 
 /* 
     ===========================
@@ -327,4 +332,11 @@ body {
 
 .card-list {
     width: 100%;
+}
+
+
+.imgSize {
+    height: 22px;
+    width: 22px;
+    margin-right: 10px;
 }

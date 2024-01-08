@@ -1,0 +1,60 @@
+﻿@model Task_Management_System.Areas.Users.Models.AddTaskModel
+
+@{
+    Layout = "_Layout_Header";
+}
+
+<div class="wrapper">
+    @{
+        String buttonName = "";
+        if (ViewBag.Data != null)
+        {
+            ViewBag.Data = "Edit Project Details";
+            buttonName = "Save Changes";
+        }
+        else
+        {
+            ViewBag.Data = "Add Your Project";
+            buttonName = "Add Project";
+        }
+    }
+    <div class="registration_form">
+        <div class="title">
+            @ViewBag.Data
+        </div>
+        <form asp-action="AddTask">
+            @Html.HiddenFor(x => x.TaskID)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form_wrap">
+
+                <div class="input_wrap">
+                    <label asp-for="TaskName" for="fname">Task Name</label>
+                    <input asp-for="TaskName" name="TaskName" type="text" id="fname">
+                    <div><span asp-validation-for="TaskName" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="TaskDescription" for="fname">Task Dedcription</label>
+                    <textarea asp-for="TaskDescription" name="TaskDescription" type="text" cols="40"
+                           rows="5" id="fname" class="form-control rounded-1 p-2"></textarea>
+                    <div><span asp-validation-for="TaskDescription" class="text-danger"></span></div>
+                </div>
+
+                <div class="input_wrap">
+                    <label asp-for="DeadLine" for="fname">Task DeadLine  </label>
+                    <input asp-for="DeadLine" name="DeadLine" type="date" id="fname">
+                    <div><span asp-validation-for="DeadLine" class="text-danger"></span></div>
+                </div>
+
+                <div class="input_wrap">
+                    <input type="submit" value="@buttonName" class="submit_btn">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

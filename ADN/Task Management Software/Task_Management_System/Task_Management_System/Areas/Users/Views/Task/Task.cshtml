@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout_Header";
+}
+
+<div class="container-fluid mt-3">
+    <div class="row justify-content-around">
+
+        @*First Row*@
+        <div class="d-inline-block col-lg-4 col-md-5 bg-secondary bg-opacity-10">
+
+            <div class="row justify-content-end bg-secondary bg-opacity-10">
+                <div class="col m-2">Pending</div>
+                <a asp-area="Users" asp-controller="Task" asp-action="AddTaskForm" class="col-3 btn btn-outline-success m-1">+ Add Task</a>
+            </div>
+
+            @foreach (System.Data.DataRow data in Model.Rows)
+            {
+                if (@data["TaskState"].ToString() == "Pending".ToString())
+                {
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            @data["TaskName"]
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Complete To: @data["DeadLine"]</h5>
+                            <p class="card-text">@data["TaskDescription"]</p>
+                            <div class="row align-items-start">
+                                <button class="col btn btn-outline-success m-1" type="submit">View</button>
+                                <button class="col btn btn-outline-success m-1" type="submit">Edit</button>
+                                <button asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-ProjectID="@data["TaskID"]" class="col btn btn-outline-success m-1" type="submit">Progress<i class="bi bi-arrow-return-right ms-2"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        @*Second Row*@
+        <div class="d-inline-block col-lg-4 col-md-5 bg-secondary bg-opacity-10">
+            <div class="row p-2 bg-secondary bg-opacity-10">In Progress</div>
+            @foreach (System.Data.DataRow data in Model.Rows)
+            {
+                if (@data["TaskState"].ToString() == "InProgress".ToString())
+                {
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            @data["TaskName"]
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Complete To: @data["DeadLine"]</h5>
+                            <p class="card-text">@data["TaskDescription"]</p>
+                            <div class="row align-items-start">
+                                <button class="col btn btn-outline-success m-1" type="submit">View</button>
+                                <button class="col btn btn-outline-success m-1" type="submit">Edit</button>
+                                <button class="col btn btn-outline-success m-1" type="submit">Complete<i class="bi bi-arrow-return-right ms-2"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        @*Third Row*@
+        <div class="d-inline-block col-lg-3 col-md-5 bg-secondary bg-opacity-10">
+            <div class="row p-2 bg-secondary bg-opacity-10">Completed</div>
+            @foreach (System.Data.DataRow data in Model.Rows)
+            {
+                if (@data["TaskState"].ToString() == "Done".ToString())
+                {
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            @data["TaskName"]
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Completed</h5>
+                            <p class="card-text">@data["TaskDescription"]</p>
+                            <div class="row align-items-start">
+                                <button class="col btn btn-outline-success m-1" type="submit">View</button>
+                                <button class="col btn btn-outline-success m-1" type="submit">Edit</button>                             
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+</div>

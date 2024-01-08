@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout_Header";
+}
+
+<div class="container-fluid mt-3">
+    <div class="row justify-content-around">
+
+        @*First Row*@
+        <div class="d-inline-block col-lg-4 col-md-5 bg-secondary bg-opacity-10" style="height: 100vh;">
+
+            <div class="row justify-content-end bg-secondary bg-opacity-10 mb-1">
+                <div class="col m-2">Pending</div>
+                <button class="col btn btn-outline-success m-1" type="submit">+ Add Task</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Task Name
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+
+                    <div class="row align-items-start">
+                        <button class="col btn btn-outline-success m-1" type="submit">View</button>
+                        <button class="col btn btn-outline-success m-1" type="submit">Edit</button>
+                        <button class="col btn btn-outline-success m-1" type="submit">Progress -></button>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        @*Second Row*@
+        <div class="d-inline-block col-lg-4 col-md-5 bg-secondary bg-opacity-10" style="height: 100vh;">
+            <div class="row mb-2 p-2 bg-secondary bg-opacity-10">In Progress</div>
+            <div class="card">
+                <div class="card-header">
+                    Task Name
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                    <div class="row align-items-start">
+                        <button class="col btn btn-outline-success m-1" type="submit">View</button>
+                        <button class="col btn btn-outline-success m-1" type="submit">Edit</button>
+                        <button class="col btn btn-outline-success m-1" type="submit">Complete -></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @*Third Row*@
+        <div class="d-inline-block col-lg-3 col-md-5 bg-secondary bg-opacity-10" style="height: 100vh;">
+            <div class="row mb-2 p-2 bg-secondary bg-opacity-10">Completed</div>
+            <div class="card">
+                <div class="card-header">
+                    Task Name
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div class="row align-items-start">
+                        <button class="col btn btn-outline-success m-1" type="submit">View</button>
+                        <button class="col btn btn-outline-success m-1" type="submit">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

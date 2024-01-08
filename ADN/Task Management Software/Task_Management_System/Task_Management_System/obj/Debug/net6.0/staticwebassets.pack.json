@@ -13,6 +13,22 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "E:\\Semester-6\\ADN\\Task Management Software\\Task_Management_System\\Task_Management_System\\wwwroot\\icons\\budget.png",
+      "PackagePath": "staticwebassets\\icons\\budget.png"
+    },
+    {
+      "Id": "E:\\Semester-6\\ADN\\Task Management Software\\Task_Management_System\\Task_Management_System\\wwwroot\\icons\\customer.png",
+      "PackagePath": "staticwebassets\\icons\\customer.png"
+    },
+    {
+      "Id": "E:\\Semester-6\\ADN\\Task Management Software\\Task_Management_System\\Task_Management_System\\wwwroot\\icons\\project.png",
+      "PackagePath": "staticwebassets\\icons\\project.png"
+    },
+    {
+      "Id": "E:\\Semester-6\\ADN\\Task Management Software\\Task_Management_System\\Task_Management_System\\wwwroot\\icons\\team.png",
+      "PackagePath": "staticwebassets\\icons\\team.png"
+    },
+    {
       "Id": "E:\\Semester-6\\ADN\\Task Management Software\\Task_Management_System\\Task_Management_System\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

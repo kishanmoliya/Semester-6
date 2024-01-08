@@ -23,27 +23,27 @@
     <form method="post" asp-area="Users" asp-controller="Dashbord" asp-action="AddProjectForm">
         <div class="card-listab-content">
             <div class="row justify-content-around">
-                <div class="card ds blue col-lg-2 col-md-4 m-2">
-                    <div class="title">all projects</div>
+                <div class="card ds blue col-lg-2 col-md-4 m-2"> 
+                    <div class="title"><img src="~/icons/project.png" href="LOGO" class="imgSize"/>projects</div>
                     <div class="value">@Model.DashboordData.sumOfProject</div>
                 </div>
                 <div class="card ds green col-lg-2 col-md-4 m-2">
-                    <div class="title">team members</div>
+                    <div class="title"><img src="~/icons/team.png" href="LOGO" class="imgSize" /> team members</div>
                     <div class="value">@Model.DashboordData.sumOfMember</div>
                 </div>
                 <div class="card ds orange col-lg-2 col-md-4 m-2">
-                    <div class="title">total budget</div>
+                    <div class="title"><img src="~/icons/budget.png" href="LOGO" class="imgSize" /> total budget</div>
                     <div class="value">@Model.DashboordData.sumOfBudget.ToString("#,##0.00") Rs.</div>
                 </div>
                 <div class="card ds red col-lg-2 col-md-4 m-2">
-                    <div class="title">new customers</div>
+                    <div class="title"><img src="~/icons/customer.png" href="LOGO" class="imgSize" /> new customers</div>
                     <div class="value">@Model.DashboordData.sumOfCustomers</div>
                 </div>
             </div>
         </div>
 
         <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus"></i>+ Add Project</button>
+            <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus"></i>Add Project</button>
         </div>
     </form>
     <div class="table-data">
@@ -62,14 +62,14 @@
                 {
                     <tr>
                         <td>@data.ProjectTitle</td>
-                        <td>@data.DeadLine</td>
+                        <td>@data.DeadLine.ToString("dd/MM/yyyy")</td>
                         <td>@data.ProjectOwnerName</td>
                         <td>Pending</td>
                         <td class="d-flex justify-content-center">
-
                             <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data.ProjectID">Delete</a>
                             <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-ProjectID="@data.ProjectID">Update</a>
-                            <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-action="ProjectDetails" asp-route-ProjectID="@data.ProjectID">Show Details</a>
+                            <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-action="ProjectDetails" asp-route-ProjectID="@data.ProjectID">Details</a>
+                            <a class="btn btn-outline-warning m-1" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@data.ProjectID">Manage Task</a>
                         </td>
                     </tr>
                 }
