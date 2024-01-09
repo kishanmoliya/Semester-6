@@ -20,7 +20,7 @@
             {
                 if (@data["TaskState"].ToString() == "Pending".ToString())
                 {
-                    <div class="card mt-2">
+                    <div class="card mt-2 mb-2">
                         <div class="card-header">
                             @data["TaskName"]
                         </div>
@@ -30,7 +30,7 @@
                             <div class="row align-items-start">
                                 <button class="col btn btn-outline-success m-1" type="submit">View</button>
                                 <button class="col btn btn-outline-success m-1" type="submit">Edit</button>
-                                <button asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-ProjectID="@data["TaskID"]" class="col btn btn-outline-success m-1" type="submit">Progress<i class="bi bi-arrow-return-right ms-2"></i></button>
+                                <a type="submit" asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success m-1">Progress<i class="bi bi-arrow-return-right ms-2"></i></a>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
             {
                 if (@data["TaskState"].ToString() == "InProgress".ToString())
                 {
-                    <div class="card mt-2">
+                    <div class="card mt-2 mb-2">
                         <div class="card-header">
                             @data["TaskName"]
                         </div>
@@ -55,7 +55,7 @@
                             <div class="row align-items-start">
                                 <button class="col btn btn-outline-success m-1" type="submit">View</button>
                                 <button class="col btn btn-outline-success m-1" type="submit">Edit</button>
-                                <button asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-ProjectID="@data["TaskID"]" class="col btn btn-outline-success m-1" type="submit">Complete<i class="bi bi-arrow-return-right ms-2"></i></button>
+                                <a asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success m-1" type="submit">Complete<i class="bi bi-arrow-return-right ms-2"></i></a>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
             {
                 if (@data["TaskState"].ToString() == "Done".ToString())
                 {
-                    <div class="card mt-2">
+                    <div class="card mt-2 mb-2">
                         <div class="card-header">
                             @data["TaskName"]
                         </div>

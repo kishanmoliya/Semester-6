@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Microsoft.CodeAnalysis;
+using System.Data;
 using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.DAL;
 
@@ -48,6 +49,49 @@ namespace Task_Management_System.BAL
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+        #endregion
+
+        #region Change Task State
+        public bool PR_State_Change(int TaskID, string TaskState)
+        {
+            try
+            {
+                if (dal.PR_State_Change(TaskID, TaskState))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region Task Details
+        public DataTable PR_Task_SelectByPK(int TaskID)
+        {
+            try
+            {
+                DataTable dt = dal.PR_Task_SelectByPK(TaskID);
+                if (dt != null)
+                {
+                    return dt;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
         #endregion

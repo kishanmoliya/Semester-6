@@ -132,36 +132,6 @@ namespace Task_Management_System.DAL
         }
         #endregion
 
-        #region Update Projct
-        public bool PR_Update_Project(NewProjectModel prjModel, int ProjectID)
-        {
-            try
-            {
-                SqlDatabase db = new SqlDatabase(ConnString);
-                DbCommand cmd = db.GetStoredProcCommand("PR_Update_Project");
-                db.AddInParameter(cmd, "@ProjectTitle", SqlDbType.VarChar, prjModel.ProjectTitle);
-                db.AddInParameter(cmd, "@ProjectDescription", SqlDbType.VarChar, prjModel.ProjectDescription);
-                db.AddInParameter(cmd, "@ProjectOwnerName", SqlDbType.VarChar, prjModel.ProjectOwnerName);
-                db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, prjModel.DeadLine);
-                db.AddInParameter(cmd, "@TotalMembers", SqlDbType.Int, prjModel.TotalMembers);
-                db.AddInParameter(cmd, "@ProjectCost", SqlDbType.Decimal, prjModel.ProjectCost);
-                db.AddInParameter(cmd, "@UserID", SqlDbType.Int, ProjectID);
-                if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-        #endregion
-
         #region Get Dashbord Data...
         public DataTable DashbordCount(int id)
         {

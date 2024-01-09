@@ -102,16 +102,17 @@ END;
 Create or ALter Procedure SelectAllTask
 As
 Select * From PRJ_Task
+ORDER BY [dbo].[PRJ_Task].[CreatedDate]
+
 
 --Select By PK
 Exec [dbo].[PR_Task_SelectByPK] 5
 CREATE OR Alter PROCEDURE [dbo].[PR_Task_SelectByPK]
-@ProjectID int
+@TaskID int
 AS
-
 SELECT * FROM [dbo].[PRJ_Task]
-WHERE [dbo].[PRJ_Task].[ProjectID] = @ProjectID
-ORDER BY [dbo].[PRJ_Task].[TaskName]
+WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
+ORDER BY [dbo].[PRJ_Task].[CreatedDate]
 
 -- Change State
 Exec [dbo].[PR_State_Change] 5,'InProgress'
@@ -132,6 +133,19 @@ BEGIN
 	WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID;
 END
 
+--Task Update
+ALTER PROCEDURE [dbo].[PR_Update_Task]
+	@TaskID				int,
+	@TaskName			nVarchar(Max),
+	@TaskDescription	nVarchar(Max),
+	@DeadLine			DateTime
+AS
+UPDATE [dbo].[PRJ_Task]	
+	SET [dbo].[PRJ_Task].[TaskName] = @TaskName,
+		[dbo].[PRJ_Task].[TaskDescription] = @TaskDescription,
+		[dbo].[PRJ_Task].[DeadLine] = @DeadLine,
+		[dbo].[PRJ_Task].[Modified] = GETDATE()
+WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 --Inert Member

@@ -96,28 +96,6 @@ namespace Task_Management_System.BAL
             }
         }
         #endregion
-       
-        #region Updata Project
-        public bool PR_Update_Project(NewProjectModel prjModel, int ProjectID)
-        {
-            try
-            {
-
-                if (dal.PR_Update_Project(prjModel, ProjectID))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-        #endregion
 
         #region DashbordData
         public DataTable DashbordCount(int id)

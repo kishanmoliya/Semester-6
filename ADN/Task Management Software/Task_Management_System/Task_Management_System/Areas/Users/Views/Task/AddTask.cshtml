@@ -7,20 +7,20 @@
 <div class="wrapper">
     @{
         String buttonName = "";
-        if (ViewBag.Data != null)
+        if (ViewBag.TaskID != null)
         {
-            ViewBag.Data = "Edit Project Details";
+            ViewBag.TaskID = "Edit Task Details";
             buttonName = "Save Changes";
         }
         else
         {
-            ViewBag.Data = "Add Your Project";
-            buttonName = "Add Project";
+            ViewBag.TaskID = "Add Your Task";
+            buttonName = "Add Task";
         }
     }
     <div class="registration_form">
         <div class="title">
-            @ViewBag.Data
+            @ViewBag.TaskID
         </div>
         <form asp-action="AddTask">
             @Html.HiddenFor(x => x.TaskID)
