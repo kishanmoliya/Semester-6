@@ -9,12 +9,12 @@ namespace Task_Management_System.DAL
     {
         SqlDatabase db = new SqlDatabase(ConnString);
         #region Get Task...
-        public DataTable PR_Project_Task(int ProjectID)
+        public DataTable PR_ProjectWise_Task(int ProjectID)
         {
             try
             {
                 SqlDatabase db = new SqlDatabase(ConnString);
-                DbCommand cmd = db.GetStoredProcCommand("PR_Task_SelectByPK");
+                DbCommand cmd = db.GetStoredProcCommand("PR_ProjectWise_Task");
                 db.AddInParameter(cmd, "@ProjectID", SqlDbType.Int, ProjectID);
                 DataTable dt = new DataTable();
                 using (IDataReader reader = db.ExecuteReader(cmd))
@@ -38,7 +38,7 @@ namespace Task_Management_System.DAL
                 try
                 {
                     DbCommand cmd = db.GetStoredProcCommand("PR_Update_Task");
-                    db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, taskModel.ProjectID);
+                    db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
                     db.AddInParameter(cmd, "@TaskName", SqlDbType.VarChar, taskModel.TaskName);
                     db.AddInParameter(cmd, "@TaskDescription", SqlDbType.VarChar, taskModel.TaskDescription);
                     db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, taskModel.DeadLine);

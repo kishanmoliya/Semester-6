@@ -3,32 +3,37 @@
 
 @if (Model != null && Model.Count > 0)
 {
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Age</th>
-                <!-- Add other columns as needed -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var emp in Model)
-            {
-                <tr>
-                    <td>@emp.StudentID</td>
-                    <td>@emp.StudentName</td>
-                    <td>@emp.StudentAge</td>
-                    <td>
-                        <form method="post" asp-controller="Student" asp-action="Delete" asp-route-StudentID="@emp.StudentID">
-                            <button type="submit" class="btn btn-outline-danger">Delete</button>
-                        </form>
-                    </td>
-                    <!-- Add other columns as needed -->
+    <div class="Container">
+        <nav class="navbar bg-body-tertiary mb-2">
+            <div class="d-flex col justify-content-end">
+                <a asp-controller="Student" asp-action="AddEdit" class="btn btn-outline-primary"><i class="bi bi-plus"></i>Add Student</a>
+            </div>
+        </nav>
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-primary">
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Student Age</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var stu in Model)
+                {
+                    <tr>
+                        <td>@stu.StudentID</td>
+                        <td>@stu.StudentName</td>
+                        <td>@stu.StudentAge</td>
+                        <td>
+                            <a asp-controller="Student" asp-action="Delete" asp-route-StudentID="@stu.StudentID" class="btn btn-outline-danger">Delete</a>
+                            <a asp-controller="Student" asp-action="AddEdit" asp-route-StudentID="@stu.StudentID" class="btn btn-outline-danger">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {

@@ -15,7 +15,7 @@ namespace Task_Management_System.Areas.Users.Controllers
         #region All Task
         public IActionResult Task(int ProjectID)
         {
-            DataTable dt = bal.PR_Project_Task(ProjectID);
+            DataTable dt = bal.PR_ProjectWise_Task(ProjectID);
             TempData["ProjectID"] = ProjectID;
             return View(dt);
         }

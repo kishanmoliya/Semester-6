@@ -102,17 +102,26 @@ END;
 Create or ALter Procedure SelectAllTask
 As
 Select * From PRJ_Task
-ORDER BY [dbo].[PRJ_Task].[CreatedDate]
+ORDER BY [dbo].[PRJ_Task].[TaskName]
 
 
---Select By PK
+--Select Project Wise Task
+Exec [dbo].[PR_ProjectWise_Task] 5
+CREATE OR Alter PROCEDURE [dbo].[PR_ProjectWise_Task]
+@ProjectID int
+AS
+SELECT * FROM [dbo].[PRJ_Task]
+WHERE [dbo].[PRJ_Task].[ProjectID] = @ProjectID
+ORDER BY [dbo].[PRJ_Task].[TaskName]
+
+--Select TaskByPK
 Exec [dbo].[PR_Task_SelectByPK] 5
 CREATE OR Alter PROCEDURE [dbo].[PR_Task_SelectByPK]
 @TaskID int
 AS
 SELECT * FROM [dbo].[PRJ_Task]
 WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
-ORDER BY [dbo].[PRJ_Task].[CreatedDate]
+ORDER BY [dbo].[PRJ_Task].[TaskName]
 
 -- Change State
 Exec [dbo].[PR_State_Change] 5,'InProgress'

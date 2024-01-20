@@ -1,0 +1,48 @@
+﻿@model API_Consume.Models.StudentModel;
+@{
+    Layout = "_Layout";
+}
+<h3>@ViewBag.StudentID</h3>
+<div class="container w-50">
+    @{
+        if (ViewBag.StudentID != null)
+        {
+            ViewBag.StudentID = "Edit Stuednt Details";
+        }
+        else
+        {
+            ViewBag.StudentID = "Add Student";
+        }
+    }
+    <h3>@ViewBag.StudentID</h3>
+    <form method="post" asp-controller="Student" asp-action="Save">
+        @Html.HiddenFor(x => x.StudentID)
+        <div class="mb-3">
+            <label class="form-label"><span class="text-danger fw-bold">*</span>Student Name :</label>
+            <input type="text" class="form-control" id="StudentName" name="StudentName" asp-for="StudentName" />
+            <span class="form-text text-danger" asp-validation-for="StudentName"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><span class="text-danger fw-bold">*</span>Father Name :</label>
+            <input type="text" class="form-control" id="StudentFatherName" name="StudentFatherName" asp-for="StudentFatherName" />
+            <span class="form-text text-danger" asp-validation-for="StudentFatherName"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><span class="text-danger fw-bold">*</span>Age :</label>
+            <input type="text" class="form-control" id="StudentAge" name="StudentAge" asp-for="StudentAge" />
+            <span class="form-text text-danger" asp-validation-for="StudentAge"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><span class="text-danger fw-bold">*</span>Standred :</label>
+            <input type="text" class="form-control" id="StudentStandred" name="StudentStandred" asp-for="StudentStandred" />
+            <span class="form-text text-danger" asp-validation-for="StudentStandred"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

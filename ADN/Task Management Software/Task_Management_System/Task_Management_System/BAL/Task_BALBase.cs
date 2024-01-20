@@ -9,11 +9,11 @@ namespace Task_Management_System.BAL
     {
         Task_DALBase dal = new Task_DALBase();
         #region Project Wise Task 
-        public DataTable PR_Project_Task(int ProjectID)
+        public DataTable PR_ProjectWise_Task(int ProjectID)
         {
             try
             {
-                DataTable dt = dal.PR_Project_Task(ProjectID);
+                DataTable dt = dal.PR_ProjectWise_Task(ProjectID);
                 if (dt != null)
                 {
                     return dt;
