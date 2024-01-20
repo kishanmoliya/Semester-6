@@ -34,8 +34,8 @@
                 </div>
                 <div class="input_wrap">
                     <label asp-for="ProjectDescription" for="fname">Project Dedcription</label>
-                    <input asp-for="ProjectDescription" name="ProjectDescription" type="text" cols="40"
-                           rows="5" id="fname">
+                    <textarea asp-for="ProjectDescription" name="ProjectDescription" type="text"
+                              rows="5" id="fname" class="form-control rounded-1 p-2"></textarea>
                     <div><span asp-validation-for="ProjectDescription" class="text-danger"></span></div>
                 </div>
                 <div class="input_wrap">
@@ -44,15 +44,15 @@
                     <div><span asp-validation-for="ProjectOwnerName" class="text-danger"></span></div>
                 </div>
 
-                <div class="input_grp">
-                    <div class="input_wrap">
+                <div class="input_grp row">
+                    <div class="col input_wrap">
                         <label asp-for="TotalMembers" for="fname">Project Total Members</label>
-                        <input asp-for="TotalMembers" name="TotalMembers" type="number" min="1" max="500" id="fname">
+                        <input asp-for="TotalMembers" name="TotalMembers" type="number" class="form-comtrol" min="1" max="500" id="fname">
                         <div><span asp-validation-for="TotalMembers" class="text-danger"></span></div>
                     </div>
-                    <div class="input_wrap">
+                    <div class="col input_wrap">
                         <label asp-for="ProjectCost" for="fname">Project Cost</label>
-                        <input asp-for="ProjectCost" name="ProjectCost" type="number" min="1000" max="50000000" id="fname">
+                        <input asp-for="ProjectCost" name="ProjectCost" type="number" class="form-control" min="1000" max="50000000" id="fname">
                         <div><span asp-validation-for="ProjectCost" class="text-danger"></span></div>
                     </div>
                 </div>
