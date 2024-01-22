@@ -11,5 +11,6 @@
         public double ProjectCost { get; set;}
         public int UserID { get; set;}
         public DateTime ModifiedDate { get; set; }
+        public string ProjectState { get; set; }
     }
 }

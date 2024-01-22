@@ -72,7 +72,8 @@ Select
 	PRJ_Project.DeadLine,
 	PRJ_Project.TotalMembers,
 	PRJ_Project.ProjectCost,
-	PRJ_Project.ModifiedDate
+	PRJ_Project.ModifiedDate,
+	PRJ_Project.ProjectState
 From PRJ_Project
 Inner Join MST_User on PRJ_Project.UserID = MST_User.UserID
 Where PRJ_Project.UserID = @UserID

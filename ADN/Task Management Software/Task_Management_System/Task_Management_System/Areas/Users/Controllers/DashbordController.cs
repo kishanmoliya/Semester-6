@@ -50,6 +50,7 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
                     ProjectCost = Convert.ToDouble(dr["ProjectCost"]),
                     UserID = Convert.ToInt32(dr["UserID"]),
                     ModifiedDate = Convert.ToDateTime(dr["ModifiedDate"]),
+                    ProjectState = Convert.ToString(dr["ProjectState"]),
                 };
                 newProject.Add(model);
             }

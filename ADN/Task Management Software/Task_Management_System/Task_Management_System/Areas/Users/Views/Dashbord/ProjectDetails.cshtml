@@ -5,18 +5,6 @@
 @{
     Layout = "_Layout_Header";
 }
-<style>
-    .table-data {
-        overflow-y: auto;
-        height: 71vh;
-    }
-
-        .table-data thead tr {
-            position: sticky;
-            top: 0;
-        }
-</style>
-
 <div class="Container">
     <div class="table-data">
         <table class="table table-hover">
@@ -32,8 +20,32 @@
                 {
                     <tr>
                         <td>@data["ProjectTitle"]</td>
-                        <td>@data["ProjectDescription"]</td>                     
+                        <td>@data["ProjectDescription"]</td>
                     </tr>
+                    <div class="bg-success bg-opacity-10 px-5 py-1 mt-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Project Name: @data["ProjectTitle"]</h4>
+
+                                <p>
+                                    Projection Description: @data["ProjectDescription"]  <br/>
+                                    Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
+                                    Quidem sit est nulla ullam. Suscipit debitis ullam iusto dolorem animi dolorem numquam. Enim fuga ipsum dolor nulla quia ut.
+                                    Rerum dolor voluptatem et deleniti libero totam numquam nobis distinctio. Sit sint aut. Consequatur rerum in.
+                                </p>
+
+
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project Owner:    </span>@data["ProjectOwnerName"]</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project Cost:     </span>@data["ProjectCost"]</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project Members:  </span>@data["TotalMembers"]</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project Status:   </span>@data["ProjectState"]</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Created Date:     </span>@Convert.ToDateTime(data["CreatedDate"]).ToString("dd/MM/yyyy")</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project DeadLine: </span>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Last Modified:    </span>@Convert.ToDateTime(data["ModifiedDate"]).ToString("dd/MM/yyyy")</h6>
+
+                            </div>
+                        </div>
+                    </div>
                 }
             </tbody>
         </table>

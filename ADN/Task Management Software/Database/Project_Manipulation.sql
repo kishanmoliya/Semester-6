@@ -19,7 +19,8 @@ Insert Into [dbo].[PRJ_Project]
 	[dbo].[PRJ_Project].[TotalMembers],
 	[dbo].[PRJ_Project].[ProjectCost],
 	[dbo].[MST_User].[UserID],
-	[dob].[PRJ_Project].[ModifiedDate]
+	[dob].[PRJ_Project].[ModifiedDate],
+	[dob].[PRJ_Project].[ProjectState]
 )
 Values
 (
@@ -31,7 +32,8 @@ Values
 	@TotalMembers,		
 	@ProjectCost,		
 	@UserID,
-	GetDate()
+	GetDate(),
+	'Pending'
 )
 
 -- Delete Project
@@ -44,8 +46,8 @@ WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 
 
 -- Select Project By PK
-Exec [dbo].[PR_Project_SelectByPK] 20
-CREATE PROCEDURE [dbo].[PR_Project_SelectByPK]
+Exec [dbo].[PR_Project_SelectByPK] 5
+CREATE OR ALTER PROCEDURE [dbo].[PR_Project_SelectByPK]
 @ProjectID int
 AS
 
@@ -57,6 +59,8 @@ SELECT [dbo].[PRJ_Project].[ProjectID]
 	  ,[dbo].[PRJ_Project].[ProjectCost]
 	  ,[dbo].[PRJ_Project].[CreatedDate]
 	  ,[dbo].[PRJ_Project].[DeadLine]
+	  ,[dbo].[PRJ_Project].[ModifiedDate]
+	  ,[dbo].[PRJ_Project].[ProjectState]
 FROM [dbo].[PRJ_Project]
 WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 ORDER BY [dbo].[PRJ_Project].[ProjectTitle]

@@ -17,14 +17,14 @@
                 @{
                     if (ViewBag.Message != null)
                     {
-                        <p style="color:red;">@ViewBag.Message</p>
+                        <h5 class="fw-bold text-danger d-flex justify-content-center pt-2">@ViewBag.Message</h5>
                     }
                     if (TempData["Success"] != null)
                     {
                         <p style="color:green;">@TempData["Success"]</p>
                     }
                 }
-
+                
                 <form asp-area="MST_User_Registration" asp-controller="MST_User_Registration" asp-action="Login" class="card-body cardbody-color p-lg-5">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="text-center">
