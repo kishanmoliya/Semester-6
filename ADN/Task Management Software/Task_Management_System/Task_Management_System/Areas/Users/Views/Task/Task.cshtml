@@ -28,7 +28,7 @@
                             <h5 class="card-title">Complete To: @Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</h5>
                             <p class="card-text">@data["TaskDescription"]</p>
                             <div class="row align-items-start">
-                                <a asp-area="Users" asp-controller="Task" asp-action="" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
                                 <a asp-area="Users" asp-controller="Task" asp-action="UpdateTask" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">Edit</a>
                                 <a asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success m-1">Progress<i class="bi bi-arrow-return-right ms-2"></i></a>
                             </div>

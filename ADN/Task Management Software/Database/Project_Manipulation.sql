@@ -66,7 +66,7 @@ WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 ORDER BY [dbo].[PRJ_Project].[ProjectTitle]
 
 -- Update Project
-Exec  [dbo].[PR_Update_Project] 11, 'k Prj1','k new Project','kishan',50,456425.00,'12-30-2023'
+Exec  [dbo].[PR_Update_Project] 11, 'k Prj1','k new Project','kishan',50,456425.00,'12-30-2023','In Progress'
 Create Or ALTER PROCEDURE [dbo].[PR_Update_Project]
 	@ProjectID			int,
 	@ProjectTitle		nVarchar(Max),
@@ -74,7 +74,8 @@ Create Or ALTER PROCEDURE [dbo].[PR_Update_Project]
 	@ProjectOwnerName	nVarchar(Max),
 	@TotalMembers		int,
 	@ProjectCost		Decimal(16,8),
-	@DeadLine			DateTime
+	@DeadLine			DateTime,
+	@ProjectState		nVarchar(Max)
 AS
 UPDATE [dbo].[PRJ_Project]	
 	SET [dbo].[PRJ_Project].[ProjectTitle] = @ProjectTitle,
@@ -83,7 +84,8 @@ UPDATE [dbo].[PRJ_Project]
 		[dbo].[PRJ_Project].[TotalMembers] = @TotalMembers,
 		[dbo].[PRJ_Project].[ProjectCost] = @ProjectCost,
 		[dbo].[PRJ_Project].[DeadLine] = @DeadLine,
-		[dbo].[PRJ_Project].[ModifiedDate] = GETDATE()
+		[dbo].[PRJ_Project].[ModifiedDate] = GETDATE(),
+		[dbo].[PRJ_Project].[ProjectState] = @ProjectState
 WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 
 ------------------------------------------------------------------------------

@@ -65,8 +65,8 @@
                         <td class="d-flex justify-content-center">
                             <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data.ProjectID">Delete</a>
                             <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-ProjectID="@data.ProjectID">Update</a>
-                            <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-action="ProjectDetails" asp-route-ProjectID="@data.ProjectID">Details</a>
-                            <a class="btn btn-outline-warning m-1" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@data.ProjectID">Manage Task</a>
+                            <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-controller="Task" asp-action="ProjectDetails" asp-action="Task" asp-route-ProjectID="@data.ProjectID">Details</a>
+                            <a class="btn btn-outline-warning m-1" asp-area="Users" asp-controller="Task" asp-controller="Dashbord" asp-action="Task" asp-action="ProjectDetails" asp-route-ProjectID="@data.ProjectID">Manage Task</a>
                         </td>
                     </tr>
                 }

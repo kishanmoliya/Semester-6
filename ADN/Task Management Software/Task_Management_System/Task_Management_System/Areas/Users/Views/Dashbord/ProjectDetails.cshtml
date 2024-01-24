@@ -8,21 +8,10 @@
 <div class="Container">
     <div class="table-data">
         <table class="table table-hover">
-            <thead>
-                <tr class="table-primary fixed">
-                    <th scope="col">Project Tile</th>
-                    <th scope="col">Project Description</th>
-                    <th scope="col" colspan="2" class="text-center">Action</th>
-                </tr>
-            </thead>
             <tbody>
                 @foreach (System.Data.DataRow data in Model.Rows)
                 {
-                    <tr>
-                        <td>@data["ProjectTitle"]</td>
-                        <td>@data["ProjectDescription"]</td>
-                    </tr>
-                    <div class="bg-success bg-opacity-10 px-5 py-1 mt-2">
+                    <div class="bg-success bg-opacity-10 px-3 py-1 mt-2">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Project Name: @data["ProjectTitle"]</h4>
@@ -51,3 +40,6 @@
         </table>
     </div>
 </div>
+
+
+

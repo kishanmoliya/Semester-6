@@ -73,5 +73,13 @@ namespace Task_Management_System.Areas.Users.Controllers
             }
         }
         #endregion
+
+        #region Task Details
+        public IActionResult TaskDetails(int TaskID)
+        {
+            DataTable dt = bal.PR_Task_SelectByPK(TaskID);
+            return View(dt);
+        }
+        #endregion
     }
 }

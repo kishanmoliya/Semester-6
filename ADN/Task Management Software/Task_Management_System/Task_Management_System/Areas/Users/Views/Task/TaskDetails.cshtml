@@ -1,0 +1,40 @@
+﻿@model System.Data.DataTable;
+@{
+    Layout = "_Layout_Header";
+}
+<div class="Container">
+    <div class="table-data">
+        <table class="table table-hover">
+            <tbody>
+                @foreach (System.Data.DataRow data in Model.Rows)
+                {
+                    <div class="bg-success bg-opacity-10 px-3 py-1 mt-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Task Name: @data["TaskName"]</h4>
+
+                                <p>
+                                    Task Description: @data["TaskDescription"]  <br />
+                                    Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
+                                    Quidem sit est nulla ullam. Suscipit debitis ullam iusto dolorem animi dolorem numquam. Enim fuga ipsum dolor nulla quia ut.
+                                    Rerum dolor voluptatem et deleniti libero totam numquam nobis distinctio. Sit sint aut. Consequatur rerum in.
+                                </p>
+
+
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Task Status:    </span>@data["TaskState"]</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Created Date:     </span>@Convert.ToDateTime(data["CreatedDate"]).ToString("dd/MM/yyyy")</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Task DeadLine: </span>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</h6>
+                                <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Last Modified:    </span>@Convert.ToDateTime(data["Modified"]).ToString("dd/MM/yyyy")</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
