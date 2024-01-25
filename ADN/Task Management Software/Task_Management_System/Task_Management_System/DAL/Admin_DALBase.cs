@@ -32,7 +32,7 @@ namespace Task_Management_System.DAL
         #region Add Project
         public bool PR_Add_Project(NewProjectModel prjModel, int UserID, int? ProjectID)
         {
-            if(ProjectID != null)
+            if (ProjectID != null)
             {
                 try
                 {
@@ -45,6 +45,7 @@ namespace Task_Management_System.DAL
                     db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, prjModel.DeadLine);
                     db.AddInParameter(cmd, "@TotalMembers", SqlDbType.Int, prjModel.TotalMembers);
                     db.AddInParameter(cmd, "@ProjectCost", SqlDbType.Decimal, prjModel.ProjectCost);
+                    db.AddInParameter(cmd, "@ProjectState", SqlDbType.VarChar, prjModel.ProjectState);
                     if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
                     {
                         return true;
@@ -59,29 +60,32 @@ namespace Task_Management_System.DAL
                     return false;
                 }
             }
-            try
+            else
             {
-                SqlDatabase db = new SqlDatabase(ConnString);
-                DbCommand cmd = db.GetStoredProcCommand("PR_Add_Project");
-                db.AddInParameter(cmd, "@ProjectTitle", SqlDbType.VarChar, prjModel.ProjectTitle);
-                db.AddInParameter(cmd, "@ProjectDescription", SqlDbType.VarChar, prjModel.ProjectDescription);
-                db.AddInParameter(cmd, "@ProjectOwnerName", SqlDbType.VarChar, prjModel.ProjectOwnerName);
-                db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, prjModel.DeadLine);
-                db.AddInParameter(cmd, "@TotalMembers", SqlDbType.Int, prjModel.TotalMembers);
-                db.AddInParameter(cmd, "@ProjectCost", SqlDbType.Decimal, prjModel.ProjectCost);
-                db.AddInParameter(cmd, "@UserID", SqlDbType.Int, UserID);
-                if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
+                try
                 {
-                    return true;
+                    SqlDatabase db = new SqlDatabase(ConnString);
+                    DbCommand cmd = db.GetStoredProcCommand("PR_Add_Project");
+                    db.AddInParameter(cmd, "@ProjectTitle", SqlDbType.VarChar, prjModel.ProjectTitle);
+                    db.AddInParameter(cmd, "@ProjectDescription", SqlDbType.VarChar, prjModel.ProjectDescription);
+                    db.AddInParameter(cmd, "@ProjectOwnerName", SqlDbType.VarChar, prjModel.ProjectOwnerName);
+                    db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, prjModel.DeadLine);
+                    db.AddInParameter(cmd, "@TotalMembers", SqlDbType.Int, prjModel.TotalMembers);
+                    db.AddInParameter(cmd, "@ProjectCost", SqlDbType.Decimal, prjModel.ProjectCost);
+                    db.AddInParameter(cmd, "@UserID", SqlDbType.Int, UserID);
+                    if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
                     return false;
                 }
-            }
-            catch (Exception ex)
-            {
-                return false;
             }
         }
         #endregion

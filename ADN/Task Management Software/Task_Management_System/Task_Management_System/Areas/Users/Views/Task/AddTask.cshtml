@@ -35,7 +35,7 @@
                 <div class="input_wrap">
                     <label asp-for="TaskDescription" for="fname">Task Dedcription</label>
                     <textarea asp-for="TaskDescription" name="TaskDescription" type="text"
-                           rows="5" id="fname" class="form-control rounded-1 p-2"></textarea>
+                              rows="5" id="fname" class="form-control rounded-1 p-2"></textarea>
                     <div><span asp-validation-for="TaskDescription" class="text-danger"></span></div>
                 </div>
 
@@ -48,6 +48,7 @@
                 <div class="input_wrap">
                     <input type="submit" value="@buttonName" class="submit_btn">
                 </div>
+                <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-controller="Dashbord" asp-action="Task" asp-action="ProjectDetails" asp-route-ProjectID="@TempData["ProjectID"]">Back</a>
             </div>
         </form>
     </div>

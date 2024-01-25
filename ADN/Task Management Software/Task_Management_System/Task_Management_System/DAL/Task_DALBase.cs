@@ -62,7 +62,7 @@ namespace Task_Management_System.DAL
                 db.AddInParameter(cmd, "@TaskName", SqlDbType.VarChar, taskModel.TaskName);
                 db.AddInParameter(cmd, "@ProjectID", SqlDbType.Int, ProjectID);
                 db.AddInParameter(cmd, "@TaskDescription", SqlDbType.VarChar, taskModel.TaskDescription);
-                db.AddInParameter(cmd, "@MemberID", SqlDbType.VarChar, taskModel.MemberID);
+                db.AddInParameter(cmd, "@MemberID", SqlDbType.VarChar, taskModel.MemberID == null ? null: taskModel.MemberID);
                 db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, taskModel.DeadLine);
                 if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
                 {

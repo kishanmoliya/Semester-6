@@ -38,6 +38,19 @@
                               rows="5" id="fname" class="form-control rounded-1 p-2"></textarea>
                     <div><span asp-validation-for="ProjectDescription" class="text-danger"></span></div>
                 </div>
+
+
+                @if (ViewBag.Data == "Edit Project Details")
+                {
+                    <select class="form-select" id="States" name="ProjectState" asp-for="ProjectState">
+                        <option value="">Change State</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Complete">Complete</option>
+                    </select>
+                }
+
+
                 <div class="input_wrap">
                     <label asp-for="ProjectOwnerName" for="fname">Project Owner Name</label>
                     <input asp-for="ProjectOwnerName" name="ProjectOwnerName" type="text" id="fname">
@@ -66,6 +79,7 @@
                 <div class="input_wrap">
                     <input type="submit" value="@buttonName" class="submit_btn">
                 </div>
+                <a class="btn btn-secondary" asp-area="Users" asp-controller="Dashbord" asp-action="Dashbord">Back</a>
             </div>
         </form>
     </div>

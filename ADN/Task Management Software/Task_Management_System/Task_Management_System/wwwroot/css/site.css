@@ -292,7 +292,7 @@ body {
 
 .ds {
     padding: 5px 15px 15px;
-    width: 22%;
+    /*width: 22%;*/
 }
 
 .title {
@@ -310,8 +310,7 @@ body {
 }
 
 .value {
-    font-size: 28px;
-    padding: 0 10px;
+    font-size: 24px;
 }
 
 .blue {

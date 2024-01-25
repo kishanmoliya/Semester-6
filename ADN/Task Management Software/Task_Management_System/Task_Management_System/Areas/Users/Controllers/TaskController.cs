@@ -12,6 +12,7 @@ namespace Task_Management_System.Areas.Users.Controllers
     public class TaskController : Controller
     {
         Task_BALBase bal = new Task_BALBase();
+
         #region All Task
         public IActionResult Task(int ProjectID)
         {
@@ -51,7 +52,7 @@ namespace Task_Management_System.Areas.Users.Controllers
         }
         #endregion
 
-        #region Update Project
+        #region Update Task
         public IActionResult UpdateTask(int TaskID)
         {
             ViewBag.TaskID = TaskID;

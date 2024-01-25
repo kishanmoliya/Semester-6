@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
 using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.BAL;
@@ -106,6 +107,7 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         public IActionResult UpdateProject(int ProjectID)
         {
             ViewBag.Data = ProjectID;
+
             DataTable dt = bal.PR_Project_SelectByPK(ProjectID);
             if (dt.Rows.Count > 0)
             {
@@ -118,6 +120,7 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
                     TotalMembers = Convert.ToInt32(dt.Rows[0]["TotalMembers"]),
                     ProjectCost = Convert.ToDouble(dt.Rows[0]["ProjectCost"]),
                     DeadLine = Convert.ToDateTime(dt.Rows[0]["DeadLine"]),
+                    ProjectState = Convert.ToString(dt.Rows[0]["ProjectState"])
                 };
                 return View("AddProject", prjModel);
             }
