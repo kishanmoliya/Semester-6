@@ -62,7 +62,6 @@ namespace Task_Management_System.DAL
                 db.AddInParameter(cmd, "@TaskName", SqlDbType.VarChar, taskModel.TaskName);
                 db.AddInParameter(cmd, "@ProjectID", SqlDbType.Int, ProjectID);
                 db.AddInParameter(cmd, "@TaskDescription", SqlDbType.VarChar, taskModel.TaskDescription);
-                db.AddInParameter(cmd, "@MemberID", SqlDbType.VarChar, taskModel.MemberID == null ? null: taskModel.MemberID);
                 db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, taskModel.DeadLine);
                 if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
                 {
@@ -116,6 +115,63 @@ namespace Task_Management_System.DAL
             {
                 return null;
             }
+        }
+        #endregion
+
+        #region Add Member
+        public bool PR_Member_Insert(AddMemberModel memberModel, int TaskID)
+        {
+            /*if (TaskID != null)
+            {
+                try
+                {
+                    DbCommand cmd = db.GetStoredProcCommand("PR_Update_Task");
+                    db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
+                    db.AddInParameter(cmd, "@TaskName", SqlDbType.VarChar, memberModel.TaskName);
+                    db.AddInParameter(cmd, "@TaskDescription", SqlDbType.VarChar, memberModel.TaskDescription);
+                    db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, memberModel.DeadLine);
+                    if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+
+            }
+            else
+            {*/
+                try
+                {
+                    DbCommand cmd = db.GetStoredProcCommand("PR_Member_Insert");
+                    db.AddInParameter(cmd, "@MemberName", SqlDbType.VarChar, memberModel.MemberName);
+                    db.AddInParameter(cmd, "@MemberContact", SqlDbType.VarChar, memberModel.MemberContact);
+                    db.AddInParameter(cmd, "@MemberEmail", SqlDbType.VarChar, memberModel.MemberEmail);
+                    db.AddInParameter(cmd, "@MemberRole", SqlDbType.VarChar, memberModel.MemberRole);
+                    db.AddInParameter(cmd, "@MemberTechnology", SqlDbType.VarChar, memberModel.MemberTechnology);
+                    db.AddInParameter(cmd, "@MemberAge", SqlDbType.Int, memberModel.MemberAge);
+                    db.AddInParameter(cmd, "@MemberSalary", SqlDbType.Decimal, memberModel.MemberSalary);
+                    db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
+                    if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+           /* }*/
         }
         #endregion
     }

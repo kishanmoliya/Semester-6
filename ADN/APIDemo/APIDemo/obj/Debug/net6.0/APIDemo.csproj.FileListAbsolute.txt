@@ -40,3 +40,6 @@ E:\Semester-6\ADN\APIDemo\APIDemo\bin\Debug\net6.0\runtimes\win-x64\native\sni.d
 E:\Semester-6\ADN\APIDemo\APIDemo\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 E:\Semester-6\ADN\APIDemo\APIDemo\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 E:\Semester-6\ADN\APIDemo\APIDemo\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+E:\Semester-6\ADN\APIDemo\APIDemo\bin\Debug\net6.0\FluentValidation.dll
+E:\Semester-6\ADN\APIDemo\APIDemo\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+E:\Semester-6\ADN\APIDemo\APIDemo\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

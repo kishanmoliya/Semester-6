@@ -91,17 +91,16 @@ WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 --Inert Task
-EXEC PR_Task_Insert 'DB2',5,'In This Task All Data base Operation Done Like Table Craetion and procedures etc...',NULL,'5-5-2024'
+EXEC PR_Task_Insert 'DB2',5,'In This Task All Data base Operation Done Like Table Craetion and procedures etc...','5-5-2024'
 Create or ALTER PROCEDURE PR_Task_Insert
     @TaskName			nvarchar(MAX),
     @ProjectID			int,
     @TaskDescription	nvarchar(MAX),
-    @MemberID			int = NULL,
 	@DeadLine			datetime
 AS
 BEGIN
     INSERT INTO PRJ_Task
-    VALUES (@TaskName, 'Pending', GetDate(), GetDate(), @ProjectID, @TaskDescription, @MemberID, @DeadLine);
+    VALUES (@TaskName, 'Pending', GetDate(), GetDate(), @ProjectID, @TaskDescription, @DeadLine);
 END;
 
 --Select All Task
@@ -165,22 +164,26 @@ WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
 ------------------------------------------------------------------------------
 --Inert Member
 Select * From PRJ_Member
-EXEC InsertMember 'pravin',7899565623,'Pravin322@gmail.com','Manager','Java',26,'40000.00'
-CREATE PROCEDURE PR_Member_Insert
+EXEC PR_Member_Insert 'pravin2',7899565623,'Pravin322@gmail.com','Manager','Java',26,'40000.00',2
+CREATE OR ALTER PROCEDURE PR_Member_Insert
     @MemberName nvarchar(MAX),
     @MemberContact nvarchar(MAX),
     @MemberEmail nvarchar(MAX),
     @MemberRole nvarchar(MAX),
     @MemberTechnology nvarchar(MAX),
     @MemberAge int,
-    @MemberSalary decimal(18, 2)
+    @MemberSalary decimal(18, 2),
+	@TaskID int
 AS
 BEGIN
-    INSERT INTO PRJ_Member (MemberName, MemberContact, MemberEmail, MemberRole, MemberTechnology, MemberAge, MemberSalary)
-    VALUES (@MemberName, @MemberContact, @MemberEmail, @MemberRole, @MemberTechnology, @MemberAge, @MemberSalary);
+    INSERT INTO PRJ_Member 
+    VALUES (@MemberName, @MemberContact, @MemberEmail, @MemberRole, @MemberTechnology, @MemberAge, @MemberSalary, @TaskID);
 END;
 
 --Select All Members
 Create or ALter Procedure SelectAllMember
 As
 Select * From PRJ_Member
+
+
+Select * from PRJ_Member Where TaskID = 2

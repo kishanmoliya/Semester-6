@@ -1,0 +1,80 @@
+﻿@using Task_Management_System.BAL;
+@model Task_Management_System.Areas.Users.Models.AddMemberModel
+
+@{
+    Layout = "_Layout_Header";
+}
+
+<div class="wrapper">
+    @{
+        String buttonName = "";
+        if (ViewBag.MemberID != null)
+        {
+            ViewBag.MemberID = "Edit Member Details";
+            buttonName = "Save Changes";
+        }
+        else
+        {
+            ViewBag.MemberID = "Add Member";
+            buttonName = "Add Member";
+        }
+    }
+    <div class="registration_form">
+        <div class="title">
+            @ViewBag.MemberID
+        </div>
+        <form asp-action="AddMember">
+            @Html.HiddenFor(x => x.MemberID)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form_wrap">
+
+                <div class="input_wrap">
+                    <label asp-for="MemberName" for="fname">Member Name</label>
+                    <input asp-for="MemberName" name="MemberName" type="text" id="fname">
+                    <div><span asp-validation-for="MemberName" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="MemberContact" for="fname">Member Contact</label>
+                    <input asp-for="MemberContact" name="MemberContact" type="number" id="fname">
+                    <div><span asp-validation-for="MemberContact" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="MemberEmail" for="fname">Member Email</label>
+                    <input asp-for="MemberEmail" name="MemberEmail" type="text" id="fname">
+                    <div><span asp-validation-for="MemberEmail" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="MemberRole" for="fname">Member Role</label>
+                    <input asp-for="MemberRole" name="MemberRole" type="text" id="fname">
+                    <div><span asp-validation-for="MemberRole" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="MemberTechnology" for="fname">Member Technology</label>
+                    <input asp-for="MemberTechnology" name="MemberTechnology" type="text" id="fname">
+                    <div><span asp-validation-for="MemberTechnology" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="MemberAge" for="fname">Member Age</label>
+                    <input asp-for="MemberAge" name="MemberAge" type="number" id="fname" min="15" max="80">
+                    <div><span asp-validation-for="MemberAge" class="text-danger"></span></div>
+                </div>
+                <div class="input_wrap">
+                    <label asp-for="MemberSalary" for="fname">Member Salary</label>
+                    <input asp-for="MemberSalary" name="MemberSalary" type="number" id="fname">
+                    <div><span asp-validation-for="MemberSalary" class="text-danger"></span></div>
+                </div>
+
+                <div class="input_wrap">
+                    <input type="submit" value="@buttonName" class="submit_btn">
+                </div>
+                <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@CommonVariables.TaskID">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

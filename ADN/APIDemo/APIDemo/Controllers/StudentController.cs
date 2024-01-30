@@ -192,6 +192,23 @@ namespace APIDemo.Controllers
             {
                 return null;
             }
+        }
+        #endregion
+
+        #region User Insert
+        [HttpPost]
+        public IActionResult UserInsert([FromForm] RegistrationModel studentModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                return Ok("ok");
+            }
+            else
+            {
+                return Ok("false");
+
+            }
             #endregion
         }
     }

@@ -1,4 +1,5 @@
-﻿@model Task_Management_System.Areas.Users.Models.AddTaskModel
+﻿@using Task_Management_System.BAL;
+@model Task_Management_System.Areas.Users.Models.AddTaskModel
 
 @{
     Layout = "_Layout_Header";
@@ -24,6 +25,7 @@
         </div>
         <form asp-action="AddTask">
             @Html.HiddenFor(x => x.TaskID)
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form_wrap">
 
@@ -48,7 +50,7 @@
                 <div class="input_wrap">
                     <input type="submit" value="@buttonName" class="submit_btn">
                 </div>
-                <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-controller="Dashbord" asp-action="Task" asp-action="ProjectDetails" asp-route-ProjectID="@TempData["ProjectID"]">Back</a>
+                <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@CommonVariables.ProjectID">Back</a>
             </div>
         </form>
     </div>

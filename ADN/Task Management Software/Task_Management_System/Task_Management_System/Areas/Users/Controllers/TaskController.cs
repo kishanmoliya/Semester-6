@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Evaluation;
-using Microsoft.CodeAnalysis;
 using System.Data;
 using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.BAL;
@@ -12,12 +10,11 @@ namespace Task_Management_System.Areas.Users.Controllers
     public class TaskController : Controller
     {
         Task_BALBase bal = new Task_BALBase();
-
-        #region All Task
+        #region Get Task
         public IActionResult Task(int ProjectID)
         {
             DataTable dt = bal.PR_ProjectWise_Task(ProjectID);
-            TempData["ProjectID"] = ProjectID;
+            CommonVariables.ProjectID = ProjectID;
             return View(dt);
         }
         #endregion
@@ -28,9 +25,9 @@ namespace Task_Management_System.Areas.Users.Controllers
             return View("AddTask");
         }
 
-        public IActionResult AddTask(AddTaskModel taskModel, int? TaskID)
+        public IActionResult AddTask(AddTaskModel taskModel, int? TaskID) 
         {
-            int ProjectID = Convert.ToInt32(TempData["ProjectID"]);
+            int ProjectID = CommonVariables.ProjectID;
             bool IsSuccess = bal.PR_Task_Insert(taskModel, ProjectID, TaskID);
             if (IsSuccess)
             {
@@ -47,7 +44,7 @@ namespace Task_Management_System.Areas.Users.Controllers
         public IActionResult MoveToProgress(int TaskID, string TaskState)
         {
             bal.PR_State_Change(TaskID, TaskState);
-            int ProjectID = Convert.ToInt32(TempData["ProjectID"]);
+            int ProjectID = CommonVariables.ProjectID;
             return RedirectToAction("Task", new { ProjectID });
         }
         #endregion
@@ -78,8 +75,31 @@ namespace Task_Management_System.Areas.Users.Controllers
         #region Task Details
         public IActionResult TaskDetails(int TaskID)
         {
+            /*Created View Model and do Crude For Member*/
             DataTable dt = bal.PR_Task_SelectByPK(TaskID);
+            CommonVariables.TaskID = TaskID;
             return View(dt);
+        }
+        #endregion
+
+        #region Add Member
+        public IActionResult AddMemberForm()
+        {
+            return View("AddMember");
+        }
+
+        public IActionResult AddMember(AddMemberModel memberModel)
+        {
+            int TaskID = CommonVariables.TaskID;
+            bool IsSuccess = bal.PR_Member_Insert(memberModel, TaskID);
+            if (IsSuccess)
+            {
+                return RedirectToAction("TaskDetails", new { TaskID });
+            }
+            else
+            {
+                return View();
+            }
         }
         #endregion
     }

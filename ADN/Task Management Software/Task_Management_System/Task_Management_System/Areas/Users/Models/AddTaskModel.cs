@@ -16,7 +16,6 @@ namespace Task_Management_System.Areas.Users.Models
         [Required]
         public DateTime DeadLine { get; set; }
         public int ProjectID { get; set; }
-        public int? MemberID { get; set; }
 
         [Required]
         public string TaskDescription { get; set; }

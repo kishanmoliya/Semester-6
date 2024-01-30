@@ -95,5 +95,27 @@ namespace Task_Management_System.BAL
             }
         }
         #endregion
+
+        #region Add Member
+        public bool PR_Member_Insert(AddMemberModel memberModel, int TaskID)
+        {
+            try
+            {
+
+                if (dal.PR_Member_Insert(memberModel, TaskID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }

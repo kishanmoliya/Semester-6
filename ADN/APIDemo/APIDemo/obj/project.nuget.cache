@@ -1,12 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "28sOcbpIDVoul3p4dSPe+4eAGotVO0uSLo0bpmDu4V0EREOBoqSSUSq4+8f6yOLKF8Jvs8vD+EOs9FLhUwxB7Q==",
+  "dgSpecHash": "Ui5HWOtUu0XSFGdjZJqScXfN5HoiQC/pdVqDoBwU7EbL9E9p11yiFLTTHblV6j3+t865Y2NeRhou+oE9O7rYvA==",
   "success": true,
   "projectFilePath": "E:\\Semester-6\\ADN\\APIDemo\\APIDemo\\APIDemo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SMART\\.nuget\\packages\\enterpriselibrary.common\\6.0.1304\\enterpriselibrary.common.6.0.1304.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\enterpriselibrary.data\\6.0.1304\\enterpriselibrary.data.6.0.1304.nupkg.sha512",
+    "C:\\Users\\SMART\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\SMART\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\SMART\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\SMART\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
