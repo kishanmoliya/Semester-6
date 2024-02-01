@@ -11,7 +11,7 @@ namespace Task_Management_System.Areas.Users.Models
         public string TaskName { get; set; }
         public string TaskState { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public DateTime Modified { get; set; }
 
         [Required]
         public DateTime DeadLine { get; set; }

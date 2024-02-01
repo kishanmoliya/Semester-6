@@ -75,12 +75,54 @@ namespace Task_Management_System.Areas.Users.Controllers
         #region Task Details
         public IActionResult TaskDetails(int TaskID)
         {
-            /*Created View Model and do Crude For Member*/
-            DataTable dt = bal.PR_Task_SelectByPK(TaskID);
             CommonVariables.TaskID = TaskID;
-            return View(dt);
+            TaskMemberViewModel model = new TaskMemberViewModel();
+            model.TaskData = getTaskData(TaskID);
+            model.MemberData = getMemberData(TaskID);
+            return View(model);
+            /*Created View Model and do Crude For Member*/
+            /* DataTable dt = bal.PR_Task_SelectByPK(TaskID);
+             return View(dt);*/
         }
         #endregion
+
+        public AddTaskModel getTaskData(int TaskID)
+        {
+            DataTable dt = bal.PR_Task_SelectByPK(TaskID);
+            AddTaskModel TskData = new AddTaskModel
+            {
+                TaskID = Convert.ToInt32(dt.Rows[0]["TaskID"]),
+                TaskName = Convert.ToString(dt.Rows[0]["TaskName"]),
+                TaskDescription = Convert.ToString(dt.Rows[0]["TaskDescription"]),
+                TaskState = Convert.ToString(dt.Rows[0]["TaskState"]),
+                CreatedDate = Convert.ToDateTime(dt.Rows[0]["CreatedDate"]),
+                DeadLine = Convert.ToDateTime(dt.Rows[0]["DeadLine"]),
+                Modified = Convert.ToDateTime(dt.Rows[0]["Modified"])
+            };
+            return TskData;
+        }
+
+        public List<AddMemberModel> getMemberData(int TaskID)
+        {
+            DataTable dt = bal.PR_TaskWise_Member(TaskID);
+            List<AddMemberModel> newMember = new List<AddMemberModel>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                AddMemberModel member = new AddMemberModel
+                {
+                    MemberID = Convert.ToInt32(dr["MemberID"]),
+                    MemberName = Convert.ToString(dr["MemberName"]),
+                    MemberContact = Convert.ToString(dr["MemberContact"]),
+                    MemberEmail = Convert.ToString(dr["MemberEmail"]),
+                    MemberRole = Convert.ToString(dr["MemberRole"]),
+                    MemberTechnology = Convert.ToString(dr["MemberTechnology"]),
+                    MemberAge = Convert.ToInt32(dr["MemberAge"]),
+                    MemberSalary = Convert.ToDouble(dr["MemberSalary"]),
+                };
+                newMember.Add(member);
+            }
+            return newMember;
+        }
 
         #region Add Member
         public IActionResult AddMemberForm()

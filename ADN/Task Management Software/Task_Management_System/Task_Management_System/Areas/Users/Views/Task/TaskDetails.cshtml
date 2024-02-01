@@ -1,4 +1,71 @@
-﻿@using Task_Management_System.BAL;
+﻿@using Task_Management_System.Areas.Users.Models;
+@using Task_Management_System.BAL;
+@{
+    Layout = "_Layout_Header";
+}
+<div class="Container">
+    <div class="table-data">
+        <table class="table table-hover">
+            <tbody>
+                <div class="bg-success bg-opacity-10 px-3 py-1 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Task Name: @Model.TaskData.TaskName</h4>
+
+                            <p>
+                                Task Description: @Model.TaskData.TaskDescription  <br />
+                                Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
+                                Quidem sit est nulla ullam. Suscipit debitis ullam iusto dolorem animi dolorem numquam. Enim fuga ipsum dolor nulla quia ut.
+                                Rerum dolor voluptatem et deleniti libero totam numquam nobis distinctio. Sit sint aut. Consequatur rerum in.
+                            </p>
+
+
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Task Status:    </span>@Model.TaskData.TaskState</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Created Date:     </span>@Convert.ToDateTime(Model.TaskData.CreatedDate).ToString("dd/MM/yyyy")</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Task DeadLine: </span>@Convert.ToDateTime(Model.TaskData.DeadLine).ToString("dd/MM/yyyy")</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Last Modified:    </span>@Convert.ToDateTime(Model.TaskData.Modified).ToString("dd/MM/yyyy")</h6>
+
+                            <div>
+                                <a asp-controller="Task" asp-action="AddMemberForm" class="btn btn-secondary">Add Member</a>
+
+
+                                <table class="table table-hover" id="tableId">
+                                    <thead>
+                                        <tr class="table-primary fixed">
+                                            <th scope="col">Member Name</th>
+                                            <th scope="col">Member Contact</th>
+                                            <th scope="col">Member Email</th>
+                                            <th scope="col" colspan="3" class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (AddMemberModel data in Model.MemberData)
+                                        {
+                                            <tr>
+                                                <td>@data.MemberName</td>
+                                                <td>@data.MemberContact</td>
+                                                <td>@data.MemberEmail</td>
+                                                <td class="d-flex justify-content-center">
+                                                    <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data">Delete</a>
+                                                    <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-ProjectID="@data">Update</a>
+                                                    <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-controller="Task" asp-action="ProjectDetails" asp-action="Task" asp-route-ProjectID="@data">Details</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+    </div>
+    <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@CommonVariables.ProjectID">Back</a>
+</div>
+
+
+@*@using Task_Management_System.BAL;
 @model System.Data.DataTable;
 @{
     Layout = "_Layout_Header";
@@ -26,9 +93,39 @@
                                 <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Created Date:     </span>@Convert.ToDateTime(data["CreatedDate"]).ToString("dd/MM/yyyy")</h6>
                                 <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Task DeadLine: </span>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</h6>
                                 <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Last Modified:    </span>@Convert.ToDateTime(data["Modified"]).ToString("dd/MM/yyyy")</h6>
-                               
+
                                 <div>
                                     <a asp-controller="Task" asp-action="AddMemberForm" class="btn btn-secondary">Add Member</a>
+                                </div>
+                                <div class="table-data">
+                                    <table class="table table-hover" id="tableId">
+                                        <thead>
+                                            <tr class="table-primary fixed">
+                                                <th scope="col">Project Name</th>
+                                                <th scope="col">Deadline</th>
+                                                <th scope="col">Project Owner</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col" colspan="3" class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (NewProjectModel data in Model.ProjectDetails)
+                                            {
+                                                <tr>
+                                                    <td>@data.ProjectTitle</td>
+                                                    <td>@data.DeadLine.ToString("dd/MM/yyyy")</td>
+                                                    <td>@data.ProjectOwnerName</td>
+                                                    <td>@data.ProjectState</td>
+                                                    <td class="d-flex justify-content-center">
+                                                        <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data.ProjectID">Delete</a>
+                                                        <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-ProjectID="@data.ProjectID">Update</a>
+                                                        <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-controller="Task" asp-action="ProjectDetails" asp-action="Task" asp-route-ProjectID="@data.ProjectID">Details</a>
+                                                        <a class="btn btn-outline-warning m-1" asp-area="Users" asp-controller="Task" asp-controller="Dashbord" asp-action="Task" asp-action="ProjectDetails" asp-route-ProjectID="@data.ProjectID">Manage Task</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
 
                             </div>
@@ -39,7 +136,8 @@
         </table>
     </div>
     <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@CommonVariables.ProjectID">Back</a>
-</div>
+</div>*@
+
 
 
 

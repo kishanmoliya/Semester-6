@@ -174,5 +174,28 @@ namespace Task_Management_System.DAL
            /* }*/
         }
         #endregion
+
+
+        #region Get Task Wise Member...
+        public DataTable PR_TaskWise_Member(int TaskID)
+        {
+            try
+            {
+                SqlDatabase db = new SqlDatabase(ConnString);
+                DbCommand cmd = db.GetStoredProcCommand("PR_TaskWise_Member");
+                db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
+                DataTable dt = new DataTable();
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    dt.Load(reader);
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

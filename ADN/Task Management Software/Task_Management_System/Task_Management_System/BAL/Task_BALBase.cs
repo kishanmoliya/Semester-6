@@ -117,5 +117,29 @@ namespace Task_Management_System.BAL
             }
         }
         #endregion
+
+
+        #region Task Wise Member 
+        public DataTable PR_TaskWise_Member(int TaskID)
+        {
+            try
+            {
+                DataTable dt = dal.PR_TaskWise_Member(TaskID);
+                if (dt != null)
+                {
+                    return dt;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+        #endregion
     }
 }

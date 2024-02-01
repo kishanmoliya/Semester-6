@@ -180,10 +180,48 @@ BEGIN
     VALUES (@MemberName, @MemberContact, @MemberEmail, @MemberRole, @MemberTechnology, @MemberAge, @MemberSalary, @TaskID);
 END;
 
---Select All Members
-Create or ALter Procedure SelectAllMember
+--Select Task Wise Member
+Create Procedure PR_TaskWise_Member
+@TaskID	int
 As
-Select * From PRJ_Member
+Select * From PRJ_Member Where TaskID = @TaskID
 
 
-Select * from PRJ_Member Where TaskID = 2
+Select * from PRJ_Member
+
+-- Delete Member
+Exec [dbo].[PR_Delete_Member] 20
+CREATE PROCEDURE [dbo].[PR_Delete_Member]
+	@MemberID	int
+AS
+DELETE FROM [dbo].[PRJ_Member]
+WHERE [dbo].[PRJ_Member].[MemberID] = @MemberID
+
+-- Select Member By ID
+Create Procedure [dbo].[PR_Member_SelectByID] 
+	@MemberID int
+AS
+	Select * From PRJ_Member Where MemberID = @MemberID
+
+
+--Member Update
+EXEC PR_Update_Member 2,'raju',78595484651,'raju23@gmail.com','db','java','22',20000.00
+CREATE PROCEDURE [dbo].[PR_Update_Member]
+	@MemberID				int,
+	@MemberName				nVarchar(Max),
+	@MemberContact			nVarchar(Max),
+	@MemberEmail			nVarchar(Max),
+	@MemberRole				nVarchar(Max),
+	@MemberTechnology		nVarchar(Max),
+	@MemberAge				int,
+	@MemberSalary			Decimal
+AS
+UPDATE [dbo].[PRJ_Member]	
+	SET [dbo].[PRJ_Member].[MemberName] = @MemberName,
+		[dbo].[PRJ_Member].[MemberContact] = @MemberContact,
+		[dbo].[PRJ_Member].[MemberEmail] = @MemberEmail,
+		[dbo].[PRJ_Member].[MemberRole] = @MemberRole,
+		[dbo].[PRJ_Member].[MemberTechnology] = @MemberTechnology,
+		[dbo].[PRJ_Member].[MemberAge] = @MemberAge,
+		[dbo].[PRJ_Member].[MemberSalary] = @MemberSalary
+WHERE [dbo].[PRJ_Member].[MemberID] = @MemberID
