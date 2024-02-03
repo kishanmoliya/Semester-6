@@ -107,7 +107,7 @@ END;
 Create or ALter Procedure SelectAllTask
 As
 Select * From PRJ_Task
-ORDER BY [dbo].[PRJ_Task].[TaskName]
+ORDER BY [dbo].[PRJ_Task].[CreatedDate]
 
 
 --Select Project Wise Task
@@ -117,8 +117,8 @@ CREATE OR Alter PROCEDURE [dbo].[PR_ProjectWise_Task]
 AS
 SELECT * FROM [dbo].[PRJ_Task]
 WHERE [dbo].[PRJ_Task].[ProjectID] = @ProjectID
-ORDER BY [dbo].[PRJ_Task].[TaskName]
-
+ORDER BY [dbo].[PRJ_Task].[CreatedDate] DESC
+ 
 --Select TaskByPK
 Exec [dbo].[PR_Task_SelectByPK] 5
 CREATE OR Alter PROCEDURE [dbo].[PR_Task_SelectByPK]
@@ -197,8 +197,9 @@ AS
 DELETE FROM [dbo].[PRJ_Member]
 WHERE [dbo].[PRJ_Member].[MemberID] = @MemberID
 
--- Select Member By ID
-Create Procedure [dbo].[PR_Member_SelectByID] 
+-- Select Member By PK
+EXEC PR_Member_SelectByPK 21
+Create OR ALTER Procedure [dbo].[PR_Member_SelectByPK] 
 	@MemberID int
 AS
 	Select * From PRJ_Member Where MemberID = @MemberID

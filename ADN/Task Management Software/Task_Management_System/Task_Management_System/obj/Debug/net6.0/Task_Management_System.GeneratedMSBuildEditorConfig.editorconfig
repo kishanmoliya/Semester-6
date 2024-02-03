@@ -64,6 +64,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlcnNcVmlld3NcVGFza1xBZGRUYXNrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/Semester-6/ADN/Task Management Software/Task_Management_System/Task_Management_System/Areas/Users/Views/Task/MemberDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlcnNcVmlld3NcVGFza1xNZW1iZXJEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Semester-6/ADN/Task Management Software/Task_Management_System/Task_Management_System/Areas/Users/Views/Task/Task.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlcnNcVmlld3NcVGFza1xUYXNrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

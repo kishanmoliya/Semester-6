@@ -44,6 +44,5 @@ namespace Task_Management_System.BAL
             }
         }
         #endregion
-
     }
 }

@@ -97,12 +97,12 @@ namespace Task_Management_System.BAL
         #endregion
 
         #region Add Member
-        public bool PR_Member_Insert(AddMemberModel memberModel, int TaskID)
+        public bool PR_Member_Insert(AddMemberModel memberModel, int TaskID, int? MemberID)
         {
             try
             {
 
-                if (dal.PR_Member_Insert(memberModel, TaskID))
+                if (dal.PR_Member_Insert(memberModel, TaskID, MemberID))
                 {
                     return true;
                 }
@@ -117,7 +117,6 @@ namespace Task_Management_System.BAL
             }
         }
         #endregion
-
 
         #region Task Wise Member 
         public DataTable PR_TaskWise_Member(int TaskID)
@@ -139,6 +138,50 @@ namespace Task_Management_System.BAL
                 return null;
             }
 
+        }
+        #endregion
+
+        #region Delete Member
+        public bool PR_Delete_Member(int MemberID)
+        {
+            try
+            {
+
+                if (dal.PR_Delete_Member(MemberID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region Member SelectByID
+        public DataTable PR_Member_SelectByPK(int MemberID)
+        {
+            try
+            {
+                DataTable dt = dal.PR_Member_SelectByPK(MemberID);
+                if (dt != null)
+                {
+                    return dt;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
         #endregion
     }

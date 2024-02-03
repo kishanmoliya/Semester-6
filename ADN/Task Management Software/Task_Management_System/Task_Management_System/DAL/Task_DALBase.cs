@@ -119,17 +119,21 @@ namespace Task_Management_System.DAL
         #endregion
 
         #region Add Member
-        public bool PR_Member_Insert(AddMemberModel memberModel, int TaskID)
+        public bool PR_Member_Insert(AddMemberModel memberModel, int TaskID, int? MemberID)
         {
-            /*if (TaskID != null)
+            if (MemberID != null)
             {
                 try
                 {
-                    DbCommand cmd = db.GetStoredProcCommand("PR_Update_Task");
-                    db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
-                    db.AddInParameter(cmd, "@TaskName", SqlDbType.VarChar, memberModel.TaskName);
-                    db.AddInParameter(cmd, "@TaskDescription", SqlDbType.VarChar, memberModel.TaskDescription);
-                    db.AddInParameter(cmd, "@DeadLine", SqlDbType.DateTime, memberModel.DeadLine);
+                    DbCommand cmd = db.GetStoredProcCommand("PR_Update_Member");
+                    db.AddInParameter(cmd, "@MemberID", SqlDbType.Int, MemberID);
+                    db.AddInParameter(cmd, "@MemberName", SqlDbType.VarChar, memberModel.MemberName);
+                    db.AddInParameter(cmd, "@MemberContact", SqlDbType.VarChar, memberModel.MemberContact);
+                    db.AddInParameter(cmd, "@MemberEmail", SqlDbType.VarChar, memberModel.MemberEmail);
+                    db.AddInParameter(cmd, "@MemberRole", SqlDbType.VarChar, memberModel.MemberRole);
+                    db.AddInParameter(cmd, "@MemberTechnology", SqlDbType.VarChar, memberModel.MemberTechnology);
+                    db.AddInParameter(cmd, "@MemberAge", SqlDbType.Int, memberModel.MemberAge);
+                    db.AddInParameter(cmd, "@MemberSalary", SqlDbType.Decimal, memberModel.MemberSalary);
                     if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
                     {
                         return true;
@@ -146,7 +150,7 @@ namespace Task_Management_System.DAL
 
             }
             else
-            {*/
+            {
                 try
                 {
                     DbCommand cmd = db.GetStoredProcCommand("PR_Member_Insert");
@@ -171,7 +175,7 @@ namespace Task_Management_System.DAL
                 {
                     return false;
                 }
-           /* }*/
+           }
         }
         #endregion
 
@@ -184,6 +188,52 @@ namespace Task_Management_System.DAL
                 SqlDatabase db = new SqlDatabase(ConnString);
                 DbCommand cmd = db.GetStoredProcCommand("PR_TaskWise_Member");
                 db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
+                DataTable dt = new DataTable();
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    dt.Load(reader);
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Delete Member
+        public bool PR_Delete_Member(int MemberID)
+        {
+            try
+            {
+                SqlDatabase db = new SqlDatabase(ConnString);
+                DbCommand cmd = db.GetStoredProcCommand("PR_Delete_Member");
+                db.AddInParameter(cmd, "@MemberID", SqlDbType.Int, MemberID);
+                if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region Member SelectByID
+        public DataTable PR_Member_SelectByPK(int MemberID)
+        {
+            try
+            {
+                SqlDatabase db = new SqlDatabase(ConnString);
+                DbCommand cmd = db.GetStoredProcCommand("PR_Member_SelectByPK");
+                db.AddInParameter(cmd, "@MemberID", SqlDbType.VarChar, MemberID);
                 DataTable dt = new DataTable();
                 using (IDataReader reader = db.ExecuteReader(cmd))
                 {

@@ -8,7 +8,10 @@ namespace Task_Management_System.Areas.Users.Models
         public int TaskID { get; set; }
 
         [Required]
+        [MinLength(5, ErrorMessage = "TASKNAME_TOO_SHORT")]
+        [MaxLength(50, ErrorMessage = "TASKNAME_TOO_LONG")]
         public string TaskName { get; set; }
+
         public string TaskState { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime Modified { get; set; }

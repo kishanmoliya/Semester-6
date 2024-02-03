@@ -25,7 +25,7 @@ namespace Task_Management_System.Areas.Users.Controllers
             return View("AddTask");
         }
 
-        public IActionResult AddTask(AddTaskModel taskModel, int? TaskID) 
+        public IActionResult AddTask(AddTaskModel taskModel, int? TaskID)
         {
             int ProjectID = CommonVariables.ProjectID;
             bool IsSuccess = bal.PR_Task_Insert(taskModel, ProjectID, TaskID);
@@ -80,11 +80,7 @@ namespace Task_Management_System.Areas.Users.Controllers
             model.TaskData = getTaskData(TaskID);
             model.MemberData = getMemberData(TaskID);
             return View(model);
-            /*Created View Model and do Crude For Member*/
-            /* DataTable dt = bal.PR_Task_SelectByPK(TaskID);
-             return View(dt);*/
         }
-        #endregion
 
         public AddTaskModel getTaskData(int TaskID)
         {
@@ -123,6 +119,7 @@ namespace Task_Management_System.Areas.Users.Controllers
             }
             return newMember;
         }
+        #endregion
 
         #region Add Member
         public IActionResult AddMemberForm()
@@ -130,10 +127,10 @@ namespace Task_Management_System.Areas.Users.Controllers
             return View("AddMember");
         }
 
-        public IActionResult AddMember(AddMemberModel memberModel)
+        public IActionResult AddMember(AddMemberModel memberModel, int? MemberID)
         {
             int TaskID = CommonVariables.TaskID;
-            bool IsSuccess = bal.PR_Member_Insert(memberModel, TaskID);
+            bool IsSuccess = bal.PR_Member_Insert(memberModel, TaskID, MemberID);
             if (IsSuccess)
             {
                 return RedirectToAction("TaskDetails", new { TaskID });
@@ -142,6 +139,49 @@ namespace Task_Management_System.Areas.Users.Controllers
             {
                 return View();
             }
+        }
+        #endregion
+
+        #region Delete Member
+        public IActionResult DeleteMember(int MemberID, int TaskID)
+        {
+            bal.PR_Delete_Member(MemberID);
+            return RedirectToAction("TaskDetails", new { TaskID });
+        }
+        #endregion
+
+        #region Update Member
+        public IActionResult UpdateMember(int MemberID)
+        {
+            ViewBag.MemberID = MemberID;
+            DataTable dt = bal.PR_Member_SelectByPK(MemberID);
+            if (dt.Rows.Count > 0)
+            {
+                AddMemberModel memberModel = new AddMemberModel
+                {
+                    MemberID = Convert.ToInt32(dt.Rows[0]["MemberID"]),
+                    MemberName = Convert.ToString(dt.Rows[0]["MemberName"]),
+                    MemberContact = Convert.ToString(dt.Rows[0]["MemberContact"]),
+                    MemberEmail = Convert.ToString(dt.Rows[0]["MemberEmail"]),
+                    MemberRole = Convert.ToString(dt.Rows[0]["MemberRole"]),
+                    MemberTechnology = Convert.ToString(dt.Rows[0]["MemberTechnology"]),
+                    MemberAge = Convert.ToInt32(dt.Rows[0]["MemberAge"]),
+                    MemberSalary = Convert.ToDouble(dt.Rows[0]["MemberSalary"]),
+                };
+                return View("AddMember", memberModel);
+            }
+            else
+            {
+                return View("Dashbord");
+            }
+        }
+        #endregion
+
+        #region Member Details
+        public IActionResult MemberDetails(int MemberID)
+        {
+            DataTable dt = bal.PR_Member_SelectByPK(MemberID);
+            return View(dt);
         }
         #endregion
     }

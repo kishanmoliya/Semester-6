@@ -77,6 +77,7 @@ Select
 From PRJ_Project
 Inner Join MST_User on PRJ_Project.UserID = MST_User.UserID
 Where PRJ_Project.UserID = @UserID
+ORDER BY [dbo].[PRJ_Project].[CreatedDate] DESC
 
 
 
