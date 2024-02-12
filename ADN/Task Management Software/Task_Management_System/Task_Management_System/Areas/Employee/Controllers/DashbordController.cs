@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using Task_Management_System.BAL;
+using Task_Management_System.BAL.IsValidUser;
 
 namespace Task_Management_System.Areas.Employee.Controllers
 {
+    [CheckAccess]
     [Area("Employee")]
     public class DashbordController : Controller
     {

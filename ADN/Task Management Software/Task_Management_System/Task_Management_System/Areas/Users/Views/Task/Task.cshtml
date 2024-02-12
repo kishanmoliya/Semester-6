@@ -9,11 +9,11 @@
     <div class="row justify-content-around">
 
         @*First Row*@
-        <div class="d-inline-block col-lg-4 col-md-5 bg-secondary bg-opacity-10">
+        <div class="d-inline-block col-lg-4 col-md-5 m-1 bg-secondary bg-opacity-10">
 
             <div class="row justify-content-end bg-secondary bg-opacity-10">
                 <div class="col m-2">Pending</div>
-                <a asp-area="Users" asp-controller="Task" asp-action="AddTaskForm" class="col-3 btn btn-outline-success m-1">+ Add Task</a>
+                <a asp-area="Users" asp-controller="Task" asp-action="AddTaskForm" class="col-3 btn btn-outline-success m-1 p-1">+ Add Task</a>
             </div>
 
             @foreach (System.Data.DataRow data in Model.Rows)
@@ -21,17 +21,24 @@
                 if (@data["TaskState"].ToString() == "Pending".ToString())
                 {
                     <div class="card mt-2 mb-2">
-                        <div class="card-header">
-                            @data["TaskName"]
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="">
+                                @data["TaskName"]
+                            </div>
+                            <div>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="bi bi-eye m-1 text-danger"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="UpdateTask" asp-route-TaskID="@data["TaskID"]"  class="bi bi-pencil m-1"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success ms-2 p-1">Progress<i class="bi bi-arrow-return-right ms-2 p-1"></i></a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Complete To: @Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</h5>
-                            <p class="card-text">@data["TaskDescription"]</p>
-                            <div class="row align-items-start">
+                            <p class="card-text">Description: @data["TaskDescription"]</p>
+                           @* <div class="row align-items-start">
                                 <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
                                 <a asp-area="Users" asp-controller="Task" asp-action="UpdateTask" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">Edit</a>
                                 <a asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success m-1">Progress<i class="bi bi-arrow-return-right ms-2"></i></a>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 }
@@ -39,24 +46,31 @@
         </div>
 
         @*Second Row*@
-        <div class="d-inline-block col-lg-4 col-md-5 bg-secondary bg-opacity-10">
+        <div class="d-inline-block col-lg-4 col-md-5 bg-secondary bg-opacity-10 m-1">
             <div class="row p-2 bg-secondary bg-opacity-10">In Progress</div>
             @foreach (System.Data.DataRow data in Model.Rows)
             {
                 if (@data["TaskState"].ToString() == "InProgress".ToString())
                 {
                     <div class="card mt-2 mb-2">
-                        <div class="card-header">
-                            @data["TaskName"]
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="">
+                                @data["TaskName"]
+                            </div>
+                            <div>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="bi bi-eye m-1 text-danger"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="UpdateTask" asp-route-TaskID="@data["TaskID"]" class="bi bi-pencil m-1"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success ms-2 p-1">Complete<i class="bi bi-arrow-return-right ms-2 p-1"></i></a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Complete To: @data["DeadLine"]</h5>
                             <p class="card-text">@data["TaskDescription"]</p>
-                            <div class="row align-items-start">
-                                <a asp-area="Users" asp-controller="Task" asp-action="" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
+                           @* <div class="row align-items-start">
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
                                 <a asp-area="Users" asp-controller="Task" asp-action="UpdateTask" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">Edit</a>
                                 <a asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success m-1">Complete<i class="bi bi-arrow-return-right ms-2"></i></a>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 }
@@ -64,27 +78,32 @@
         </div>
 
         @*Third Row*@
-        <div class="d-inline-block col-lg-3 col-md-5 bg-secondary bg-opacity-10">
+        <div class="d-inline-block col-lg-3 col-md-5 bg-secondary bg-opacity-10 m-1">
             <div class="row p-2 bg-secondary bg-opacity-10">Completed</div>
             @foreach (System.Data.DataRow data in Model.Rows)
             {
                 if (@data["TaskState"].ToString() == "Done".ToString())
                 {
                     <div class="card mt-2 mb-2">
-                        <div class="card-header">
-                            @data["TaskName"]
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="">
+                                @data["TaskName"]
+                            </div>
+                            <div>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="bi bi-eye m-1 text-danger"></a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Completed</h5>
                             <p class="card-text">@data["TaskDescription"]</p>
-                            <div class="row align-items-start">
-                                <a asp-area="Users" asp-controller="Task" asp-action="" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
-                            </div>
+                          @*  <div class="row align-items-start">
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
+                            </div>*@
                         </div>
                     </div>
                 }
             }
         </div>
     </div>
-        <a class="btn btn-secondary m-2" asp-area="Users" asp-controller="Dashbord" asp-action="Dashbord">Back</a>
+    <a class="btn btn-secondary m-2" asp-area="Users" asp-controller="Dashbord" asp-action="Dashbord">Back</a>
 </div>

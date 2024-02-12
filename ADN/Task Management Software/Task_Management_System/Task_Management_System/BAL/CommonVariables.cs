@@ -44,16 +44,6 @@
             return false;
         }
 
-        /*    public static string? ProjectID()
-            {
-                NewProjectModel pm = new NewProjectModel();
-                if (pm.ProjectID != null)
-                {
-                    return pm.ProjectID.ToString();
-                }
-                return null;
-            }*/
-
         public static int ProjectID;
         public static int TaskID;
     }

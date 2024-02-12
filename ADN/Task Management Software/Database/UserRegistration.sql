@@ -96,7 +96,7 @@ From MST_User
  
 
 -- Dashbord Data
-Exec DashbordCount 5
+Exec DashbordCount 24
 Alter Procedure DashbordCount
 	@UserID	int
 AS
@@ -108,7 +108,7 @@ Declare @Temp Table
 	sumOfCustomers	int	
 )
 Insert Into @Temp 
-Select sumOfMember = SUM(TotalMembers), sumOfProject = Count(ProjectID), sumOfBudget = SUM(ProjectCost), sumOfCustomers = Count(Distinct ProjectOwnerName)
+Select sumOfMember = ISNULL(SUM(TotalMembers), 0), sumOfProject = Count(ProjectID), sumOfBudget = ISNULL(SUM(ProjectCost), 0), sumOfCustomers = Count(Distinct ProjectOwnerName)
 FROM PRJ_Project Where UserID = @UserID
 
 Select * From @Temp

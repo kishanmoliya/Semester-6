@@ -26,7 +26,10 @@
                             <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Last Modified:    </span>@Convert.ToDateTime(Model.TaskData.Modified).ToString("dd/MM/yyyy")</h6>
 
                             <div>
+                            @if (@Model.TaskData.TaskState != "Done")
+                            {                       
                                 <a asp-controller="Task" asp-action="AddMemberForm" class="btn btn-secondary">Add Member</a>
+                            }
 
                                 @if (Model.MemberData.Count > 0)
                                 {

@@ -6,7 +6,6 @@ using Task_Management_System.DAL;
 
 namespace Task_Management_System.Areas.MST_User_Registration.Controllers
 {
-
     [Area("MST_User_Registration")]
     public class MST_User_RegistrationController : Controller
     {
@@ -28,14 +27,14 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
             DataTable dt = bal.PR_GetUser_Log(userModel.Email, userModel.Password);
             if (dt.Rows.Count > 0)
             {
-                if (Convert.ToBoolean(dt.Rows[0]["IsAdmin"]))
-                {
+               /* if (Convert.ToBoolean(dt.Rows[0]["IsAdmin"]))
+                {*/
                     HttpContext.Session.SetInt32("UserID", Convert.ToInt32(dt.Rows[0]["UserID"]));
                     HttpContext.Session.SetString("UserName", Convert.ToString(dt.Rows[0]["UserName"]));
                     HttpContext.Session.SetString("IsAdmin", dt.Rows[0]["IsAdmin"].ToString());
                     HttpContext.Session.SetString("Email", dt.Rows[0]["Email"].ToString());
                     return RedirectToAction("Dashbord", "Dashbord", new { area = "Users" });
-                }
+               /* }*/
             }
             else
             {

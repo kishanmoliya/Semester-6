@@ -2,6 +2,7 @@
 using System.Data;
 using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.BAL;
+using Task_Management_System.BAL.IsValidUser;
 
 namespace Task_Management_System.Areas.Users.Controllers
 {
@@ -10,7 +11,9 @@ namespace Task_Management_System.Areas.Users.Controllers
     public class TaskController : Controller
     {
         Task_BALBase bal = new Task_BALBase();
+
         #region Get Task
+        [IsAdmin]
         public IActionResult Task(int ProjectID)
         {
             DataTable dt = bal.PR_ProjectWise_Task(ProjectID);
