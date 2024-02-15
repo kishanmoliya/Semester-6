@@ -25,6 +25,7 @@
         </div>
         <form asp-action="AddMember">
             @Html.HiddenFor(x => x.MemberID)
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form_wrap">
 
@@ -67,7 +68,7 @@
                 <div class="input_wrap">
                     <input type="submit" value="@buttonName" class="submit_btn">
                 </div>
-                <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@CommonVariables.TaskID">Back</a>
+                <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@UrlEncryptor.Encrypt(CommonVariables.TaskID.ToString())">Back</a>
             </div>
         </form>
     </div>

@@ -45,35 +45,38 @@
     <div class="table-data">
         @if (Model.DashboordData.sumOfProject != 0)
         {
-            
-        <table class="table table-hover" id="tableId">
-            <thead>
-                <tr class="table-primary fixed">
-                    <th scope="col">Project Name</th>
-                    <th scope="col">Deadline</th>
-                    <th scope="col">Project Owner</th>
-                    <th scope="col">Status</th>
-                    <th scope="col" colspan="3" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (NewProjectModel data in Model.ProjectDetails)
-                {
-                    <tr>
-                        <td>@data.ProjectTitle</td>
-                        <td>@data.DeadLine.ToString("dd/MM/yyyy")</td>
-                        <td>@data.ProjectOwnerName</td>
-                        <td>@data.ProjectState</td>
-                        <td class="d-flex justify-content-center">
-                            <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data.ProjectID">Delete</a>
-                            <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-ProjectID="@data.ProjectID">Update</a>
-                            <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-controller="Task" asp-action="ProjectDetails" asp-action="Task" asp-route-ProjectID="@data.ProjectID">Details</a>
-                            <a class="btn btn-outline-warning m-1" asp-area="Users" asp-controller="Task" asp-controller="Dashbord" asp-action="Task" asp-action="ProjectDetails" asp-route-ProjectID="@data.ProjectID">Manage Task</a>
-                        </td>
+
+            <table class="table table-hover" id="tableId">
+                <thead>
+                    <tr class="table-primary fixed">
+                        <th scope="col">Project Name</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Project Owner</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" colspan="3" class="text-center">Action</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (NewProjectModel data in Model.ProjectDetails)
+                    {
+                        <tr>
+                            <td>@data.ProjectTitle</td>
+                            <td>@data.DeadLine.ToString("dd/MM/yyyy")</td>
+                            <td>@data.ProjectOwnerName</td>
+                            <td>@data.ProjectState</td>
+                            <td class="d-flex justify-content-center">
+                                <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data.ProjectID">@*<i class="bi bi-trash"></i>*@Delete</a>
+                                @{
+                                    string encryptedData = UrlEncryptor.Encrypt(@data.ProjectID.ToString());
+                                    <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-ProjectID="@encryptedData">Update</a>
+                                    <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-controller="Task" asp-action="ProjectDetails" asp-action="Task" asp-route-ProjectID="@encryptedData">Details</a>
+                                    <a class="btn btn-outline-warning m-1" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@encryptedData">Manage Task</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
     </div>
 </div>

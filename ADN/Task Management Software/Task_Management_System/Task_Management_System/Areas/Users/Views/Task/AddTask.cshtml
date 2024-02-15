@@ -50,7 +50,7 @@
                 <div class="input_wrap">
                     <input type="submit" value="@buttonName" class="submit_btn">
                 </div>
-                <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@CommonVariables.ProjectID">Back</a>
+                <a class="btn btn-secondary" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@UrlEncryptor.Encrypt(@CommonVariables.ProjectID.ToString())">Back</a>
             </div>
         </form>
     </div>

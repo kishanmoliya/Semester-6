@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Security.Cryptography.Xml;
 using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.BAL;
 using Task_Management_System.BAL.IsValidUser;
@@ -89,9 +90,10 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         #endregion
 
         #region Get Single Project
-        public IActionResult ProjectDetails(int ProjectID)
+        public IActionResult ProjectDetails(string ProjectID)
         {
-            DataTable dt = bal.PR_Project_SelectByPK(ProjectID);
+            string decryptedData = UrlEncryptor.Decrypt(ProjectID);
+            DataTable dt = bal.PR_Project_SelectByPK(Convert.ToInt32(decryptedData));
             if (dt.Rows.Count > 0)
             {
                 return View(dt);
@@ -104,11 +106,12 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         #endregion
 
         #region Update Project
-        public IActionResult UpdateProject(int ProjectID)
+        public IActionResult UpdateProject(string ProjectID)
         {
-            ViewBag.Data = ProjectID;
+            string decryptedData = UrlEncryptor.Decrypt(ProjectID);
+            ViewBag.Data = Convert.ToInt32(decryptedData);
 
-            DataTable dt = bal.PR_Project_SelectByPK(ProjectID);
+            DataTable dt = bal.PR_Project_SelectByPK(Convert.ToInt32(decryptedData));
             if (dt.Rows.Count > 0)
             {
                 NewProjectModel prjModel = new NewProjectModel

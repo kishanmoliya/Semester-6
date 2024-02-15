@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/zMnJeJOrR5W351G6S8gxrwhzBIpMIpaI3PV00Za4/x/VmEliolDJAh7EXs6SLs57UPDYIVz/M/cZSFXdaqLIQ==",
+  "dgSpecHash": "73OnRx5QD/xdaC2Ksc2I8FzpFhtIEEbkP88MnH4cKi1+EnbokXhVBsW9zuZyynKrCyw+kJncC4cgAWAMW6gfaQ==",
   "success": true,
   "projectFilePath": "E:\\Semester-6\\ADN\\Task Management Software\\Task_Management_System\\Task_Management_System\\Task_Management_System.csproj",
   "expectedPackageFiles": [
@@ -185,7 +185,7 @@
     "C:\\Users\\SMART\\.nuget\\packages\\system.security.cryptography.openssl\\4.3.0\\system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\system.security.cryptography.pkcs\\5.0.0\\system.security.cryptography.pkcs.5.0.0.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\system.security.cryptography.primitives\\4.3.0\\system.security.cryptography.primitives.4.3.0.nupkg.sha512",
-    "C:\\Users\\SMART\\.nuget\\packages\\system.security.cryptography.protecteddata\\6.0.0\\system.security.cryptography.protecteddata.6.0.0.nupkg.sha512",
+    "C:\\Users\\SMART\\.nuget\\packages\\system.security.cryptography.protecteddata\\8.0.0\\system.security.cryptography.protecteddata.8.0.0.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\system.security.cryptography.x509certificates\\4.3.0\\system.security.cryptography.x509certificates.4.3.0.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
     "C:\\Users\\SMART\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using System.Data;
 using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.BAL;
@@ -14,10 +15,11 @@ namespace Task_Management_System.Areas.Users.Controllers
 
         #region Get Task
         [IsAdmin]
-        public IActionResult Task(int ProjectID)
+        public IActionResult Task(string ProjectID)
         {
-            DataTable dt = bal.PR_ProjectWise_Task(ProjectID);
-            CommonVariables.ProjectID = ProjectID;
+            string decryptedData = UrlEncryptor.Decrypt(ProjectID);
+            DataTable dt = bal.PR_ProjectWise_Task(Convert.ToInt32(decryptedData));
+            CommonVariables.ProjectID = Convert.ToInt32(decryptedData);
             return View(dt);
         }
         #endregion
@@ -30,10 +32,11 @@ namespace Task_Management_System.Areas.Users.Controllers
 
         public IActionResult AddTask(AddTaskModel taskModel, int? TaskID)
         {
-            int ProjectID = CommonVariables.ProjectID;
-            bool IsSuccess = bal.PR_Task_Insert(taskModel, ProjectID, TaskID);
+            int PrjectID = CommonVariables.ProjectID;
+            bool IsSuccess = bal.PR_Task_Insert(taskModel, PrjectID, TaskID);
             if (IsSuccess)
             {
+                string ProjectID = UrlEncryptor.Encrypt(PrjectID.ToString());
                 return RedirectToAction("Task", new { ProjectID });
             }
             else
@@ -47,16 +50,18 @@ namespace Task_Management_System.Areas.Users.Controllers
         public IActionResult MoveToProgress(int TaskID, string TaskState)
         {
             bal.PR_State_Change(TaskID, TaskState);
-            int ProjectID = CommonVariables.ProjectID;
+            int PrjectID = CommonVariables.ProjectID;
+            string ProjectID = UrlEncryptor.Encrypt(PrjectID.ToString());
             return RedirectToAction("Task", new { ProjectID });
         }
         #endregion
 
         #region Update Task
-        public IActionResult UpdateTask(int TaskID)
+        public IActionResult UpdateTask(String TskID)
         {
-            ViewBag.TaskID = TaskID;
-            DataTable dt = bal.PR_Task_SelectByPK(TaskID);
+            string decryptedData = UrlEncryptor.Decrypt(TskID);
+            ViewBag.TaskID = Convert.ToInt32(decryptedData);
+            DataTable dt = bal.PR_Task_SelectByPK(Convert.ToInt32(decryptedData));
             if (dt.Rows.Count > 0)
             {
                 AddTaskModel taskModel = new AddTaskModel
@@ -76,12 +81,13 @@ namespace Task_Management_System.Areas.Users.Controllers
         #endregion
 
         #region Task Details
-        public IActionResult TaskDetails(int TaskID)
+        public IActionResult TaskDetails(String TaskID)
         {
-            CommonVariables.TaskID = TaskID;
+            string decryptedData = UrlEncryptor.Decrypt(TaskID);
+            CommonVariables.TaskID = Convert.ToInt32(decryptedData);
             TaskMemberViewModel model = new TaskMemberViewModel();
-            model.TaskData = getTaskData(TaskID);
-            model.MemberData = getMemberData(TaskID);
+            model.TaskData = getTaskData(Convert.ToInt32(decryptedData));
+            model.MemberData = getMemberData(Convert.ToInt32(decryptedData));
             return View(model);
         }
 
@@ -132,10 +138,11 @@ namespace Task_Management_System.Areas.Users.Controllers
 
         public IActionResult AddMember(AddMemberModel memberModel, int? MemberID)
         {
-            int TaskID = CommonVariables.TaskID;
-            bool IsSuccess = bal.PR_Member_Insert(memberModel, TaskID, MemberID);
+            int TskID = CommonVariables.TaskID;
+            bool IsSuccess = bal.PR_Member_Insert(memberModel, TskID, MemberID);
             if (IsSuccess)
             {
+                string TaskID = UrlEncryptor.Encrypt(TskID.ToString());
                 return RedirectToAction("TaskDetails", new { TaskID });
             }
             else
@@ -146,18 +153,20 @@ namespace Task_Management_System.Areas.Users.Controllers
         #endregion
 
         #region Delete Member
-        public IActionResult DeleteMember(int MemberID, int TaskID)
+        public IActionResult DeleteMember(int MemberID, int TskID)
         {
             bal.PR_Delete_Member(MemberID);
+            string TaskID = UrlEncryptor.Encrypt(TskID.ToString());
             return RedirectToAction("TaskDetails", new { TaskID });
         }
         #endregion
 
         #region Update Member
-        public IActionResult UpdateMember(int MemberID)
+        public IActionResult UpdateMember(String MemberID)
         {
-            ViewBag.MemberID = MemberID;
-            DataTable dt = bal.PR_Member_SelectByPK(MemberID);
+            string decryptedData = UrlEncryptor.Decrypt(MemberID);
+            ViewBag.MemberID = Convert.ToInt32(decryptedData);
+            DataTable dt = bal.PR_Member_SelectByPK(Convert.ToInt32(decryptedData));
             if (dt.Rows.Count > 0)
             {
                 AddMemberModel memberModel = new AddMemberModel
@@ -181,9 +190,9 @@ namespace Task_Management_System.Areas.Users.Controllers
         #endregion
 
         #region Member Details
-        public IActionResult MemberDetails(int MemberID)
+        public IActionResult MemberDetails(String MemberID)
         {
-            DataTable dt = bal.PR_Member_SelectByPK(MemberID);
+            DataTable dt = bal.PR_Member_SelectByPK(Convert.ToInt32(UrlEncryptor.Decrypt(MemberID)));
             return View(dt);
         }
         #endregion
