@@ -37,7 +37,7 @@ Values
 )
 
 -- Delete Project
-Exec [dbo].[PR_Delete_Project] 12
+Exec [dbo].[PR_Delete_Project] 5
 CREATE PROCEDURE [dbo].[PR_Delete_Project]
 	@ProjectID	int
 AS
@@ -100,7 +100,7 @@ Create or ALTER PROCEDURE PR_Task_Insert
 AS
 BEGIN
     INSERT INTO PRJ_Task
-    VALUES (@TaskName, 'Pending', GetDate(), GetDate(), @ProjectID, @TaskDescription, @DeadLine);
+    VALUES (@TaskName, 'Pending', GetDate(), GetDate(), @ProjectID, @TaskDescription, @DeadLine, 0);
 END;
 
 --Select All Task
@@ -159,6 +159,33 @@ UPDATE [dbo].[PRJ_Task]
 		[dbo].[PRJ_Task].[TaskDescription] = @TaskDescription,
 		[dbo].[PRJ_Task].[DeadLine] = @DeadLine,
 		[dbo].[PRJ_Task].[Modified] = GETDATE()
+WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
+
+--Task Reject and Restore
+EXEC [PR_Task_Delete_Restore] 1, 0
+Create Procedure [dbo].[PR_Task_Delete_Restore]
+	@TaskID			int,
+	@IsRejected		bit
+AS
+IF @IsRejected = 0
+BEGIN
+    UPDATE [dbo].[PRJ_Task]	
+	SET [dbo].[PRJ_Task].[IsRejected] = 1
+	WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID;
+END
+ELSE
+BEGIN
+    UPDATE [dbo].[PRJ_Task]	
+	SET [dbo].[PRJ_Task].[IsRejected] = 0
+	WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID;
+END
+
+-- Task Delete
+Exec [dbo].[PR_Delete_Task] 5
+CREATE PROCEDURE [dbo].[PR_Delete_Task]
+	@TaskID	int
+AS
+DELETE FROM [dbo].[PRJ_Task]
 WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------

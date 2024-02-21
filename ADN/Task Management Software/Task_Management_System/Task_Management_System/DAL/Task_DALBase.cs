@@ -8,6 +8,7 @@ namespace Task_Management_System.DAL
     public class Task_DALBase : DAL_Helper
     {
         SqlDatabase db = new SqlDatabase(ConnString);
+
         #region Get Task...
         public DataTable PR_ProjectWise_Task(int ProjectID)
         {
@@ -96,6 +97,23 @@ namespace Task_Management_System.DAL
         }
         #endregion
 
+        #region Task Reject or Restore
+        public bool PR_Task_Reject(int TaskID, string IsRejected)
+        {
+            DbCommand cmd = db.GetStoredProcCommand("PR_Task_Delete_Restore");
+            db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
+            db.AddInParameter(cmd, "@IsRejected", SqlDbType.VarChar, IsRejected);
+            if(Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
+
         #region Task Details
         public DataTable PR_Task_SelectByPK(int TaskID)
         {
@@ -114,6 +132,30 @@ namespace Task_Management_System.DAL
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+        #endregion
+
+        #region Delete Task
+        public bool PR_Delete_Task(int TaskID)
+        {
+            try
+            {
+                SqlDatabase db = new SqlDatabase(ConnString);
+                DbCommand cmd = db.GetStoredProcCommand("PR_Delete_Task");
+                db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
+                if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
         #endregion
@@ -178,7 +220,6 @@ namespace Task_Management_System.DAL
            }
         }
         #endregion
-
 
         #region Get Task Wise Member...
         public DataTable PR_TaskWise_Member(int TaskID)

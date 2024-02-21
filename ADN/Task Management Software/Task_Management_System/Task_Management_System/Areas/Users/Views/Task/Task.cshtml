@@ -7,22 +7,21 @@
 
 <div class="container-fluid mt-3">
     <div class="row justify-content-around">
-    <div class="row justify-content-between">
-        <a asp-area="Users" asp-controller="Task" asp-action="AddTaskForm" class="col-1 btn btn-outline-success m-1">+ Add Task</a>
-            <a class="col-1 btn btn-outline-secondary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="Dashbord">Back</a>
-    </div>
+        <div class="row justify-content-between">
+            <a class="col-1 btn btn-secondary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="Dashbord">Back</a>
+            <a asp-area="Users" asp-controller="Task" asp-action="AddTaskForm" class="col-1 btn btn-success m-1">+ Add Task</a>
+        </div>
 
         @*First Row*@
         <div class="d-inline-block col-lg-4 col-md-5 m-1 bg-secondary bg-opacity-10">
 
             <div class="row justify-content-end bg-secondary bg-opacity-10">
                 <div class="col p-2">Pending</div>
-               @* <a asp-area="Users" asp-controller="Task" asp-action="AddTaskForm" class="col-3 btn btn-outline-success m-1 p-1">+ Add Task</a>*@
             </div>
 
             @foreach (System.Data.DataRow data in Model.Rows)
             {
-                if (@data["TaskState"].ToString() == "Pending".ToString())
+                if (@data["TaskState"].ToString() == "Pending".ToString() && !Convert.ToBoolean(@data["IsRejected"]))
                 {
                     <div class="card mt-2 mb-2">
                         <div class="card-header d-flex justify-content-between">
@@ -32,15 +31,18 @@
                             <div>
                                 @{
                                     string encryptedData = UrlEncryptor.Encrypt(@data["TaskID"].ToString());
-                                    <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@encryptedData" style="font-size: 20px" class="bi bi-eye m-1 text-danger"></a>
+                                    <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@encryptedData" style="font-size: 20px" class="bi bi-eye m-1 text-info"></a>
                                     <a asp-area="Users" asp-controller="Task" asp-action="UpdateTask" asp-route-TskID="@encryptedData" style="font-size: 20px" class="bi bi-pencil bi-3x m-1"></a>
+                                    <a asp-area="Users" asp-controller="Task" asp-action="TaskReject" asp-route-TskID="@data["TaskID"]" asp-route-IsRejected="@data["IsRejected"]" style="font-size: 20px" class="bi bi-trash bi-3x m-1 text-danger"></a>
                                 }
                                 <a asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success ms-2 p-1">Progress<i class="bi bi-arrow-return-right ms-2 p-1"></i></a>
                             </div>
                         </div>
                         <div class="card-body">
-
-                            <h5 class="card-title">DeadLine:<button class="btn btn-outline-danger ms-1"><i class="bi bi-calendar-check me-2"></i>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</button></h5>
+                            <h5 class="card-title">
+                                DeadLine:
+                                <span class="bg-danger p-1 rounded text-white fw-bold fs-6"><i class="bi bi-calendar-check me-2"></i>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</span>
+                            </h5>
                             <p class="card-text">Description: @data["TaskDescription"]</p>
                             @* <div class="row align-items-start">
                     <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
@@ -58,7 +60,7 @@
             <div class="row p-2 bg-secondary bg-opacity-10">In Progress</div>
             @foreach (System.Data.DataRow data in Model.Rows)
             {
-                if (@data["TaskState"].ToString() == "InProgress".ToString())
+                if (@data["TaskState"].ToString() == "InProgress".ToString() && !Convert.ToBoolean(@data["IsRejected"]))
                 {
                     <div class="card mt-2 mb-2">
                         <div class="card-header d-flex justify-content-between">
@@ -68,14 +70,18 @@
                             <div>
                                 @{
                                     string encryptedData = UrlEncryptor.Encrypt(@data["TaskID"].ToString());
-                                    <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@encryptedData" style="font-size: 20px" class="bi bi-eye m-1 text-danger"></a>
+                                    <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@encryptedData" style="font-size: 20px" class="bi bi-eye m-1 text-info"></a>
                                     <a asp-area="Users" asp-controller="Task" asp-action="UpdateTask" asp-route-TskID="@encryptedData" style="font-size: 20px" class="bi bi-pencil m-1"></a>
+                                    <a asp-area="Users" asp-controller="Task" asp-action="TaskReject" asp-route-TskID="@data["TaskID"]" asp-route-IsRejected="@data["IsRejected"]" style="font-size: 20px" class="bi bi-trash bi-3x m-1 text-danger"></a>
                                 }
                                 <a asp-area="Users" asp-controller="Task" asp-action="MoveToProgress" asp-route-TaskID="@data["TaskID"]" asp-route-TaskState="@data["TaskState"]" class="col btn btn-outline-success ms-2 p-1">Complete<i class="bi bi-arrow-return-right ms-2 p-1"></i></a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Complete To: @data["DeadLine"]</h5>
+                            <h5 class="card-title">
+                                DeadLine:
+                                <span class="bg-danger p-1 rounded text-white fw-bold fs-6"><i class="bi bi-calendar-check me-2"></i>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</span>
+                            </h5>
                             <p class="card-text">@data["TaskDescription"]</p>
                             @* <div class="row align-items-start">
                     <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
@@ -93,7 +99,7 @@
             <div class="row p-2 bg-secondary bg-opacity-10">Completed</div>
             @foreach (System.Data.DataRow data in Model.Rows)
             {
-                if (@data["TaskState"].ToString() == "Done".ToString())
+                if (@data["TaskState"].ToString() == "Done".ToString() && !Convert.ToBoolean(@data["IsRejected"]))
                 {
                     <div class="card mt-2 mb-2">
                         <div class="card-header d-flex justify-content-between">
@@ -101,7 +107,105 @@
                                 @data["TaskName"]
                             </div>
                             <div>
-                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@UrlEncryptor.Encrypt(@data["TaskID"].ToString())" style="font-size: 20px" class="bi bi-eye text-danger"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@UrlEncryptor.Encrypt(@data["TaskID"].ToString())" style="font-size: 20px" class="bi bi-eye text-info"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskReject" asp-route-TskID="@data["TaskID"]" asp-route-IsRejected="@data["IsRejected"]" style="font-size: 20px" class="bi bi-trash bi-3x m-1 text-danger"></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Completed</h5>
+                            <p class="card-text">@data["TaskDescription"]</p>
+                            @*  <div class="row align-items-start">
+                    <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@data["TaskID"]" class="col btn btn-outline-success m-1">View</a>
+                    </div>*@
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+
+        <h3 class="mt-5 ms-2">Rejected Task</h3>
+        @*First Row*@
+        <div class="d-inline-block col-lg-4 col-md-5 m-1 bg-secondary bg-opacity-10">
+
+            <div class="row justify-content-end bg-secondary bg-opacity-10">
+                <div class="col p-2">Pending</div>
+            </div>
+
+            @foreach (System.Data.DataRow data in Model.Rows)
+            {
+                if (@data["TaskState"].ToString() == "Pending".ToString() && Convert.ToBoolean(@data["IsRejected"]))
+                {
+                    <div class="card mt-2 mb-2">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="">
+                                <h4>@data["TaskName"]</h4>
+                            </div>
+                            <div>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@UrlEncryptor.Encrypt(@data["TaskID"].ToString())" style="font-size: 20px" class="bi bi-eye text-info"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="DeleteTask" asp-route-TskID="@data["TaskID"]" style="font-size: 20px" class="bi bi-trash bi-3x m-1 text-danger"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskReject" asp-route-TskID="@data["TaskID"]" asp-route-IsRejected="@data["IsRejected"]" class="btn btn-outline-success p-1 ms-2">Restore</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                DeadLine:
+                                <span class="bg-danger p-1 rounded text-white fw-bold fs-6"><i class="bi bi-calendar-check me-2"></i>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</span>
+                            </h5>
+                            <p class="card-text">Description: @data["TaskDescription"]</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        @*Second Row*@
+        <div class="d-inline-block col-lg-4 col-md-5 bg-secondary bg-opacity-10 m-1">
+            <div class="row p-2 bg-secondary bg-opacity-10">In Progress</div>
+            @foreach (System.Data.DataRow data in Model.Rows)
+            {
+                if (@data["TaskState"].ToString() == "InProgress".ToString() && Convert.ToBoolean(@data["IsRejected"]))
+                {
+                    <div class="card mt-2 mb-2">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="">
+                                @data["TaskName"]
+                            </div>
+                            <div>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@UrlEncryptor.Encrypt(@data["TaskID"].ToString())" style="font-size: 20px" class="bi bi-eye text-info"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="DeleteTask" asp-route-TskID="@data["TaskID"]" style="font-size: 20px" class="bi bi-trash bi-3x m-1 text-danger"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskReject" asp-route-TskID="@data["TaskID"]" asp-route-IsRejected="@data["IsRejected"]" class="btn btn-outline-success p-1 ms-2">Restore</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                DeadLine:
+                                <span class="bg-danger p-1 rounded text-white fw-bold fs-6"><i class="bi bi-calendar-check me-2"></i>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</span>
+                            </h5>
+                            <p class="card-text">@data["TaskDescription"]</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        @*Third Row*@
+        <div class="d-inline-block col-lg-3 col-md-5 bg-secondary bg-opacity-10 m-1">
+            <div class="row p-2 bg-secondary bg-opacity-10">Completed</div>
+            @foreach (System.Data.DataRow data in Model.Rows)
+            {
+                if (@data["TaskState"].ToString() == "Done".ToString() && Convert.ToBoolean(@data["IsRejected"]))
+                {
+                    <div class="card mt-2 mb-2">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="">
+                                @data["TaskName"]
+                            </div>
+                            <div>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskDetails" asp-route-TaskID="@UrlEncryptor.Encrypt(@data["TaskID"].ToString())" style="font-size: 20px" class="bi bi-eye text-info"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="DeleteTask" asp-route-TskID="@data["TaskID"]" style="font-size: 20px" class="bi bi-trash bi-3x m-1 text-danger"></a>
+                                <a asp-area="Users" asp-controller="Task" asp-action="TaskReject" asp-route-TskID="@data["TaskID"]" asp-route-IsRejected="@data["IsRejected"]" class="btn btn-outline-success p-1 ms-2">Restore</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -116,5 +220,4 @@
             }
         </div>
     </div>
-    <a class="btn btn-secondary m-2" asp-area="Users" asp-controller="Dashbord" asp-action="Dashbord">Back</a>
 </div>

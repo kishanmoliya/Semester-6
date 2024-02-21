@@ -22,5 +22,7 @@ namespace Task_Management_System.Areas.Users.Models
 
         [Required]
         public string TaskDescription { get; set; }
+
+        public bool IsRejected { get; set; }
     }
 }

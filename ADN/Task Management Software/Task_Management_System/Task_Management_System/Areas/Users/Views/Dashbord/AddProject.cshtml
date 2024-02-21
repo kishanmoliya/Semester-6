@@ -18,12 +18,13 @@
             buttonName = "Add Project";
         }
     }
-    <div class="registration_form">
+    <div class="registration_form mt-4">
         <div class="title">
             @ViewBag.Data
         </div>
-        <form asp-action="AddProject">
+        <form method="post" asp-action="AddProject">
             @Html.HiddenFor(x => x.ProjectID)
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form_wrap">
 

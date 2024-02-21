@@ -37,16 +37,22 @@
         </div>
     </div>
 
+
     <form method="post" asp-area="Users" asp-controller="Dashbord" asp-action="AddProjectForm">
-        <div class="d-flex justify-content-end m-1 me-3">
-            <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus"></i>Add Project</button>
+        <div class="row justify-content-between mt-3 mb-1">
+            <div class="col-3">
+                <input id="filter-text" class="form-control" onkeyup="filterTable(this)" placeholder="Search" type="text" fdprocessedid="ee7wrj">
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus"></i>Add Project</button>
+            </div>
         </div>
     </form>
     <div class="table-data">
         @if (Model.DashboordData.sumOfProject != 0)
         {
 
-            <table class="table table-hover" id="tableId">
+            <table class="table table-hover">
                 <thead>
                     <tr class="table-primary fixed">
                         <th scope="col">Project Name</th>
@@ -56,7 +62,7 @@
                         <th scope="col" colspan="3" class="text-center">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="ItemTableBody">
                     @foreach (NewProjectModel data in Model.ProjectDetails)
                     {
                         <tr>
@@ -65,10 +71,10 @@
                             <td>@data.ProjectOwnerName</td>
                             <td>@data.ProjectState</td>
                             <td class="d-flex justify-content-center">
-                                <a class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data.ProjectID">@*<i class="bi bi-trash"></i>*@Delete</a>
+                                <a onclick="return confirmDelete();" class="btn btn-outline-danger m-1" asp-area="Users" asp-controller="Dashbord" asp-action="DeleteProject" asp-route-ProjectID="@data.ProjectID">@*<i class="bi bi-trash"></i>*@Delete</a>
                                 @{
                                     string encryptedData = UrlEncryptor.Encrypt(@data.ProjectID.ToString());
-                                    <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-ProjectID="@encryptedData">Update</a>
+                                    <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-PrjectID="@encryptedData">Update</a>
                                     <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-controller="Task" asp-action="ProjectDetails" asp-action="Task" asp-route-ProjectID="@encryptedData">Details</a>
                                     <a class="btn btn-outline-warning m-1" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@encryptedData">Manage Task</a>
                                 }
@@ -83,21 +89,28 @@
 
 @section Scripts{
     <script>
-        function addRowHandlers() {
-            var table = document.getElementById("tableId");
-            var rows = table.getElementsByTagName("tr");
-
-            for (i = 0; i < rows.length; i++) {
-                var currentRow = table.rows[i];
-                var createClickHandler =
-                    function (row) {
-                        return function () {
-                            row.getElementsByTagName("a")[2].click();
-                        };
-                    };
-                currentRow.onclick = createClickHandler(currentRow);
-            }
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this Project?");
         }
-        window.onload = addRowHandlers();
+    </script>
+
+    <script>
+        function filterTable(searchText) {
+            var stext = searchText.value.toLowerCase();
+            $('#ItemTableBody tr').each(function () {
+                var row = $(this);
+                var ingredientName = row.find('td:eq(0)').text().toLowerCase();
+                var created = row.find('td:eq(1)').text().toLowerCase();
+                var modified = row.find('td:eq(2)').text().toLowerCase();
+                var sequence = row.find('td:eq(3)').text().toLowerCase();
+                var quantity = row.find('td:eq(4)').text().toLowerCase();
+
+                if (ingredientName.includes(stext) || created.includes(stext) || modified.includes(stext) || sequence.includes(stext) || quantity.includes(stext)) {
+                    row.show();
+                } else {
+                    row.hide();
+                }
+            });
+        }
     </script>
 }

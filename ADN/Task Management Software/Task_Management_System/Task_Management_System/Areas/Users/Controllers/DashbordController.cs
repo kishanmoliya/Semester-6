@@ -106,9 +106,9 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         #endregion
 
         #region Update Project
-        public IActionResult UpdateProject(string ProjectID)
+        public IActionResult UpdateProject(string PrjectID)
         {
-            string decryptedData = UrlEncryptor.Decrypt(ProjectID);
+            string decryptedData = UrlEncryptor.Decrypt(PrjectID);
             ViewBag.Data = Convert.ToInt32(decryptedData);
 
             DataTable dt = bal.PR_Project_SelectByPK(Convert.ToInt32(decryptedData));

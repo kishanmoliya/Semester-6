@@ -15,6 +15,8 @@ namespace Task_Management_System.Areas.Users.Models
         public string ProjectDescription { get; set; }
 
         [Required]
+        [MinLength(3, ErrorMessage = "Descreption is TOO SHORT")]
+        [MaxLength(500, ErrorMessage = "Descreption is TOO LONG")]
         public string ProjectOwnerName { get; set; }
         public DateTime DeadLine { get; set;}
 

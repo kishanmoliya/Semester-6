@@ -80,6 +80,16 @@ namespace Task_Management_System.Areas.Users.Controllers
         }
         #endregion
 
+        #region Reject or Restore
+        public IActionResult TaskReject(int TskID, string IsRejected)
+        {
+            bal.PR_Task_Reject(TskID, IsRejected);
+            int PrjectID = CommonVariables.ProjectID;
+            string ProjectID = UrlEncryptor.Encrypt(PrjectID.ToString());
+            return RedirectToAction("Task", new { ProjectID });
+        }
+        #endregion
+
         #region Task Details
         public IActionResult TaskDetails(String TaskID)
         {
@@ -102,7 +112,8 @@ namespace Task_Management_System.Areas.Users.Controllers
                 TaskState = Convert.ToString(dt.Rows[0]["TaskState"]),
                 CreatedDate = Convert.ToDateTime(dt.Rows[0]["CreatedDate"]),
                 DeadLine = Convert.ToDateTime(dt.Rows[0]["DeadLine"]),
-                Modified = Convert.ToDateTime(dt.Rows[0]["Modified"])
+                Modified = Convert.ToDateTime(dt.Rows[0]["Modified"]),
+                IsRejected = Convert.ToBoolean(dt.Rows[0]["IsRejected"])
             };
             return TskData;
         }
@@ -127,6 +138,15 @@ namespace Task_Management_System.Areas.Users.Controllers
                 newMember.Add(member);
             }
             return newMember;
+        }
+        #endregion
+
+        #region Task Delete 
+        public IActionResult DeleteTask(int TskID)
+        {
+            bal.PR_Delete_Task(TskID);
+            string ProjectID = UrlEncryptor.Encrypt(CommonVariables.ProjectID.ToString());
+            return RedirectToAction("Task", new { ProjectID });
         }
         #endregion
 
@@ -162,9 +182,9 @@ namespace Task_Management_System.Areas.Users.Controllers
         #endregion
 
         #region Update Member
-        public IActionResult UpdateMember(String MemberID)
+        public IActionResult UpdateMember(String MberID)
         {
-            string decryptedData = UrlEncryptor.Decrypt(MemberID);
+            string decryptedData = UrlEncryptor.Decrypt(MberID);
             ViewBag.MemberID = Convert.ToInt32(decryptedData);
             DataTable dt = bal.PR_Member_SelectByPK(Convert.ToInt32(decryptedData));
             if (dt.Rows.Count > 0)

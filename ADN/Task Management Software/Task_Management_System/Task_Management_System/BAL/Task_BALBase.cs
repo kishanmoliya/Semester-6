@@ -72,6 +72,27 @@ namespace Task_Management_System.BAL
                 return false;
             }
         }
+        #endregion#region Change Task State
+
+        #region Task Reject or Restore
+        public bool PR_Task_Reject(int TaskID, string IsRejected)
+        {
+            try
+            {
+                if (dal.PR_Task_Reject(TaskID, IsRejected))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         #endregion
 
         #region Task Details
@@ -92,6 +113,27 @@ namespace Task_Management_System.BAL
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+        #endregion
+
+        #region Delete Task
+        public bool PR_Delete_Task(int TaskID)
+        {
+            try
+            {
+                if (dal.PR_Delete_Task(TaskID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
         #endregion
