@@ -46,5 +46,6 @@
 
         public static int ProjectID;
         public static int TaskID;
+        public static string Error;
     }
 }

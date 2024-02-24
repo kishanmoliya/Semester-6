@@ -84,8 +84,16 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         #region Delete 
         public IActionResult DeleteProject(int ProjectID)
         {
-            bal.PR_Delete_Project(ProjectID);
-            return RedirectToAction("Dashbord");
+           
+                if (bal.PR_Delete_Project(ProjectID))
+                {
+                    return RedirectToAction("Dashbord");
+                }
+                else
+                {
+                    return RedirectToAction("Dashbord");
+                }
+          
         }
         #endregion
 

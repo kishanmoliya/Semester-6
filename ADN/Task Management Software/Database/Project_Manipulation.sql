@@ -38,19 +38,18 @@ Values
 
 -- Delete Project
 Exec [dbo].[PR_Delete_Project] 5
-CREATE PROCEDURE [dbo].[PR_Delete_Project]
+CREATE OR ALTER PROCEDURE [dbo].[PR_Delete_Project]
 	@ProjectID	int
 AS
-DELETE FROM [dbo].[PRJ_Project]
-WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
+DELETE FROM	PRJ_Task Where ProjectID = @ProjectID
+DELETE FROM [dbo].[PRJ_Project] WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 
 
 -- Select Project By PK
-Exec [dbo].[PR_Project_SelectByPK] 11
+Exec [dbo].[PR_Project_SelectByPK] 79
 CREATE OR ALTER PROCEDURE [dbo].[PR_Project_SelectByPK]
 @ProjectID int
 AS
-
 SELECT [dbo].[PRJ_Project].[ProjectID]
 	  ,[dbo].[PRJ_Project].[ProjectTitle]
       ,[dbo].[PRJ_Project].[ProjectDescription]
@@ -61,9 +60,98 @@ SELECT [dbo].[PRJ_Project].[ProjectID]
 	  ,[dbo].[PRJ_Project].[DeadLine]
 	  ,[dbo].[PRJ_Project].[ModifiedDate]
 	  ,[dbo].[PRJ_Project].[ProjectState]
+	  ,NoOfTask = dbo.NoOfTask(@ProjectID)
+	  ,AssignedMember = dbo.AssignedMembers(@ProjectID)
+	  ,NoOfPendingTask = dbo.PendingTask(@ProjectID)
+	  ,NoOfInProgressTask = dbo.InProgressTask(@ProjectID)
+	  ,NoOfDoneTask = dbo.DoneTask(@ProjectID)
+	  ,NoOfRejectedTsk = dbo.RejectedTask(@ProjectID)
 FROM [dbo].[PRJ_Project]
+	Inner Join PRJ_Task
+	on PRJ_Task.ProjectID = PRJ_Project.ProjectID
+	Inner Join PRJ_Member
+	on PRJ_Member.TaskID = PRJ_Task.TaskID
 WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
+Group By Prj_Project.ProjectID, ProjectTitle, ProjectDescription, ProjectOwnerName, TotalMembers, ProjectCost, PRJ_Project.CreatedDate, PRJ_Project.DeadLine, ModifiedDate, ProjectState
 ORDER BY [dbo].[PRJ_Project].[ProjectTitle]
+
+
+Create or Alter function dbo.NoOfTask(@ProjectID int)
+returns int
+as
+Begin
+	DECLARE @result INT;
+
+	Select @result = COUNT(ProjectID) from PRJ_Task
+	Where IsRejected != 1 AND ProjectID = @ProjectID
+
+	RETURN @result;
+End
+
+Create or Alter function dbo.AssignedMembers(@ProjectID int)
+returns int
+as
+Begin
+	DECLARE @result INT;
+
+	Select @result = COUNT(ProjectID) from PRJ_Member
+	Where ProjectID = @ProjectID
+
+	RETURN @result;
+End
+
+Create or Alter function dbo.PendingTask(@ProjectID int)
+returns int
+as
+Begin
+	DECLARE @result INT;
+
+	Select @result = COUNT(TaskState) from PRJ_Task
+	Where TaskState = 'Pending' AND IsRejected != 1 AND ProjectID = @ProjectID
+
+	RETURN @result;
+End
+
+Create or Alter function dbo.InProgressTask(@ProjectID int)
+returns int
+as
+Begin
+	DECLARE @result INT;
+
+	Select @result = COUNT(TaskState) from PRJ_Task
+	Where TaskState = 'InProgress' AND IsRejected != 1 AND ProjectID = @ProjectID
+
+	RETURN @result;
+End
+
+Create or Alter function dbo.DoneTask(@ProjectID int)
+returns int
+as
+Begin
+	DECLARE @result INT;
+
+	Select @result = COUNT(TaskState) from PRJ_Task
+	Where TaskState = 'Done' AND IsRejected != 1 AND ProjectID = @ProjectID
+
+	RETURN @result;
+End
+
+Create or Alter function dbo.RejectedTask(@ProjectID int)
+returns int
+as
+Begin
+	DECLARE @result INT;
+
+	Select @result = COUNT(TaskState) from PRJ_Task
+	Where IsRejected = 1 AND ProjectID = @ProjectID
+
+	RETURN @result;
+End
+
+
+
+
+
 
 -- Update Project
 Exec  [dbo].[PR_Update_Project] 11, 'k Prj1','k new Project','kishan',50,456425.00,'12-30-2023','In Progress'
@@ -191,7 +279,7 @@ WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
 ------------------------------------------------------------------------------
 --Inert Member
 Select * From PRJ_Member
-EXEC PR_Member_Insert 'pravin2',7899565623,'Pravin322@gmail.com','Manager','Java',26,'40000.00',2
+EXEC PR_Member_Insert 'pravin2',7899565623,'Pravin322@gmail.com','Manager','Java',26,'40000.00',2,5
 CREATE OR ALTER PROCEDURE PR_Member_Insert
     @MemberName nvarchar(MAX),
     @MemberContact nvarchar(MAX),
@@ -200,11 +288,12 @@ CREATE OR ALTER PROCEDURE PR_Member_Insert
     @MemberTechnology nvarchar(MAX),
     @MemberAge int,
     @MemberSalary decimal(18, 2),
-	@TaskID int
+	@TaskID int,
+	@ProjectID int
 AS
 BEGIN
     INSERT INTO PRJ_Member 
-    VALUES (@MemberName, @MemberContact, @MemberEmail, @MemberRole, @MemberTechnology, @MemberAge, @MemberSalary, @TaskID);
+    VALUES (@MemberName, @MemberContact, @MemberEmail, @MemberRole, @MemberTechnology, @MemberAge, @MemberSalary, @TaskID, @ProjectID);
 END;
 
 --Select Task Wise Member

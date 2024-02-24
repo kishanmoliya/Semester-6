@@ -20,7 +20,7 @@ From MST_User
 
 -- User Register
 select * From MST_User
-Exec [dbo].[PR_User_Insert] 'Narendra Modi','modi232@gmail.com','modi',0,1
+Exec [dbo].[PR_User_Insert] 'k','k','k',0,1
 Create or Alter Procedure [dbo].[PR_User_Insert]
 	@UserName	nvarchar(Max),
 	@Email		nvarchar(Max),
@@ -28,26 +28,34 @@ Create or Alter Procedure [dbo].[PR_User_Insert]
 	@IsAdmin	Bit = 0,
 	@IsActive	Bit = 1
 As
-Insert Into [dbo].[MST_User]
-(
-	[dbo].[MST_User].[UserName],
-	[dbo].[MST_User].[Email],
-	[dbo].[MST_User].[Password],
-	[dbo].[MST_User].[IsAdmin],
-	[dbo].[MST_User].[IsActive],
-	[dbo].[MST_User].[CreatedDate],
-	[dbo].[MST_User].[ModifiedDate]
-)
-Values
-(
-	@UserName,
-	@Email,	
-	@Password,
-	@IsAdmin,
-	@IsActive,
-	GETDATE(),
-	GETDATE()
-)
+SET NOCOUNT ON;
+
+	IF EXISTS (SELECT 1 FROM MST_User WHERE UserName = @UserName)
+        THROW 51001, 'User Name Already Exists', 1;
+    Else IF EXISTS (SELECT 1 FROM MST_User WHERE Email = @Email)
+        THROW 51000, 'Email Already Exists', 1;
+	Else
+		Insert Into [dbo].[MST_User]
+		(
+			[dbo].[MST_User].[UserName],
+			[dbo].[MST_User].[Email],
+			[dbo].[MST_User].[Password],
+			[dbo].[MST_User].[IsAdmin],
+			[dbo].[MST_User].[IsActive],
+			[dbo].[MST_User].[CreatedDate],
+			[dbo].[MST_User].[ModifiedDate]
+		)
+		Values
+		(
+			@UserName,
+			@Email,	
+			@Password,
+			@IsAdmin,
+			@IsActive,
+			GETDATE(),
+			GETDATE()
+		)
+
 
 
 -- Login User

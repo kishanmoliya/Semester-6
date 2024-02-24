@@ -1,9 +1,8 @@
 ﻿using System.Data;
 using System.Data.Common;
-using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Task_Management_System.Areas.MST_User_Registration.Models;
+using Task_Management_System.BAL;
 
 namespace Task_Management_System.DAL
 {
@@ -53,6 +52,7 @@ namespace Task_Management_System.DAL
             }
             catch (Exception ex)
             {
+                CommonVariables.Error = Convert.ToString(ex.Message);
                 return false;
             }
         }

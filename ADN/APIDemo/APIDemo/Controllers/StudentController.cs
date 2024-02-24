@@ -13,7 +13,7 @@ namespace APIDemo.Controllers
     {
         SqlDatabase sqlDatabase = new SqlDatabase(DAL_Helpers.ConnString);
 
-        #region Select All Person
+      /*  #region Select All Person
         [HttpGet]
         public IActionResult GetStudent()
         {
@@ -98,8 +98,8 @@ namespace APIDemo.Controllers
                 return null;
             }
         }
-        #endregion
-
+        #endregion*/
+/*
         #region Student Insert
         [HttpPost]
         public IActionResult Insert([FromForm] StudentModel studentModel)
@@ -131,9 +131,19 @@ namespace APIDemo.Controllers
                 return null;
             }
         }
-        #endregion
+        #endregion*/
 
-        #region Student Update
+        [HttpPost]
+        public IActionResult ProductPost([FromForm] StudentModel stu)
+        {
+            if (ModelState.IsValid)
+            {
+                return Ok("Data validated successfully!");
+            }
+            return NotFound("Data not validate!");
+        }
+
+    /*    #region Student Update
         [HttpPut("{StudentID}")]
         public IActionResult StudentUpdate(int StudentID, [FromForm] StudentModel studentModel)
         {
@@ -209,7 +219,7 @@ namespace APIDemo.Controllers
                 return Ok("false");
 
             }
-            #endregion
+            #endregion*/
         }
     }
-}
+

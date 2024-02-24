@@ -17,24 +17,24 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
 
         User_DALBase bal = new User_DALBase();
 
+        #region User Login
+        #region Login Form
         public IActionResult Index()
         {
             return View("Login");
         }
+        #endregion
 
         public IActionResult Login(UserModel userModel)
         {
             DataTable dt = bal.PR_GetUser_Log(userModel.Email, userModel.Password);
             if (dt.Rows.Count > 0)
             {
-               /* if (Convert.ToBoolean(dt.Rows[0]["IsAdmin"]))
-                {*/
-                    HttpContext.Session.SetInt32("UserID", Convert.ToInt32(dt.Rows[0]["UserID"]));
-                    HttpContext.Session.SetString("UserName", Convert.ToString(dt.Rows[0]["UserName"]));
-                    HttpContext.Session.SetString("IsAdmin", dt.Rows[0]["IsAdmin"].ToString());
-                    HttpContext.Session.SetString("Email", dt.Rows[0]["Email"].ToString());
-                    return RedirectToAction("Dashbord", "Dashbord", new { area = "Users" });
-               /* }*/
+                HttpContext.Session.SetInt32("UserID", Convert.ToInt32(dt.Rows[0]["UserID"]));
+                HttpContext.Session.SetString("UserName", Convert.ToString(dt.Rows[0]["UserName"]));
+                HttpContext.Session.SetString("IsAdmin", dt.Rows[0]["IsAdmin"].ToString());
+                HttpContext.Session.SetString("Email", dt.Rows[0]["Email"].ToString());
+                return RedirectToAction("Dashbord", "Dashbord", new { area = "Users" });
             }
             else
             {
@@ -42,11 +42,15 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
             }
             return View();
         }
+        #endregion
 
+        #region Register User
+        #region Registration Form
         public IActionResult RegisterForm()
         {
             return View("Register");
         }
+        #endregion
 
         public IActionResult Register(UserModel userModel)
         {
@@ -57,8 +61,10 @@ namespace Task_Management_System.Areas.MST_User_Registration.Controllers
             }
             else
             {
+                ViewBag.Error = CommonVariables.Error;
                 return View();
             }
         }
+        #endregion
     }
 }

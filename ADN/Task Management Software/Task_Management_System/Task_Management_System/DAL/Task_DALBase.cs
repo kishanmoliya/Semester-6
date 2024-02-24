@@ -2,6 +2,7 @@
 using System.Data.Common;
 using System.Data;
 using Task_Management_System.Areas.Users.Models;
+using Task_Management_System.BAL;
 
 namespace Task_Management_System.DAL
 {
@@ -204,6 +205,7 @@ namespace Task_Management_System.DAL
                     db.AddInParameter(cmd, "@MemberAge", SqlDbType.Int, memberModel.MemberAge);
                     db.AddInParameter(cmd, "@MemberSalary", SqlDbType.Decimal, memberModel.MemberSalary);
                     db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
+                    db.AddInParameter(cmd, "@ProjectID", SqlDbType.Int, CommonVariables.ProjectID);
                     if (Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
                     {
                         return true;

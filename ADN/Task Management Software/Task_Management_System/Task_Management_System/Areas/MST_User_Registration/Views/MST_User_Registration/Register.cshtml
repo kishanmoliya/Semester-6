@@ -1,4 +1,5 @@
-﻿@model Task_Management_System.Areas.MST_User_Registration.Models.UserModel
+﻿@using Task_Management_System.BAL;
+@model Task_Management_System.Areas.MST_User_Registration.Models.UserModel
 
 @{
     Layout = "_Layout";
@@ -8,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h2 class="text-center text-dark mt-2">Create an Account</h2>
+            <h2 class="text-center text-dark mt-2">Task Management System</h2>
             <div class="card my-4">
                 <form asp-action="Register" class="card-body cardbody-color p-lg-5">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -22,14 +23,30 @@
                         <label asp-for="UserName" class="form-label" for="form3Example1cg">Your Name</label>
                         <input asp-for="UserName" type="text" class="form-control mt-1" id="Username" aria-describedby="emailHelp"
                                placeholder="Name" />
-                        <div><span asp-validation-for="UserName" class="text-danger"></span></div>
+                        <div>
+                            <span asp-validation-for="UserName" class="text-danger">
+                                @{
+                                    if (ViewBag.Error == "User Name Already Exists")
+                                    {
+                                        @ViewBag.Error
+                                    }
+                                }
+                            </span>
+                        </div>
                     </div>
 
                     <div class="mb-3">
                         <label asp-for="Email" class="control-label"></label>
                         <input asp-for="Email" type="text" class="form-control mt-1" id="Username" aria-describedby="emailHelp"
                                placeholder="Email">
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <span asp-validation-for="Email" class="text-danger">
+                            @{
+                                if (ViewBag.Error == "Email Already Exists")
+                                {
+                                    @ViewBag.Error
+                                }
+                            }
+                        </span>
                     </div>
 
                     <div class="mb-3">
