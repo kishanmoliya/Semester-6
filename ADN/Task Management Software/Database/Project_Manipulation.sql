@@ -41,12 +41,13 @@ Exec [dbo].[PR_Delete_Project] 5
 CREATE OR ALTER PROCEDURE [dbo].[PR_Delete_Project]
 	@ProjectID	int
 AS
+DELETE FROM	PRJ_Member Where ProjectID = @ProjectID
 DELETE FROM	PRJ_Task Where ProjectID = @ProjectID
 DELETE FROM [dbo].[PRJ_Project] WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 
 
 -- Select Project By PK
-Exec [dbo].[PR_Project_SelectByPK] 79
+Exec [dbo].[PR_Project_SelectByPK] 80
 CREATE OR ALTER PROCEDURE [dbo].[PR_Project_SelectByPK]
 @ProjectID int
 AS
@@ -67,10 +68,6 @@ SELECT [dbo].[PRJ_Project].[ProjectID]
 	  ,NoOfDoneTask = dbo.DoneTask(@ProjectID)
 	  ,NoOfRejectedTsk = dbo.RejectedTask(@ProjectID)
 FROM [dbo].[PRJ_Project]
-	Inner Join PRJ_Task
-	on PRJ_Task.ProjectID = PRJ_Project.ProjectID
-	Inner Join PRJ_Member
-	on PRJ_Member.TaskID = PRJ_Task.TaskID
 WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 Group By Prj_Project.ProjectID, ProjectTitle, ProjectDescription, ProjectOwnerName, TotalMembers, ProjectCost, PRJ_Project.CreatedDate, PRJ_Project.DeadLine, ModifiedDate, ProjectState
 ORDER BY [dbo].[PRJ_Project].[ProjectTitle]
@@ -270,11 +267,11 @@ END
 
 -- Task Delete
 Exec [dbo].[PR_Delete_Task] 5
-CREATE PROCEDURE [dbo].[PR_Delete_Task]
+CREATE OR ALTER PROCEDURE [dbo].[PR_Delete_Task]
 	@TaskID	int
 AS
-DELETE FROM [dbo].[PRJ_Task]
-WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
+Delete From PRJ_Member WHERE TaskID = @TaskID 
+DELETE FROM [dbo].[PRJ_Task] WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 --Inert Member
