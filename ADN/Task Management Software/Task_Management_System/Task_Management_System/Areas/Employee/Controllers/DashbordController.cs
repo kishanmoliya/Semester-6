@@ -10,9 +10,9 @@ namespace Task_Management_System.Areas.Employee.Controllers
     public class DashbordController : Controller
     {
         Admin_BALBase bal = new Admin_BALBase();
-        public IActionResult Dashbord()
+        public IActionResult Dashbord(string? PrjState)
         {
-            DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("EmployeeSessionID")));
+            DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("EmployeeSessionID")), PrjState);
             return View(dt);
         }
 

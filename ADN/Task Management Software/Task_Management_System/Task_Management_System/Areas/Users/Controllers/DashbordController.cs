@@ -14,11 +14,11 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         Admin_BALBase bal = new Admin_BALBase();
 
         #region Dashbord
-        public IActionResult Dashbord()
+        public IActionResult Dashbord(string? PrjState)
         {
             ViewModel model = new ViewModel();
             model.DashboordData = getDashbordData();
-            model.ProjectDetails = getProjectDetails();
+            model.ProjectDetails = getProjectDetails(PrjState);
             return View(model);
         }
 
@@ -35,9 +35,9 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
             return dashbordData;
         }
 
-        public List<NewProjectModel> getProjectDetails()
+        public List<NewProjectModel> getProjectDetails(string? PrjState)
         {
-            DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("UserID")));
+            DataTable dt = bal.PR_UserWise_Project(Convert.ToInt32(HttpContext.Session.GetInt32("UserID")), PrjState);
             List<NewProjectModel> newProject = new List<NewProjectModel>();
             foreach (DataRow dr in dt.Rows)
             {

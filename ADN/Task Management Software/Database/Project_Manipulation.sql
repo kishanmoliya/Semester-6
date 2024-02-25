@@ -217,13 +217,17 @@ ORDER BY [dbo].[PRJ_Task].[TaskName]
 Exec [dbo].[PR_State_Change] 5,'InProgress'
 Create Or ALTER PROCEDURE [dbo].[PR_State_Change]
 	@TaskID		int,
-	@TaskState	nvarchar(max)
+	@TaskState	nvarchar(max),
+	@ProjectID	int
 AS
 IF @TaskState = 'Pending'
 BEGIN
     UPDATE [dbo].[PRJ_Task]	
 	SET [dbo].[PRJ_Task].[TaskState] = 'InProgress'
 	WHERE [dbo].[PRJ_Task].[TaskID] = @TaskID;
+	Update [dbo].[PRJ_Project]
+	Set [dbo].[PRJ_Project].[ProjectState] = 'In Progress'
+	Where [dbo].[PRJ_Project].[ProjectID] = @ProjectID;
 END
 ELSE
 BEGIN

@@ -87,6 +87,7 @@ namespace Task_Management_System.DAL
             DbCommand cmd = db.GetStoredProcCommand("PR_State_Change");
             db.AddInParameter(cmd, "@TaskID", SqlDbType.Int, TaskID);
             db.AddInParameter(cmd, "@TaskState", SqlDbType.VarChar, TaskState);
+            db.AddInParameter(cmd, "@ProjectID", SqlDbType.VarChar, CommonVariables.ProjectID);
             if(Convert.ToBoolean(db.ExecuteNonQuery(cmd)))
             {
                 return true;

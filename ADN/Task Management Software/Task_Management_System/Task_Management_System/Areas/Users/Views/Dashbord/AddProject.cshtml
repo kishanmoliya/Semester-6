@@ -43,7 +43,7 @@
 
                 @if (ViewBag.Data == "Edit Project Details")
                 {
-                    <select class="form-select" id="States" name="ProjectState" asp-for="ProjectState">
+                    <select class="form-select" id="States" name="ProjectState" asp-for="ProjectState" asp-route-PrjState="">
                         <option value="">Change State</option>
                         <option value="Pending">Pending</option>
                         <option value="In Progress">In Progress</option>

@@ -68,7 +68,8 @@ Insert Into PRJ_Project Values('Architecture_Admission','Find the collage','Utta
 -- Get Login User
 Exec PR_UserWise_Project 5
 Create or Alter Procedure PR_UserWise_Project
-	@UserID int
+	@UserID			int,
+	@ProjectState	nvarchar(Max) = NULL
 As
 Select 
 	PRJ_Project.UserID,
@@ -84,7 +85,7 @@ Select
 	PRJ_Project.ProjectState
 From PRJ_Project
 Inner Join MST_User on PRJ_Project.UserID = MST_User.UserID
-Where PRJ_Project.UserID = @UserID
+Where PRJ_Project.UserID = @UserID AND (@ProjectState IS NULL OR PRJ_Project.ProjectState = @ProjectState)
 ORDER BY [dbo].[PRJ_Project].[CreatedDate] DESC
 
 

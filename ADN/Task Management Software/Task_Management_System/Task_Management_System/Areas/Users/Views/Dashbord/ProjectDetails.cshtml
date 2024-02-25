@@ -26,11 +26,19 @@
 
                             <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project Owner:    </span>@data["ProjectOwnerName"]</h6>
                             <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project Cost:     </span>@data["ProjectCost"]</h6>
-                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project Members:  </span>@data["TotalMembers"]</h6>
                             <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project Status:   </span>@data["ProjectState"]</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Total Task:   </span>@data["NoOfTask"]</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Pending Task:   </span>@data["NoOfPendingTask"]</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Progress Task:   </span>@data["NoOfInProgressTask"]</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Completed Task:   </span>@data["NoOfDoneTask"]</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Rejected Task:   </span>@data["NoOfRejectedTsk"]</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Total Members:  </span>@data["TotalMembers"]</h6>
+                            <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Assigned Members:   </span>@data["AssignedMember"]</h6>
                             <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Created Date:     </span>@Convert.ToDateTime(data["CreatedDate"]).ToString("dd/MM/yyyy")</h6>
                             <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Project DeadLine: </span>@Convert.ToDateTime(data["DeadLine"]).ToString("dd/MM/yyyy")</h6>
                             <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Last Modified:    </span>@Convert.ToDateTime(data["ModifiedDate"]).ToString("dd/MM/yyyy")</h6>
+
+
 
                         </div>
                     </div>
