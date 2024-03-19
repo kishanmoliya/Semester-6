@@ -39,7 +39,7 @@
                             <h6 class="list-group-item list-group-item-action d-flex"><span class="w-25">Last Modified:    </span>@Convert.ToDateTime(data["ModifiedDate"]).ToString("dd/MM/yyyy")</h6>
 
 
-
+                            <a asp-area="Users" asp-controller="Task" asp-action="GetProjectMember" asp-route-ProjectID="@data["ProjectID"]">Member List</a>
                         </div>
                     </div>
                 }

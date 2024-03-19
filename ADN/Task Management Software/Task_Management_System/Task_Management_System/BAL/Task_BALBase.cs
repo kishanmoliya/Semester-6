@@ -226,5 +226,27 @@ namespace Task_Management_System.BAL
             }
         }
         #endregion
+
+        #region Get All Member
+        public DataTable GetProjectMember(int ProjectID)
+        {
+            try
+            {
+                DataTable dt = dal.GetProjectMember(ProjectID);
+                if (dt != null)
+                {
+                    return dt;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

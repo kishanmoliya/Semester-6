@@ -145,6 +145,17 @@ Begin
 	RETURN @result;
 End
 
+CREATE OR ALTER FUNCTION dbo.GetAssignedMember(@ProjectID int)
+RETURNS TABLE (
+    MemberName VARCHAR(100),
+    MemberEmail VARCHAR(100),
+    MemberRole VARCHAR(100)
+)
+AS
+RETURN
+    SELECT MemberName, MemberEmail, MemberRole 
+    FROM PRJ_Member
+    WHERE ProjectID = @ProjectID;
 
 
 
@@ -173,6 +184,13 @@ UPDATE [dbo].[PRJ_Project]
 		[dbo].[PRJ_Project].[ProjectState] = @ProjectState
 WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 
+
+-- Get Project Member
+EXEC GetProjectMember 51
+Create Procedure GetProjectMember 
+	@ProjectID	int
+AS
+Select * From PRJ_Member
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 --Inert Task

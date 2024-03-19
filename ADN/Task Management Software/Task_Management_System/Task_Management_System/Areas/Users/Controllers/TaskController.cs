@@ -12,6 +12,7 @@ namespace Task_Management_System.Areas.Users.Controllers
     public class TaskController : Controller
     {
         Task_BALBase bal = new Task_BALBase();
+        List<(string, string, string)> MemberList = new List<(string, string, string)>();
 
         #region Get Task
         [IsAdmin]
@@ -216,5 +217,25 @@ namespace Task_Management_System.Areas.Users.Controllers
             return View(dt);
         }
         #endregion
+
+        #region Get All Member
+        public IActionResult GetProjectMember(int ProjectID)
+        {
+            DataTable dt = bal.GetProjectMember(ProjectID);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string MemberName = row["MemberName"].ToString();
+                string MemberRole = row["MemberRole"].ToString();
+                string MemberEmail = row["MemberEmail"].ToString();
+                MemberList.Add((MemberName, MemberRole, MemberEmail));
+            }
+
+
+            return View(dt);
+            //MemberEmail
+        }
+        #endregion
+
     }
 }

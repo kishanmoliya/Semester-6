@@ -39,28 +39,28 @@
 
     <div class="row justify-content-between mt-3 mb-1">
         <div class="col">
-            <div>
-                <input id="filter-text" class="form-control" onkeyup="filterTable(this)" placeholder="Search" type="text" fdprocessedid="ee7wrj">
-            </div>
-
-            @*DropDown For Project State*@
-            <div>
-                <form type="post" id="myFormm" asp-area="Users" asp-controller="Dashbord" asp-action="Dashbord">
-                    <select onChange="submitForm('myFormm')" class="form-select" name="PrjState">
-                        <option value="">Project Status</option>
-                        <option value="Pending">Pending</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Complete">Complete</option>
-                    </select>
-                </form>
-            </div>
+            <input id="filter-text" class="form-control" onkeyup="filterTable(this)" placeholder="Search" type="text" fdprocessedid="ee7wrj">
         </div>
 
-        <form method="post" asp-area="Users" asp-controller="Dashbord" asp-action="AddProjectForm">
-            <div class="col">
-                <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus"></i>Add Project</button>
-            </div>
-        </form>
+        <div class="col">
+            <form type="post" id="MyForm" asp-area="Users" asp-controller="Dashbord" asp-action="Dashbord">
+                <select onChange="submitForm()" class="form-select" name="PrjState">
+                    <option value="">Project Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Complete">Complete</option>
+                    <option value="">All</option>
+                </select>
+            </form>
+        </div>
+
+        <div class="col text-end">
+            <form method="post" asp-area="Users" asp-controller="Dashbord" asp-action="AddProjectForm">
+                <div class="col">
+                    <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus"></i>Add Project</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="table-data">
@@ -129,9 +129,9 @@
     </script>
 
     <script>
-        function submitForm(formName){
-           var a = document.getElementById(formName);
-           a.submit();
+        function submitForm() {
+            var a = document.getElementById('MyForm');
+            a.submit();
         }
     </script>
 }

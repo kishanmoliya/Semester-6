@@ -291,5 +291,27 @@ namespace Task_Management_System.DAL
             }
         }
         #endregion
+
+        #region Get All Member
+        public DataTable GetProjectMember(int ProjectID)
+        {
+            try
+            {
+                SqlDatabase db = new SqlDatabase(ConnString);
+                DbCommand cmd = db.GetStoredProcCommand("GetProjectMember");
+                db.AddInParameter(cmd, "@ProjectID", SqlDbType.VarChar, ProjectID);
+                DataTable dt = new DataTable();
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    dt.Load(reader);
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }
