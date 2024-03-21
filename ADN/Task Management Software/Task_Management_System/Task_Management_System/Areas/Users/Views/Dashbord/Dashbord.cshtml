@@ -89,7 +89,7 @@
                                 @{
                                     string encryptedData = UrlEncryptor.Encrypt(@data.ProjectID.ToString());
                                     <a class="btn btn-outline-primary m-1" asp-area="Users" asp-controller="Dashbord" asp-action="UpdateProject" asp-route-PrjectID="@encryptedData">Update</a>
-                                    <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-controller="Task" asp-action="ProjectDetails" asp-action="Task" asp-route-ProjectID="@encryptedData">Details</a>
+                                    <a class="btn btn-outline-success m-1" asp-area="Users" asp-controller="Dashbord" asp-controller="Task" asp-action="ProjectDetails" asp-route-ProjectID="@encryptedData">Details</a>
                                     <a class="btn btn-outline-warning m-1" asp-area="Users" asp-controller="Task" asp-action="Task" asp-route-ProjectID="@encryptedData">Manage Task</a>
                                 }
                             </td>

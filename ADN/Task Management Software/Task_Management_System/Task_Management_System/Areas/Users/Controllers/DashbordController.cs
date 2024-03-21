@@ -12,6 +12,7 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
     public class DashbordController : Controller
     {
         Admin_BALBase bal = new Admin_BALBase();
+        Task_BALBase Task_bal = new Task_BALBase();
 
         #region Dashbord
         public IActionResult Dashbord(string? PrjState)
@@ -102,6 +103,18 @@ namespace Task_Management_System.Areas.Dashbord.Controllers
         {
             string decryptedData = UrlEncryptor.Decrypt(ProjectID);
             DataTable dt = bal.PR_Project_SelectByPK(Convert.ToInt32(decryptedData));
+            DataTable dt2 = Task_bal.GetProjectMember(Convert.ToInt32(decryptedData));
+/*
+            foreach (DataRow row in dt.Rows)
+            {
+                string MemberName = row["MemberName"].ToString();
+                string MemberRole = row["MemberRole"].ToString();
+                string MemberEmail = row["MemberEmail"].ToString();
+                MemberList.Add((MemberName, MemberRole, MemberEmail));
+            }
+*/
+            ViewBag.MemberList = dt2;
+
             if (dt.Rows.Count > 0)
             {
                 return View(dt);

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
 using System.Data;
 using Task_Management_System.Areas.Users.Models;
 using Task_Management_System.BAL;
@@ -231,8 +230,9 @@ namespace Task_Management_System.Areas.Users.Controllers
                 MemberList.Add((MemberName, MemberRole, MemberEmail));
             }
 
+            ViewBag.MemberList = dt;
 
-            return View(dt);
+            return null;
             //MemberEmail
         }
         #endregion
