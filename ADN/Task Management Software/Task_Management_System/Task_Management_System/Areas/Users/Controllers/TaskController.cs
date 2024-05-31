@@ -217,11 +217,11 @@ namespace Task_Management_System.Areas.Users.Controllers
         }
         #endregion
 
-        #region Get All Member
+       /* #region Get All Member
         public IActionResult GetProjectMember(int ProjectID)
         {
             DataTable dt = bal.GetProjectMember(ProjectID);
-
+            MemberList.Clear();
             foreach (DataRow row in dt.Rows)
             {
                 string MemberName = row["MemberName"].ToString();
@@ -233,9 +233,8 @@ namespace Task_Management_System.Areas.Users.Controllers
             ViewBag.MemberList = dt;
 
             return null;
-            //MemberEmail
         }
-        #endregion
+        #endregion*/
 
     }
 }

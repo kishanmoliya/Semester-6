@@ -187,10 +187,10 @@ WHERE [dbo].[PRJ_Project].[ProjectID] = @ProjectID
 
 -- Get Project Member
 EXEC GetProjectMember 51
-Create Procedure GetProjectMember 
+Create Or Alter Procedure GetProjectMember 
 	@ProjectID	int
 AS
-Select * From PRJ_Member
+Select * From PRJ_Member Where ProjectID = @ProjectID
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 --Inert Task
